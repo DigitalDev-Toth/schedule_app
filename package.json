@@ -1,23 +1,45 @@
 {
   "name": "schedule",
   "version": "0.0.0-dev",
-  "description": "schedule application",
-  "main": "index.js",
-  "scripts": {
-  	"test": "npm test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "github.com"
-  },
-  "keywords": [
-    "schedule",
-    "responsive"
-  ],
+  "description": "schedule application",  
+  "license": "MIT", 
   "author": {
     "name": "Toth Limitada",
     "email": "contacto@toth.cl",
     "url": "http://www.toth.cl/"
   },
-  "license": "MIT"
+  "contributors": [
+    {
+      "name": "Sebastián Rodríguez",
+      "email": "srodriguez@toth.cl",
+      "url": "https://github.com/srh-work"
+    },
+    {
+      "name": "Simplicio Carcamo",
+      "email": "scarcamo@toth.cl",
+      "url": "https://github.com/siarcarse"
+    },
+    {
+      "name": "Juan Francisco Del Solar",
+      "email": "jdelsolar@toth.cl",
+      "url": "https://github.com/juandelsolar"
+    },
+    {
+      "name": "Juli@ Espinoza",
+      "email": "jespinoza@toth.cl",
+      "url": "https://github.com/dalebienduro"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DigitalDev-Toth/schedule.git"
+  },
+  "keywords": [
+    "schedule",
+    "responsive"
+  ],
+  "main": "index.js",
+  "scripts": {
+  	"test": "npm test"
+  }
 }
