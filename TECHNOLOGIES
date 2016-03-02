@@ -1,0 +1,12 @@
+TECHNOLOGIES
+===
+
+- server: express
+- views: react, materialize
+- stylesheet: sass
+- utils: redux, babel [es2015, stage-* (*decorators), react], webpack, eslint, jscs, appcache
+- database: couchdb, pouchdb, *postgresql
+- bdd: cucumber, mocha, chai, webdriverio, selenium-driver
+- CI/CD: strider
+
+UNIVERSAL JAVASCRIPT MUUUUUAAAAAAJAJAJAJAJAJA

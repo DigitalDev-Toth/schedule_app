@@ -1,0 +1,23 @@
+{
+  "name": "schedule",
+  "version": "0.0.0-dev",
+  "description": "schedule application",
+  "main": "index.js",
+  "scripts": {
+  	"test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com"
+  },
+  "keywords": [
+    "schedule",
+    "responsive"
+  ],
+  "author": {
+    "name": "Toth Limitada",
+    "email": "contacto@toth.cl",
+    "url": "http://www.toth.cl/"
+  },
+  "license": "MIT"
+}
