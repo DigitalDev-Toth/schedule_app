@@ -1,7 +1,7 @@
 TECHNOLOGIES
 ===
 
-- server: express
+- server: express, *phoenix, *elixir
 - views: react, materialize
 - stylesheet: sass
 - utils: redux, babel [es2015, stage-* (*decorators), react], webpack, eslint, jscs, appcache
