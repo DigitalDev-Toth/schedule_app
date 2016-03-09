@@ -1,8 +1,8 @@
 {
   "name": "schedule",
   "version": "0.0.0-dev",
-  "description": "schedule application",  
-  "license": "MIT", 
+  "description": "schedule application",
+  "license": "MIT",
   "author": {
     "name": "Toth Limitada",
     "email": "contacto@toth.cl",
@@ -25,9 +25,9 @@
       "url": "https://github.com/juandelsolar"
     },
     {
-      "name": "Juli@ Espinoza",
+      "name": "Julio Espinoza",
       "email": "jespinoza@toth.cl",
-      "url": "https://github.com/dalebienduro"
+      "url": "https://github.com/julioespinoza"
     }
   ],
   "repository": {
@@ -40,6 +40,46 @@
   ],
   "main": "index.js",
   "scripts": {
-  	"test": "npm test"
+    "test": "npm test"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.0",
+    "babel-eslint": "^5.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.6.5",
+    "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
+    "cucumber": "^0.9.5",
+    "eslint": "^2.3.0",
+    "eslint-plugin-babel": "^3.1.0",
+    "eslint-plugin-react": "^4.2.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.9.0",
+    "imports-loader": "^0.6.5",
+    "json-loader": "^0.5.4",
+    "mocha": "^2.4.5",
+    "node-sass": "^3.4.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
+    "react-router": "^2.0.0",
+    "redux": "^3.3.1",
+    "redux-devtools": "^3.1.1",
+    "redux-devtools-dock-monitor": "^1.1.0",
+    "redux-devtools-log-monitor": "^1.0.5",
+    "redux-router": "^1.0.0-beta7",
+    "redux-thunk": "^2.0.1",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webdriverio": "^4.0.3",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   }
 }
