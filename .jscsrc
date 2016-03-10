@@ -1,3 +1,28 @@
 {
-	"esnext": true
+	"esnext": true,
+  	"preset": "google",
+
+  	"fileExtensions": [".js", ".jsx"],
+
+  	"requireCurlyBraces": true,
+  	"requireLineFeedAtFileEnd": false,
+  	"requireParenthesesAroundIIFE": true,
+
+  	"maximumLineLength": 120,
+  	"validateLineBreaks": "LF",
+  	"validateIndentation": 4,
+
+  	"disallowKeywords": ["with"],
+  	"disallowSpacesInsideObjectBrackets": null,
+  	"disallowShorthandArrowFunctions": false,
+  	"disallowAnonymousFunctions": false,
+  	"disallowShorthandArrowFunctions": false,
+  	"disallowImplicitTypeConversion": ["string"],
+
+  	"safeContextKeyword": "that",
+
+  	"excludeFiles": [
+    	"dist/**",
+    	"node_modules/**"
+  	]
 }
