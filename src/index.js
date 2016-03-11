@@ -1,1 +1,3 @@
-document.getElementById('schedule').innerHTML = 'hello world1111';
+import './utilities/DevTools.js';
+
+document.getElementById('schedule').innerHTML = 'hello world';

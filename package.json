@@ -1,7 +1,7 @@
 {
   "name": "schedule",
   "version": "0.0.0-dev",
-  "description": "schedule application",
+  "description": "Toth schedule module",
   "license": "MIT",
   "author": {
     "name": "Toth Limitada",
@@ -40,7 +40,13 @@
   ],
   "main": "index.js",
   "scripts": {
-    "dev": "MODE_ENV=development ./node_modules/.bin/webpack-dev-server"
+    "build": "MODE_ENV=production ./node_modules/.bin/webpack -d",
+    "dev": "MODE_ENV=development ./node_modules/.bin/webpack-dev-server",
+    "test:units": "./node_modules/.bin/mocha --compilers js:babel-register --slow 3s --no-timeouts --recursive ./test/units",
+    "test:features": "./node_modules/.bin/cucumber-js ./test/features"
+  },
+  "dependencies": {
+    "pouchdb": "^5.3.0"
   },
   "devDependencies": {
     "appcache-webpack-plugin": "^1.2.1",
@@ -68,6 +74,7 @@
     "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^4.2.1",
     "eslint-plugin-security": "^1.2.0",
+    "estraverse-fb": "^1.3.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.9.0",
@@ -83,7 +90,9 @@
     "node-sass": "^3.4.2",
     "node-uuid": "^1.4.7",
     "npm-install-webpack-plugin": "^3.0.0",
+    "postcss": "^5.0.19",
     "postcss-loader": "^0.8.1",
+    "precss": "^1.4.0",
     "rc-tree-select": "^1.2.5",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",

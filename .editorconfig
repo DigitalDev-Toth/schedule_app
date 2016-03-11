@@ -12,6 +12,18 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[app/**.js]
+[package.json]
+indent_style = space
+indent_size = 2
+
+[src/**]
+indent_style = space
+indent_size = 4
+
+[style/**]
+indent_style = space
+indent_size = 4
+
+[test/**]
 indent_style = space
 indent_size = 4
