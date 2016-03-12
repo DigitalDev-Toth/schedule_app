@@ -1,14 +1,9 @@
 import { combineReducers } from 'redux';
 
-import LayoutReducer from './LayoutReducer';
+import OpenModalReducer from './OpenModalReducer';
 
-/**
- * [GlobalReducers description]
- * @type {Object}
- */
 const GlobalReducers = combineReducers({
-
-    Layout: LayoutReducer
+    OpenModal: OpenModalReducer
 });
 
 export default GlobalReducers;

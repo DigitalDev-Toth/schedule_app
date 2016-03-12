@@ -1,8 +1,5 @@
-import { moreDesks, lessDesks } from "./LayoutActions";
+import { openModal } from "./BasicAction";
 
-export let GlobalActions = {
-
-    moreDesks,
-    lessDesks,
-    changeDesksTool
+export const GlobalActions = {
+    openModal
 };
