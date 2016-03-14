@@ -24,3 +24,6 @@ TECHNOLOGIES
 
 TUTORIALS
 ---
+###REACT + REDUX
+- [Redux documentation](http://redux.js.org/docs/basics/UsageWithReact.html)
+- [React + Redux: Todo example](https://github.com/reactjs/redux/tree/master/examples/todomvc)
