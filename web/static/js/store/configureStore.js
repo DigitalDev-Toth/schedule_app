@@ -4,8 +4,6 @@ import thunkMiddleware from 'redux-thunk';
 import GlobalReducers from '../reducers';
 import DevTools from '../containers/DevTools';
 
-const MODE = process.env.MODE_ENV;
-
 const createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
     DevTools.instrument()
@@ -14,7 +12,7 @@ const createStoreWithMiddleware = compose(
 export default function configureStore(initialState) {
     const store = createStoreWithMiddleware(GlobalReducers, initialState);
 
-    if (MODE === 'development' && module.hot) {
+    if (module.hot) {
         module.hot.accept('../reducers', () =>
             store.replaceReducer(require('../reducers'))
         );

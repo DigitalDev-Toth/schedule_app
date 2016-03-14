@@ -1,11 +1,13 @@
+import 'phoenix_html';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import App from './containers/App';
 import DevTools from './containers/DevTools';
+/*import "../css/main.scss";
+import "../assets/images/ren_y_stimpy.jpg";*/
 
-const PRODUCTION = process.env.MODE_ENV === 'production' ? true : false;
 const store = configureStore();
 
 ReactDOM.render(
@@ -14,7 +16,7 @@ ReactDOM.render(
             <App />
         </Provider>
         { (() => {
-            if (!PRODUCTION) {
+            if (!__DEPLOYMENT__) {
                 return (
                     <Provider store={store}>
                         <DevTools />

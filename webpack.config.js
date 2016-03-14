@@ -6,36 +6,43 @@ const AppCachePlugin = require("appcache-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const ChunkManifestPlugin = require("chunk-manifest-webpack-plugin");
 const autoprefixer = require("autoprefixer");
-const precss = require("precss");
-const csswring = require("csswring");
+/*const precss = require("precss");*/
+/*const csswring = require("csswring");*/
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const PRODUCTION = process.env.MODE_ENV === "production" ? true : false;
+const MODE_ENV = process.env.MODE_ENV;
+const __DEPLOYMENT__ = MODE_ENV === "deploy" ? true : false;
+const __PRODUCTION__ = MODE_ENV === "prod" ? true : false;
+const __DEVELOPMENT__ = MODE_ENV === "dev" ? true : false;
 
 const PATHS = {
-	src: path.join(__dirname, "src"),
-    styles: path.join(__dirname, "styles"),
-    images: path.join(__dirname, "images"),
+	source: path.join(__dirname, "web", "static", "js"),
+    production: path.join(__dirname, "priv", "static"),
+    development: path.join(__dirname, "development"),
+    styles: path.join(__dirname, "web", "static", "css"),
+    assets: path.join(__dirname, "web", "static", "assets", "*"),
     test: path.join(__dirname, "test"),
     template: "node_modules/html-webpack-template/index.ejs",
-    modules: path.join(__dirname, "node_modules"),
-    public: path.join(__dirname, "public"),
-    assets: path.join(__dirname, "public", "assets")
+    modules: path.join(__dirname, "node_modules")    
 };
 
-const PATHS_EXCLUDE = [PATHS.styles, PATHS.test, PATHS.modules, PATHS.public];
+const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development];
 
-const entry = [PATHS.src];
+const entry = [PATHS.source];
 
 const output = {};
 
 const resolve = {
     extensions: ["", ".js", ".jsx", ".json", ".scss", ".sass", ".css"],
-    modulesDirectories: [
-        "node_modules",
-        PATHS.modules
-    ]
+    modulesDirectories: ["node_modules"],
+    alias: {
+      phoenix_html:
+        __dirname + "/deps/phoenix_html/web/static/js/phoenix_html.js",
+      phoenix:
+        __dirname + "/deps/phoenix/web/static/js/phoenix.js"
+    }
 };
 
 const modules = {};
@@ -48,33 +55,30 @@ const loaders = [
             plugins: ["transform-decorators-legacy"],
             presets: ["react", "es2015", "stage-0"]
         },
-        include: PATHS.src,
+        include: PATHS.source,
         exclude: PATHS_EXCLUDE
     }, {
         test: /\.json$/,
         loader: "json-loader",
-        include: PATHS.src
+        include: PATHS.source
     }, {
         test: /\.(png|jpg)$/,
-        loader: "url-loader?limit=8192&name=/images/[hash].[ext]"
-    }, {
-        test: /\.(png|jpg)$/,
-        loader: "url-loader?limit=8192&name=/images/[hash].[ext]"
+        loader: "url-loader?limit=8192&name=/assets/images/[name].[ext]"
     }, {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/font-woff&name=/fonts/[hash].[ext]"
+        loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
     }, {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/font-woff&name=/fonts/[hash].[ext]"
+        loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
     }, {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/octet-stream&name=/fonts/[hash].[ext]"
+        loader: "url?limit=10000&mimetype=application/octet-stream&name=/assets/fonts/[name].[ext]"
     }, {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file?name=/fonts/[hash].[ext]"
+        loader: "file?name=/assets/fonts/[name].[ext]"
     }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=image/svg+xml&name=/fonts/[hash].[ext]"
+        loader: "url?limit=10000&mimetype=image/svg+xml&name=/assets/fonts/[name].[ext]"
     }
 ];
 
@@ -82,55 +86,54 @@ const postcss = function() {
     return [autoprefixer, precss, csswring]
 };
 
-const devtool = PRODUCTION ? "source-map" : "eval";
+const devtool = __DEVELOPMENT__ ? "eval" : "source-map";
 
 const plugins = [
     new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery"
     }),
-    new HtmlWebpackPlugin({
-        title: "Toth schedule module",
-        template: PATHS.template,
-        appMountId: "schedule",
-        inject: false
-    })
+    new webpack.DefinePlugin({
+    	"__DEPLOYMENT__": __DEPLOYMENT__,
+    	"__PRODUCTION__": __PRODUCTION__,
+	    "__DEVELOPMENT__": __DEVELOPMENT__,
+	    "process.env": { NODE_ENV: JSON.stringify("production") }
+	})
 ];
 
 const preLoaders = [{
     test: /\.(js|jsx)?$/,
     loaders: ["eslint", "jscs"],
-    include: PATHS.src
+    include: PATHS.source
 }];
 
-
-if ( PRODUCTION ) {
-    output.path = PATHS.assets;
-    output.publicPath = "/assets";
+if ( !__DEVELOPMENT__ ) {
+    output.path = PATHS.production;
     output.filename = "js/schedule.js";
     loaders.push({
-        test: /\.(scss|sass)$/,
-        loader: ExtractTextPlugin.extract("sass-loader"),
+        test: /\.(scss|sass|css)$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader"),
         include: PATHS.styles
-    });
-    loaders.push({
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader"),
-        include: PATHS.styles
-    });
+    });    
     modules.loaders = loaders;
+    plugins.push( new webpack.NoErrorsPlugin() );
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
         }
     }));
-    plugins.push( new ExtractTextPlugin( "css/[hash].css", { allChunks: true } ) );
+    plugins.push( new ExtractTextPlugin( "css/schedule.css" ) );
+	/*loaders.push({
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader"),
+        include: PATHS.styles
+    });
+    plugins.push( new CopyWebpackPlugin([{ from: PATHS.assets }]) );    
     plugins.push(new webpack.optimize.CommonsChunkPlugin({
         name: "schedule",
         minChunks: Infinity
     }));
-    plugins.push( new webpack.NoErrorsPlugin() );
-    /*plugins.push( new ManifestPlugin() );
+    plugins.push( new ManifestPlugin() );
     plugins.push(new ChunkManifestPlugin({
         filename: "chunk-manifest.json",
         manifestVariable: "webpackManifest"
@@ -141,7 +144,7 @@ if ( PRODUCTION ) {
         output: 'my-manifest.appcache'
     }));*/
 } else {
-    output.path = PATHS.public;
+    output.path = PATHS.development;
     output.filename = "schedule.js";
     loaders.push({
         test: /\.(scss|sass)$/,
@@ -159,10 +162,16 @@ if ( PRODUCTION ) {
     plugins.push(new NpmInstallPlugin({
         save: true
     }));
+    plugins.push(new HtmlWebpackPlugin({
+        title: "Toth schedule module",
+        template: PATHS.template,
+        appMountId: "schedule",
+        inject: false
+    }));
 }
 
 const devServer = {
-    contentBase: PATHS.public,
+    contentBase: PATHS.development,
     stats: "errors-only",
     progress: true,
     colors: true,
@@ -178,6 +187,6 @@ module.exports = {
     module: modules,
     postcss: postcss,
     devtool: devtool,
-    devServer: PRODUCTION ? undefined : devServer,
+    devServer: __DEVELOPMENT__ ? devServer : undefined,
     plugins: plugins
 };

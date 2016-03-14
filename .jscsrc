@@ -22,7 +22,11 @@
   	"safeContextKeyword": "that",
 
   	"excludeFiles": [
-    	"styles/**",
-    	"node_modules/**"
+  		"_build/**",
+  		"config/**",
+  		"deps/**",
+    	"lib/**",  	
+    	"priv/**",
+    	"test/**"
   	]
 }

@@ -1,5 +1,5 @@
 export default class ScheduleModel {
-    static getAllSchedules() {}
+    static fetchAllSchedules() {}
 
     static getSchedule() {}
 
