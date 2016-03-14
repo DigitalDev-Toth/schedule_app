@@ -24,16 +24,9 @@ const PATHS = {
     assets: path.join(__dirname, "public", "assets")
 };
 
-const PATHS_EXCLUDE = [
-    PATHS.styles,
-    PATHS.test,
-    PATHS.modules,
-    PATHS.public
-];
+const PATHS_EXCLUDE = [PATHS.styles, PATHS.test, PATHS.modules, PATHS.public];
 
-const entry = [
-    PATHS.src
-];
+const entry = [PATHS.src];
 
 const output = {};
 
