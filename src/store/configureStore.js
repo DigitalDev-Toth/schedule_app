@@ -6,17 +6,17 @@ import DevTools from '../containers/DevTools';
 
 const MODE = process.env.MODE_ENV;
 
-const finalCreateStore = compose(
-    applyMiddleware( thunkMiddleware ),
+const createStoreWithMiddleware = compose(
+    applyMiddleware(thunkMiddleware),
     DevTools.instrument()
-)( createStore );
+)(createStore);
 
-export default function configureStore(initialState = null) {
-    const store = finalCreateStore( GlobalReducers, initialState );
+export default function configureStore(initialState) {
+    const store = createStoreWithMiddleware(GlobalReducers, initialState);
 
-    if ( MODE === 'development' && module.hot ) {
+    if (MODE === 'development' && module.hot) {
         module.hot.accept('../reducers', () =>
-            store.replaceReducer( require('../reducers') )
+            store.replaceReducer(require('../reducers'))
         );
     }
 

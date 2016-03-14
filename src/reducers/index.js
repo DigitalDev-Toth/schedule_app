@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import OpenModalReducer from './OpenModalReducer';
+import { LoadSchedulesReducer } from './BasicReducer';
 
 const GlobalReducers = combineReducers({
-    OpenModal: OpenModalReducer
+    loadSchedules: LoadSchedulesReducer
 });
 
 export default GlobalReducers;

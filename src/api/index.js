@@ -1,5 +1,5 @@
-import ScheduleModel from "./ScheduleModel";
+import ScheduleModel from './ScheduleModel';
 
-let API = {
+export const API = {
     ScheduleModel
 };

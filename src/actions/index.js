@@ -1,5 +1,9 @@
-import { openModal } from "./BasicAction";
+import { API } from '../api';
 
-export const GlobalActions = {
-    openModal
-};
+export function loadSchedules(schedules) {
+    console.log(API);
+    return {
+        type: 'LOAD_SCHEDULES',
+        schedules
+    };
+}

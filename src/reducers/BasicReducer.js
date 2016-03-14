@@ -1,13 +1,15 @@
-/*import { InitialState } from "./InitialState";*/
+import { InitialState } from '../utilities/InitialState';
 
-export default function OpenModalReducer(state = InitialState, action) {
-    switch ( action.type ) {
-        case "OPEN_MODAL":
-            return Object.assign({ type: "OPEN_MODAL" }, state, {
-                scheduleId: action.scheduleId
+export function LoadSchedulesReducer(state = InitialState(), action) {
+    switch (action.type) {
+        case 'LOAD_SCHEDULES': {
+            return Object.assign({ type: 'LOAD_SCHEDULES' }, state, {
+                schedules: action.schedules
             });
+        }
 
-        default:
+        default: {
             return state;
+        }
     }
 }

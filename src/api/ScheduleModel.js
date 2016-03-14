@@ -1,4 +1,6 @@
-export class ScheduleModel {
+export default class ScheduleModel {
+    static getAllSchedules() {}
+
     static getSchedule() {}
 
     static newSchedule() {}
