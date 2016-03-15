@@ -14,7 +14,7 @@ $ mix deps.get
 $ npm install
 ```
 
-HOW TO USE
+HOW TO USE IT
 ---
 - Development: 
 ```
