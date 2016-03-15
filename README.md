@@ -41,7 +41,7 @@ TECHNOLOGIES
 
 ###FRONTEND
 - language: javascript (es2015)
-- views: react, materialize
+- views: react, material-ui
 - stylesheet: sass
 - utils: redux, babel [es2015, stage-* (*decorators), react], webpack, eslint, jscs, appcache, eslint-security, docblockr
 
