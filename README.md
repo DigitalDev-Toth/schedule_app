@@ -34,6 +34,7 @@ $ PORT=4001 MIX_ENV=prod mix phoenix.server
 TECHNOLOGIES
 ---
 ### BACKEND
+- vm: erlang
 - language: elixir
 - framework: phoenix
 - server: cowboy
