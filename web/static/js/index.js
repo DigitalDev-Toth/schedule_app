@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import App from './containers/App';
 import DevTools from './containers/DevTools';
-/*import "../css/main.scss";
-import "../assets/images/ren_y_stimpy.jpg";*/
 
+const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const store = configureStore();
 
 ReactDOM.render(

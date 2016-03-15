@@ -28,9 +28,9 @@ const PATHS = {
     modules: path.join(__dirname, "node_modules")    
 };
 
-const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development];
+const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles];
 
-const entry = [PATHS.source];
+const entry = [PATHS.source, PATHS.styles +"/main.scss"];
 
 const output = {};
 
@@ -93,11 +93,13 @@ const plugins = [
         $: "jquery",
         jQuery: "jquery"
     }),
-    new webpack.DefinePlugin({
-    	"__DEPLOYMENT__": __DEPLOYMENT__,
-    	"__PRODUCTION__": __PRODUCTION__,
-	    "__DEVELOPMENT__": __DEVELOPMENT__,
-	    "process.env": { NODE_ENV: JSON.stringify("production") }
+    new webpack.DefinePlugin({    	
+	    "process.env": { 
+	    	NODE_ENV: JSON.stringify( "production" ),
+	    	__DEPLOYMENT__: __DEPLOYMENT__,
+	    	__PRODUCTION__: __PRODUCTION__,
+		    __DEVELOPMENT__: __DEVELOPMENT__
+	    }
 	})
 ];
 
@@ -147,13 +149,8 @@ if ( !__DEVELOPMENT__ ) {
     output.path = PATHS.development;
     output.filename = "schedule.js";
     loaders.push({
-        test: /\.(scss|sass)$/,
-        loader: "sass-loader",
-        include: PATHS.styles
-    });
-    loaders.push({
-        test: /\.css$/,
-        loader: "style-loader!css-loader?modules&importLoaders=1!postcss-loader",
+        test: /\.(scss|sass|css)$/,
+        loader: "style-loader!css-loader!sass-loader",
         include: PATHS.styles
     });
     modules.loaders = loaders;
@@ -166,7 +163,8 @@ if ( !__DEVELOPMENT__ ) {
         title: "Toth schedule module",
         template: PATHS.template,
         appMountId: "schedule",
-        inject: false
+        inject: false,
+        mobile: true
     }));
 }
 

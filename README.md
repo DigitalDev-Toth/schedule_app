@@ -1,11 +1,17 @@
 TOTH SCHEDULE MODULE
 ===
 
+INSTALL
+---
+- Get erlang, elixir and nodejs (asdf, nvm) 
+- Get it: $ git clone git@github.com:DigitalDev-Toth/schedule.git && cd schedule
+- Dependencies: $ mix deps.get && npm install
+
 HOW TO USE
 ---
-- Development: npm run dev
-- Production: MODE_ENV=prod mix phoenix.server
-- Deployment: npm run deploy && MIX_ENV=prod mix phoenix.digest && PORT=4001 MIX_ENV=prod mix phoenix.server
+- Development: $ npm run dev
+- Production: $ MODE_ENV=prod mix phoenix.server
+- Deployment: $ npm run deploy && MIX_ENV=prod mix phoenix.digest && PORT=4001 MIX_ENV=prod mix phoenix.server
 
 TECHNOLOGIES
 ---
@@ -41,3 +47,4 @@ GUIDES
 - [React documentation](https://facebook.github.io/react/docs/getting-started.html)
 - [Redux documentation](http://redux.js.org/docs/basics/)
 - [React + Redux: Todo example](https://github.com/reactjs/redux/tree/master/examples/todomvc)
+- [nvm](https://github.com/creationix/nvm)
