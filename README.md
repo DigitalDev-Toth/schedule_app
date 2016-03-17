@@ -38,13 +38,13 @@ $ MIX_ENV=prod mix compile
 $ npm run deploy 
 $ MIX_ENV=prod mix phoenix.digest
 
-#Finally run the server
+# Finally run the server
 $ PORT=4001 MIX_ENV=prod mix phoenix.server
 
-#Run the application inside an interactive shell
+# Run the application inside an interactive shell
 $ PORT=4001 MIX_ENV=prod iex -S mix phoenix.server
 
-#Daemonizes the process
+# Daemonizes the process
 $ MIX_ENV=prod PORT=4001 elixir --detached -S mix do compile, phoenix.server
 ```
 
