@@ -16,11 +16,15 @@ trim_trailing_whitespace = false
 indent_style = space
 indent_size = 2
 
-[src/**]
+[*.*]
 indent_style = space
 indent_size = 4
 
-[style/**]
+[web/static/js/**]
+indent_style = space
+indent_size = 4
+
+[web/static/css/**]
 indent_style = space
 indent_size = 4
 

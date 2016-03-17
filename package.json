@@ -38,7 +38,7 @@
     "schedule",
     "responsive"
   ],
-  "main": "index.js",
+  "main": "./web/static/js/index.js",
   "scripts": {
   	"deploy": "MODE_ENV=deploy ./node_modules/.bin/webpack -p",
     "build": "MODE_ENV=prod ./node_modules/.bin/webpack --watch-stdin --progress --colors",

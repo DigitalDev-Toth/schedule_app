@@ -6,7 +6,8 @@ INSTALL
 - Get erlang, elixir and nodejs (asdf, nvm) 
 - Get it:
 ```
-$ git clone git@github.com:DigitalDev-Toth/schedule.git && cd schedule
+$ git clone git@github.com:DigitalDev-Toth/schedule.git
+$ cd schedule
 ```
 - Dependencies: 
 ```
@@ -26,9 +27,25 @@ $ MODE_ENV=prod mix phoenix.server
 ```
 - Deployment: 
 ```
+# Create and configure config/prod.secret.exs
+# Generate a new secret: mix phoenix.gen.secret
+
+# Initial setup
+$ mix deps.get --only prod
+$ MIX_ENV=prod mix compile
+
+# Compile assets
 $ npm run deploy 
 $ MIX_ENV=prod mix phoenix.digest
+
+#Finally run the server
 $ PORT=4001 MIX_ENV=prod mix phoenix.server
+
+#Run the application inside an interactive shell
+$ PORT=4001 MIX_ENV=prod iex -S mix phoenix.server
+
+#Daemonizes the process
+$ MIX_ENV=prod PORT=4001 elixir --detached -S mix do compile, phoenix.server
 ```
 
 TECHNOLOGIES
