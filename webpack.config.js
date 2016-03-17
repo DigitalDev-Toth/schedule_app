@@ -22,13 +22,13 @@ const PATHS = {
     production: path.join(__dirname, "priv", "static"),
     development: path.join(__dirname, "development"),
     styles: path.join(__dirname, "web", "static", "css"),
-    assets: path.join(__dirname, "web", "static", "assets", "*"),
+    assets: path.join(__dirname, "web", "static", "assets"),
     test: path.join(__dirname, "test"),
     template: "node_modules/html-webpack-template/index.ejs",
-    modules: path.join(__dirname, "node_modules")    
+    modules: path.join(__dirname, "node_modules")
 };
 
-const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles];
+const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles, PATHS.assets];
 
 const entry = [PATHS.source, PATHS.styles +"/main.scss"];
 
@@ -93,8 +93,8 @@ const plugins = [
         $: "jquery",
         jQuery: "jquery"
     }),
-    new webpack.DefinePlugin({    	
-	    "process.env": { 
+    new webpack.DefinePlugin({
+	    "process.env": {
 	    	NODE_ENV: JSON.stringify( "production" ),
 	    	__DEPLOYMENT__: __DEPLOYMENT__,
 	    	__PRODUCTION__: __PRODUCTION__,
@@ -116,7 +116,7 @@ if ( !__DEVELOPMENT__ ) {
         test: /\.(scss|sass|css)$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader"),
         include: PATHS.styles
-    });    
+    });
     modules.loaders = loaders;
     plugins.push( new webpack.NoErrorsPlugin() );
     plugins.push(new webpack.optimize.UglifyJsPlugin({
@@ -125,12 +125,21 @@ if ( !__DEVELOPMENT__ ) {
         }
     }));
     plugins.push( new ExtractTextPlugin( "css/schedule.css" ) );
+    plugins.push( new CopyWebpackPlugin(
+        [{
+            from: PATHS.assets,
+            to: "assets"
+        }], {
+            ignore: [
+                { glob: "images/*", dot: true }
+            ]
+        }
+    ));
 	/*loaders.push({
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader"),
         include: PATHS.styles
     });
-    plugins.push( new CopyWebpackPlugin([{ from: PATHS.assets }]) );    
     plugins.push(new webpack.optimize.CommonsChunkPlugin({
         name: "schedule",
         minChunks: Infinity
