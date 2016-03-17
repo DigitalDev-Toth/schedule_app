@@ -57,6 +57,7 @@ TECHNOLOGIES
 - server: cowboy
 
 ###FRONTEND
+- environment: node
 - language: javascript (es2015)
 - views: react, material-ui
 - stylesheet: sass
