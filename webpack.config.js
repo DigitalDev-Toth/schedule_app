@@ -62,19 +62,19 @@ const loaders = [{
     loader: "url-loader?limit=8192&name=/assets/images/[name].[ext]"
 }, {
     test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-    loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
+    loader: "url?limit=10000&mimetype=application/font-woff&name=/fonts/[name].[ext]"
 }, {
     test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-    loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
+    loader: "url?limit=10000&mimetype=application/font-woff&name=/fonts/[name].[ext]"
 }, {
     test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-    loader: "url?limit=10000&mimetype=application/octet-stream&name=/assets/fonts/[name].[ext]"
+    loader: "url?limit=10000&mimetype=application/octet-stream&name=/fonts/[name].[ext]"
 }, {
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
     loader: "file?name=/assets/fonts/[name].[ext]"
 }, {
     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-    loader: "url?limit=10000&mimetype=image/svg+xml&name=/assets/fonts/[name].[ext]"
+    loader: "url?limit=10000&mimetype=image/svg+xml&name=/fonts/[name].[ext]"
 }];
 
 const postcss = function() {
@@ -109,11 +109,11 @@ if (!__DEVELOPMENT__) {
     output.filename = "js/schedule.js";
     loaders.push({
         test: /\.(scss|sass)$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader", "sass-loader"),
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader"),
         include: PATHS.styles
     }, {
         test: /\.css$/, // Only .css files
-        loader: 'style!css' // Run both loaders
+        loader: ExtractTextPlugin.extract('style', 'css')
     });
     modules.loaders = loaders;
     plugins.push(new webpack.NoErrorsPlugin());
@@ -148,7 +148,7 @@ if (!__DEVELOPMENT__) {
     output.filename = "schedule.js";
     loaders.push({
         test: /\.(scss|sass)$/,
-        loader: "style-loader!css-loader?modules&importLoaders=1!postcss-loader!sass-loader",
+        loader: "style-loader!css-loader",
         include: PATHS.styles
     }, {
         test: /\.css$/, // Only .css files
