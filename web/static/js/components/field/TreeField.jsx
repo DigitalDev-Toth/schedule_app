@@ -1,7 +1,7 @@
 import 'rc-tree-select/assets/index.css';
 import React from 'react';
 import TreeSelect from 'rc-tree-select';
-import { gData } from './TreeData.js';
+import { gData } from './TreeData';
 
 const TreeField = React.createClass({
     getInitialState() {
@@ -20,7 +20,6 @@ const TreeField = React.createClass({
     },
     render() {
         const { style, children, type,  ...props } = this.props;
-        console.log('style ' , style);
         return (
             <div style={{margin: 20}}>
                 <TreeSelect

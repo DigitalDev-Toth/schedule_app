@@ -3,8 +3,8 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import Dialog from 'material-ui/lib/dialog';
 import { indigo500 } from 'material-ui/lib/styles/colors';
 import FlatButton from 'material-ui/lib/flat-button';
-import {Grid, Row, Col} from './box/Container.jsx';
-import ProcedureForm from './form/ProcedureForm.jsx';
+import {Grid, Row, Col} from './box/Container';
+import ProcedureForm from './form/ProcedureForm';
 import Styles from './styles/Style';
 
 const styles = {
