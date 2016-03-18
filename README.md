@@ -3,13 +3,13 @@ TOTH SCHEDULE MODULE
 
 INSTALL
 ---
-- Get erlang, elixir and nodejs (asdf, nvm) 
+- Get erlang, elixir and nodejs (asdf, nvm)
 - Get it:
 ```
 $ git clone git@github.com:DigitalDev-Toth/schedule.git
 $ cd schedule
 ```
-- Dependencies: 
+- Dependencies:
 ```
 $ mix deps.get
 $ npm install
@@ -17,15 +17,15 @@ $ npm install
 
 HOW TO USE IT
 ---
-- Development: 
+- Development:
 ```
 $ npm run dev
 ```
-- Production: 
+- Production:
 ```
 $ MODE_ENV=prod mix phoenix.server
 ```
-- Deployment: 
+- Deployment:
 ```
 # Create and configure config/prod.secret.exs
 # Generate a new secret: mix phoenix.gen.secret
@@ -35,7 +35,7 @@ $ mix deps.get --only prod
 $ MIX_ENV=prod mix compile
 
 # Compile assets
-$ npm run deploy 
+$ npm run deploy
 $ MIX_ENV=prod mix phoenix.digest
 
 # Finally run the server

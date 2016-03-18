@@ -1,13 +1,12 @@
 const webpack = require("webpack");
 const path = require("path");
-const merge = require("webpack-merge");
 const NpmInstallPlugin = require("npm-install-webpack-plugin");
 const AppCachePlugin = require("appcache-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const ChunkManifestPlugin = require("chunk-manifest-webpack-plugin");
 const autoprefixer = require("autoprefixer");
-/*const precss = require("precss");*/
-/*const csswring = require("csswring");*/
+const precss = require("precss");
+const csswring = require("csswring");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -114,7 +113,7 @@ if ( !__DEVELOPMENT__ ) {
     output.filename = "js/schedule.js";
     loaders.push({
         test: /\.(scss|sass|css)$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader"),
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader", "sass-loader"),
         include: PATHS.styles
     });
     modules.loaders = loaders;
@@ -135,16 +134,7 @@ if ( !__DEVELOPMENT__ ) {
             ]
         }
     ));
-	/*loaders.push({
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader"),
-        include: PATHS.styles
-    });
-    plugins.push(new webpack.optimize.CommonsChunkPlugin({
-        name: "schedule",
-        minChunks: Infinity
-    }));
-    plugins.push( new ManifestPlugin() );
+    /*plugins.push( new ManifestPlugin() );
     plugins.push(new ChunkManifestPlugin({
         filename: "chunk-manifest.json",
         manifestVariable: "webpackManifest"
@@ -159,7 +149,7 @@ if ( !__DEVELOPMENT__ ) {
     output.filename = "schedule.js";
     loaders.push({
         test: /\.(scss|sass|css)$/,
-        loader: "style-loader!css-loader!sass-loader",
+        loader: "style-loader!css-loader?modules&importLoaders=1!postcss-loader!sass-loader",
         include: PATHS.styles
     });
     modules.loaders = loaders;
@@ -175,6 +165,13 @@ if ( !__DEVELOPMENT__ ) {
         inject: false,
         mobile: true
     }));
+    plugins.push( new CopyWebpackPlugin(
+        [{ from: PATHS.assets }], {
+            ignore: [
+                { glob: "images/*", dot: true }
+            ]
+        }
+    ));
 }
 
 const devServer = {
