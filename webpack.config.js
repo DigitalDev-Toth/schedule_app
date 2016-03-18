@@ -24,7 +24,9 @@ const PATHS = {
     assets: path.join(__dirname, 'web', 'static', 'assets'),
     test: path.join(__dirname, 'test'),
     template: 'node_modules/html-webpack-template/index.ejs',
-    modules: path.join(__dirname, 'node_modules')
+    modules: path.join(__dirname, 'node_modules'),
+    phoenix: __dirname + '/deps/phoenix/web/static/js/phoenix.js',
+    phoenix_html: __dirname + '/deps/phoenix_html/web/static/js/phoenix_html.js'
 };
 
 const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles, PATHS.assets];
@@ -37,8 +39,8 @@ const resolve = {
     extensions: ['', '.js', '.jsx', '.json', '.scss', '.sass', '.css'],
     modulesDirectories: ['node_modules'],
     alias: {
-        phoenix_html: __dirname + '/deps/phoenix_html/web/static/js/phoenix_html.js',
-        phoenix: __dirname + '/deps/phoenix/web/static/js/phoenix.js'
+        phoenix_html: PATHS.phoenix_html,
+        phoenix: PATHS.phoenix
     }
 };
 
@@ -51,7 +53,7 @@ const loaders = [{
         plugins: ['transform-decorators-legacy'],
         presets: ['react', 'es2015', 'stage-0']
     },
-    include: PATHS.source,
+    include: [PATHS.source, PATHS.phoenix, PATHS.phoenix_html],
     exclude: PATHS_EXCLUDE
 }, {
     test: /\.json$/,

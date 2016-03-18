@@ -3,6 +3,7 @@ defmodule Schedule.ScheduleSocket do
 
     ## Channels
     # channel "rooms:*", Schedule.RoomChannel
+    channel "schedules:*", Schedule.ScheduleChannel
 
     ## Transports
     transport :websocket, Phoenix.Transports.WebSocket
