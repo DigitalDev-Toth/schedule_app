@@ -1,4 +1,4 @@
-defmodule Schedule.UserSocket do
+defmodule Schedule.ScheduleSocket do
     use Phoenix.Socket
 
     ## Channels
