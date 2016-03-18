@@ -1,7 +1,7 @@
 defmodule Schedule.Endpoint do
     use Phoenix.Endpoint, otp_app: :schedule
 
-    socket "/socket", Schedule.UserSocket
+    socket "/socket", Schedule.ScheduleSocket
 
     # Serve at "/" the static files from "priv/static" directory.
     #
