@@ -108,9 +108,12 @@ if (!__DEVELOPMENT__) {
     output.path = PATHS.production;
     output.filename = "js/schedule.js";
     loaders.push({
-        test: /\.(scss|sass|css)$/,
+        test: /\.(scss|sass)$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&importLoaders=1!postcss-loader", "sass-loader"),
         include: PATHS.styles
+    }, {
+        test: /\.css$/, // Only .css files
+        loader: 'style!css' // Run both loaders
     });
     modules.loaders = loaders;
     plugins.push(new webpack.NoErrorsPlugin());
