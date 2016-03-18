@@ -17,7 +17,7 @@ const __PRODUCTION__ = MODE_ENV === "prod" ? true : false;
 const __DEVELOPMENT__ = MODE_ENV === "dev" ? true : false;
 
 const PATHS = {
-	source: path.join(__dirname, "web", "static", "js"),
+    source: path.join(__dirname, "web", "static", "js"),
     production: path.join(__dirname, "priv", "static"),
     development: path.join(__dirname, "development"),
     styles: path.join(__dirname, "web", "static", "css"),
@@ -29,7 +29,7 @@ const PATHS = {
 
 const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles, PATHS.assets];
 
-const entry = [PATHS.source, PATHS.styles +"/main.scss"];
+const entry = [PATHS.source, PATHS.styles + "/main.scss"];
 
 const output = {};
 
@@ -37,49 +37,45 @@ const resolve = {
     extensions: ["", ".js", ".jsx", ".json", ".scss", ".sass", ".css"],
     modulesDirectories: ["node_modules"],
     alias: {
-      phoenix_html:
-        __dirname + "/deps/phoenix_html/web/static/js/phoenix_html.js",
-      phoenix:
-        __dirname + "/deps/phoenix/web/static/js/phoenix.js"
+        phoenix_html: __dirname + "/deps/phoenix_html/web/static/js/phoenix_html.js",
+        phoenix: __dirname + "/deps/phoenix/web/static/js/phoenix.js"
     }
 };
 
 const modules = {};
-const loaders = [
-    {
-        test: /\.(js|jsx)?$/,
-        loader: "babel",
-        query: {
-            cacheDirectory: true,
-            plugins: ["transform-decorators-legacy"],
-            presets: ["react", "es2015", "stage-0"]
-        },
-        include: PATHS.source,
-        exclude: PATHS_EXCLUDE
-    }, {
-        test: /\.json$/,
-        loader: "json-loader",
-        include: PATHS.source
-    }, {
-        test: /\.(png|jpg)$/,
-        loader: "url-loader?limit=8192&name=/assets/images/[name].[ext]"
-    }, {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
-    }, {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
-    }, {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/octet-stream&name=/assets/fonts/[name].[ext]"
-    }, {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file?name=/assets/fonts/[name].[ext]"
-    }, {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=image/svg+xml&name=/assets/fonts/[name].[ext]"
-    }
-];
+const loaders = [{
+    test: /\.(js|jsx)?$/,
+    loader: "babel",
+    query: {
+        cacheDirectory: true,
+        plugins: ["transform-decorators-legacy"],
+        presets: ["react", "es2015", "stage-0"]
+    },
+    include: PATHS.source,
+    exclude: PATHS_EXCLUDE
+}, {
+    test: /\.json$/,
+    loader: "json-loader",
+    include: PATHS.source
+}, {
+    test: /\.(png|jpg)$/,
+    loader: "url-loader?limit=8192&name=/assets/images/[name].[ext]"
+}, {
+    test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+    loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
+}, {
+    test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+    loader: "url?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]"
+}, {
+    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+    loader: "url?limit=10000&mimetype=application/octet-stream&name=/assets/fonts/[name].[ext]"
+}, {
+    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+    loader: "file?name=/assets/fonts/[name].[ext]"
+}, {
+    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+    loader: "url?limit=10000&mimetype=image/svg+xml&name=/assets/fonts/[name].[ext]"
+}];
 
 const postcss = function() {
     return [autoprefixer, precss, csswring]
@@ -93,13 +89,13 @@ const plugins = [
         jQuery: "jquery"
     }),
     new webpack.DefinePlugin({
-	    "process.env": {
-	    	NODE_ENV: JSON.stringify( "production" ),
-	    	__DEPLOYMENT__: __DEPLOYMENT__,
-	    	__PRODUCTION__: __PRODUCTION__,
-		    __DEVELOPMENT__: __DEVELOPMENT__
-	    }
-	})
+        "process.env": {
+            NODE_ENV: JSON.stringify("production"),
+            __DEPLOYMENT__: __DEPLOYMENT__,
+            __PRODUCTION__: __PRODUCTION__,
+            __DEVELOPMENT__: __DEVELOPMENT__
+        }
+    })
 ];
 
 const preLoaders = [{
@@ -108,7 +104,7 @@ const preLoaders = [{
     include: PATHS.source
 }];
 
-if ( !__DEVELOPMENT__ ) {
+if (!__DEVELOPMENT__) {
     output.path = PATHS.production;
     output.filename = "js/schedule.js";
     loaders.push({
@@ -117,14 +113,14 @@ if ( !__DEVELOPMENT__ ) {
         include: PATHS.styles
     });
     modules.loaders = loaders;
-    plugins.push( new webpack.NoErrorsPlugin() );
+    plugins.push(new webpack.NoErrorsPlugin());
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
         }
     }));
-    plugins.push( new ExtractTextPlugin( "css/schedule.css" ) );
-    plugins.push( new CopyWebpackPlugin(
+    plugins.push(new ExtractTextPlugin("css/schedule.css"));
+    plugins.push(new CopyWebpackPlugin(
         [{
             from: PATHS.assets,
             to: "assets"
@@ -148,13 +144,16 @@ if ( !__DEVELOPMENT__ ) {
     output.path = PATHS.development;
     output.filename = "schedule.js";
     loaders.push({
-        test: /\.(scss|sass|css)$/,
+        test: /\.(scss|sass)$/,
         loader: "style-loader!css-loader?modules&importLoaders=1!postcss-loader!sass-loader",
         include: PATHS.styles
+    }, {
+        test: /\.css$/, // Only .css files
+        loader: 'style!css' // Run both loaders
     });
     modules.loaders = loaders;
     modules.preLoaders = preLoaders;
-    plugins.push( new webpack.HotModuleReplacementPlugin() );
+    plugins.push(new webpack.HotModuleReplacementPlugin());
     plugins.push(new NpmInstallPlugin({
         save: true
     }));
@@ -165,7 +164,7 @@ if ( !__DEVELOPMENT__ ) {
         inject: false,
         mobile: true
     }));
-    plugins.push( new CopyWebpackPlugin(
+    plugins.push(new CopyWebpackPlugin(
         [{ from: PATHS.assets }], {
             ignore: [
                 { glob: "images/*", dot: true }

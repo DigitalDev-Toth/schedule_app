@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
-
+import Main from '../components/Main.jsx';
 class App extends Component {
     static propTypes = {
         schedules: PropTypes.object,
         actions: PropTypes.object
     };
 
-/*    static contextTypes = {
+    /*static contextTypes = {
         store: PropTypes.object
     };*/
 
@@ -20,7 +20,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <div>Hello World!</div>
+                <Main />
             </div>
         );
     }
