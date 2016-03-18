@@ -1,10 +1,4 @@
-/**
- * In this file, we create a React component
- * which incorporates components providedby material-ui.
- */
-
 import React from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Dialog from 'material-ui/lib/dialog';
 import { indigo500 } from 'material-ui/lib/styles/colors';
@@ -12,9 +6,6 @@ import FlatButton from 'material-ui/lib/flat-button';
 import {Grid, Row, Col} from './box/Container.jsx';
 import ProcedureForm from './form/ProcedureForm.jsx';
 import Styles from './styles/Style';
-import 'bootstrap/dist/css/bootstrap.css';
-
-injectTapEventPlugin();
 
 const styles = {
     DialogTitle: {
