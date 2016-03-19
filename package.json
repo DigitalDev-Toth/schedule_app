@@ -47,6 +47,7 @@
     "test:features": "./node_modules/.bin/cucumber-js ./test/features"
   },
   "dependencies": {
+    "api": "^0.3.1",
     "pouchdb": "^5.3.0"
   },
   "devDependencies": {

@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 import Main from '../components/Main';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { API } from '../api';
 
+API.ScheduleModel.getSchedule();
+console.log('scheduleActions');
 injectTapEventPlugin();
 
 class App extends Component {
