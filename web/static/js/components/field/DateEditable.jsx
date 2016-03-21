@@ -1,7 +1,7 @@
 import React from 'react';
-import InlineEdit from 'react-edit-inline';
+import DateEdit from './editables/DateEdit';
 
-export default class EditInline extends React.Component {
+export default class DateEditable extends React.Component {
     constructor(props) {
         super(props);
         const {textInline} = this.props;
@@ -24,10 +24,10 @@ export default class EditInline extends React.Component {
 
     render() {
         return (<div>
-            <InlineEdit
+            <DateEdit
                 validate={this.customValidateText}
-                activeClassName='editing form-control'
                 text={this.state.message}
+                editingElement='date'
                 paramName='message'
                 change={this.dataChanged}
                 style={{
