@@ -7,18 +7,11 @@ export default class  extends React.Component {
         super(props);
         const { defaultDate, tagData } = this.props;
         this.state = {
-            editing: false,
             defaultDate,
             tagData
         };
     }
     render() {
-        if (this.state.editing) {
-            return this.renderEdit();
-        }
-        return this.renderDate();
-    }
-    renderEdit = () => {
         const dateMoment = moment(this.props.defaultDate, 'DD-MM-YYYY')._d;
         return <DatePicker
             ref = {
@@ -30,26 +23,14 @@ export default class  extends React.Component {
             formatDate={this.formatDate}
             onChange={ this.finishEdit }
         />;
-    };
-    formatDate(date) {
-        return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
     }
-    renderDate = () => {
-        return (
-            <div onClick={ this.edit } >
-                <span className='text'>{ this.props.defaultDate }</span>
-            </div>
-        );
-    };
-    edit = () => {
-        this.setState({
-            editing: true
-        });
-    };
+    formatDate(date) {
+        return moment(date).format('DD') + '-' + moment(date).format('MM') + '-' + moment(date).format('YYYY');
+    }
     finishEdit = (e, date) => {
         e = e ? e : null;
         const newValue = moment(date).format('DD-MM-YYYY');
-        if (this.state.defaultDate !== newValue && this.state.editing) {
+        if (this.state.defaultDate !== newValue) {
             if (this.props.onEdit) {
                 this.setState({
                     editing: false,

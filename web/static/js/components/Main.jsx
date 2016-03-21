@@ -69,9 +69,9 @@ class Main extends React.Component {
                             <h1>material-ui</h1>
                             <h2>example project</h2>
                             <RaisedButton
-                              label='Hazme Click ctm'
-                              primary={true}
-                              onTouchTap={this.handleTouchTap}
+                            label='Tocame Porfita'
+                            primary={true}
+                            onTouchTap={this.handleTouchTap}
                             />
                         </Styles>
                     </Col>
