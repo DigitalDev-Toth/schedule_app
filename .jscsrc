@@ -18,14 +18,14 @@
   	"disallowAnonymousFunctions": false,
   	"disallowShorthandArrowFunctions": false,
   	"disallowImplicitTypeConversion": ["string"],
-
+    "requireCamelCaseOrUpperCaseIdentifiers": {"ignoreProperties": true},
   	"safeContextKeyword": "that",
 
   	"excludeFiles": [
   		"_build/**",
   		"config/**",
   		"deps/**",
-    	"lib/**",  	
+    	"lib/**",
     	"priv/**",
     	"test/**"
   	]
