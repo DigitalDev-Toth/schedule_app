@@ -31,7 +31,7 @@ const PATHS = {
 
 const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles, PATHS.assets];
 
-const entry = [PATHS.source, PATHS.styles + '/main.scss'];
+const entry = [PATHS.source, PATHS.styles + '/app.scss'];
 
 const output = {};
 

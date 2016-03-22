@@ -17,6 +17,9 @@ defmodule Schedule.Router do
         pipe_through :browser # Use the default browser stack
 
         get "/", ScheduleController, :index
+        get "/schedules", ScheduleController, :index
+
+        get "/onlooker", ScheduleController, :onlooker
     end
 
     # Other scopes may use custom stacks.
