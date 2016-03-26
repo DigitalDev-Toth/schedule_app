@@ -3,7 +3,7 @@ TOTH SCHEDULE MODULE
 
 INSTALL
 ---
-- Get erlang, elixir and nodejs (asdf, nvm)
+- Get `Erlang`, `Elixir` and `NodeJS` (`asdf`, `nvm`)
 - Get it:
 ```
 $ git clone git@github.com:DigitalDev-Toth/schedule.git
@@ -51,25 +51,25 @@ $ MIX_ENV=prod PORT=4001 elixir --detached -S mix do compile, phoenix.server
 TECHNOLOGIES
 ---
 ### BACKEND
-- virtual machine: erlang vm
-- language: elixir
-- framework: phoenix
-- server: cowboy
+- Virtual Machine: Erlang VM
+- Language: Elixir
+- Framework: Phoenix
+- Server: Cowboy
 
 ###FRONTEND
-- environment: nodejs
-- language: javascript (es2015)
-- views: react, material-ui
-- stylesheet: sass
-- utils: redux, babel [es2015, stage-* (*decorators), react], webpack, eslint, jscs, appcache, eslint-security, docblockr
+- Environment: NodeJS
+- Language: JavaScript (ES2015)
+- Views: ReactJS, Material-UI
+- StyleSheet: SASS
+- Utils: Redux, Babel [ES2015, Stage-* (*Decorators), ReactJS], Webpack, ESlint, JSCS, Appcache, ESlint-Security, Docblockr
 
 ###DATABASE
-- backend: couchdb, *postgresql
-- frontend: pouchdb
+- Backend: CouchDB, *PostgreSQL
+- Frontend: PouchDB
 
 ###TESTING
-- bdd: cucumber, mocha, chai, webdriverio, selenium-driver
-- CI/CD: strider
+- BDD: Cucumber, Mocha, Chai, WebdriverIO, Selenium-Driver
+- CI/CD: Strider
 
 GUIDES
 ---
