@@ -51,25 +51,25 @@ $ MIX_ENV=prod PORT=4001 elixir --detached -S mix do compile, phoenix.server
 TECHNOLOGIES
 ---
 ### BACKEND
-- Virtual Machine: Erlang VM
-- Language: Elixir
-- Framework: Phoenix
-- Server: Cowboy
+- Virtual Machine: `Erlang VM`
+- Language: `Elixir`
+- Framework: `Phoenix`
+- Server: `Cowboy`
 
 ###FRONTEND
-- Environment: NodeJS
-- Language: JavaScript (ES2015)
-- Views: ReactJS, Material-UI
-- StyleSheet: SASS
-- Utils: Redux, Babel [ES2015, Stage-* (*Decorators), ReactJS], Webpack, ESlint, JSCS, Appcache, ESlint-Security, Docblockr
+- Environment: `NodeJS`
+- Language: `JavaScript (ES2015)`
+- Views: `ReactJS`, `Material-UI`
+- StyleSheet: `SASS`
+- Utils: `Redux`, `Babel [ES2015, Stage-* (*Decorators), ReactJS]`, `Webpack`, `ESlint`, `JSCS`, `Appcache`, `Docblockr`
 
 ###DATABASE
-- Backend: CouchDB, *PostgreSQL
+- Backend: `CouchDB`, `*PostgreSQL`
 - Frontend: PouchDB
 
 ###TESTING
-- BDD: Cucumber, Mocha, Chai, WebdriverIO, Selenium-Driver
-- CI/CD: Strider
+- BDD: `Cucumber`, `Mocha`, `Chai`, `WebdriverIO`, `Selenium-Driver`
+- CI/CD: `Strider`
 
 GUIDES
 ---
