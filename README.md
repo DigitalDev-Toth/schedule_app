@@ -45,7 +45,7 @@ $ PORT=4001 MIX_ENV=prod mix phoenix.server
 $ PORT=4001 MIX_ENV=prod iex -S mix phoenix.server
 
 # Daemonizes the process
-$ MIX_ENV=prod PORT=4001 elixir --detached -S mix do compile, phoenix.server
+$ PORT=4001 MIX_ENV=prod elixir --detached -S mix do compile, phoenix.server
 ```
 
 TECHNOLOGIES
