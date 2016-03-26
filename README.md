@@ -65,7 +65,7 @@ TECHNOLOGIES
 
 ###DATABASE
 - Backend: `CouchDB`, `*PostgreSQL`
-- Frontend: PouchDB
+- Frontend: `PouchDB`
 
 ###TESTING
 - BDD: `Cucumber`, `Mocha`, `Chai`, `WebdriverIO`, `Selenium-Driver`
