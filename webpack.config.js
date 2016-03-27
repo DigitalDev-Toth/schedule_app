@@ -163,7 +163,7 @@ if (!__DEVELOPMENT__) {
         save: true
     }));
     plugins.push(new HtmlWebpackPlugin({
-        title: 'Toth schedule module',
+        title: 'Toth Schedule Module',
         template: PATHS.template,
         appMountId: 'schedule',
         inject: false,
