@@ -1,13 +1,13 @@
-const webdriverio = require('webdriverio');
+import { remote } from 'webdriverio';
 
 function World() {
-    this.driver = webdriverio.remote({
+    this.driver = remote({
         desiredCapabilities: {
             browserName: 'chrome'
         }
     });
 }
 
-module.exports = function() {
+export default function() {
     this.World = World;
 }

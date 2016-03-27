@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-module.exports = function() {
+export default function() {
     this.Given(/^I am on the Toth Schedule Module page$/, function(next) {
         this.driver
             .url('http://localhost:3000')

@@ -50,7 +50,7 @@ const loaders = [{
     loader: 'babel',
     query: {
         cacheDirectory: true,
-        plugins: ['transform-decorators-legacy'],
+        plugins: ['transform-decorators-legacy', 'add-module-exports'],
         presets: ['react', 'es2015', 'stage-0']
     },
     include: [PATHS.source, PATHS.phoenix, PATHS.phoenix_html],

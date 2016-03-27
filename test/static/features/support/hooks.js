@@ -1,4 +1,4 @@
-module.exports = function() {
+export default function() {
     this.Before(function(scenario, next) {
         this.driver
             .init()
