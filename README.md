@@ -17,15 +17,29 @@ $ npm install
 
 HOW TO USE IT
 ---
-- Development:
+### DEVELOPMENT:
+Install and run the Selenium-Standalone server
+```
+$ npm install -g selenium-standalone@latest
+$ selenium-standalone install
+$ selenium-standalone start
+```
+Start the development server
 ```
 $ npm run dev
 ```
-- Production:
+Testing
+```
+$ npm run test:units
+$ npm run test:features
+```
+### PRODUCTION:
+Build assets and start the production server
 ```
 $ MODE_ENV=prod mix phoenix.server
 ```
-- Deployment:
+### DEPLOYMENT:
+Deploy project and start the production server
 ```
 # Create and configure config/prod.secret.exs
 # Generate a new secret: mix phoenix.gen.secret
@@ -56,31 +70,31 @@ TECHNOLOGIES
 - Framework: `Phoenix`
 - Server: `Cowboy`
 
-###FRONTEND
+### FRONTEND
 - Environment: `NodeJS`
 - Language: `JavaScript (ES2015)`
 - Views: `ReactJS`, `Material-UI`
 - StyleSheet: `SASS`
 - Utils: `Redux`, `Babel [ES2015, Stage-* (*Decorators), ReactJS]`, `Webpack`, `ESlint`, `JSCS`, `Appcache`, `Docblockr`
 
-###DATABASE
+### DATABASE
 - Backend: `CouchDB`, `*PostgreSQL`
 - Frontend: `PouchDB`
 
-###TESTING
+### TESTING
 - BDD: `Cucumber`, `Mocha`, `Chai`, `WebdriverIO`, `Selenium-Driver`
 - CI/CD: `Strider`
 
 GUIDES
 ---
-###ELIXIR + PHOENIX FRAMEWORK
+### ELIXIR + PHOENIX FRAMEWORK
 - [Elixir documentation](http://elixir-lang.org/docs.html)
 - [Phoenix documentation](http://www.phoenixframework.org/docs/overview)
 - [Phoenix + Webpack](http://matthewlehner.net/using-webpack-with-phoenix-and-elixir/)
 - [Phoenix + React + Redux](http://10consulting.com/2015/11/18/phoenix-react-redux-example/)
 - [asdf](https://github.com/HashNuke/asdf)
 
-###REACT + REDUX
+### REACT + REDUX
 - [React documentation](https://facebook.github.io/react/docs/getting-started.html)
 - [Redux documentation](http://redux.js.org/docs/basics/)
 - [React + Redux: Todo example](https://github.com/reactjs/redux/tree/master/examples/todomvc)
