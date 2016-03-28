@@ -39,26 +39,26 @@ Build assets and start the production server
 $ MODE_ENV=prod mix phoenix.server
 ```
 ### DEPLOYMENT
-Deploy project and start the production server
+Initial setup
 ```
-# Create and configure config/prod.secret.exs
-# Generate a new secret: mix phoenix.gen.secret
-
-# Initial setup
 $ mix deps.get --only prod
 $ MIX_ENV=prod mix compile
-
-# Compile assets
+```
+Compile assets
+```
 $ npm run deploy
 $ MIX_ENV=prod mix phoenix.digest
-
-# Finally run the server
+```
+Finally run the server
+```
 $ PORT=4001 MIX_ENV=prod mix phoenix.server
-
-# Run the application inside an interactive shell
+```
+Or run the application inside an interactive shell
+```
 $ PORT=4001 MIX_ENV=prod iex -S mix phoenix.server
-
-# Daemonizes the process
+```
+Or daemonizes the process
+```
 $ PORT=4001 MIX_ENV=prod elixir --detached -S mix do compile, phoenix.server
 ```
 
