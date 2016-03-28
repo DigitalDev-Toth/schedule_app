@@ -17,11 +17,14 @@ $ npm install
 
 HOW TO USE IT
 ---
-### DEVELOPMENT:
+### DEVELOPMENT
 Install and run the Selenium-Standalone server
 ```
 $ npm install -g selenium-standalone@latest
 $ selenium-standalone install
+```
+Run it
+```
 $ selenium-standalone start
 ```
 Start the development server
@@ -33,12 +36,12 @@ Testing
 $ npm run test:units
 $ npm run test:features
 ```
-### PRODUCTION:
+### PRODUCTION
 Build assets and start the production server
 ```
 $ MODE_ENV=prod mix phoenix.server
 ```
-### DEPLOYMENT:
+### DEPLOYMENT
 Deploy project and start the production server
 ```
 # Create and configure config/prod.secret.exs
