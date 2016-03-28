@@ -13,17 +13,14 @@ $ cd schedule
 ```
 $ mix deps.get
 $ npm install
+$ npm install -g selenium-standalone@latest
+$ selenium-standalone install
 ```
 
 HOW TO USE IT
 ---
 ### DEVELOPMENT
-Install and run the Selenium-Standalone server
-```
-$ npm install -g selenium-standalone@latest
-$ selenium-standalone install
-```
-Run it
+Run the Selenium-Standalone server
 ```
 $ selenium-standalone start
 ```
@@ -101,4 +98,5 @@ GUIDES
 - [React documentation](https://facebook.github.io/react/docs/getting-started.html)
 - [Redux documentation](http://redux.js.org/docs/basics/)
 - [React + Redux: Todo example](https://github.com/reactjs/redux/tree/master/examples/todomvc)
+- [Testing + Redux + React + Immutable](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)
 - [nvm](https://github.com/creationix/nvm)
