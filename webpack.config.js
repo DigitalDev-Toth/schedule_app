@@ -196,6 +196,6 @@ module.exports = {
     module: modules,
     postcss: postcss,
     devtool: devtool,
-    devServer: __DEVELOPMENT__ ? devServer : undefined,
+    devServer: (__DEVELOPMENT__ || __TESTING__) ? devServer : undefined,
     plugins: plugins
 };
