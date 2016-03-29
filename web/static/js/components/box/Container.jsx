@@ -1,7 +1,7 @@
 import React from 'react';
 export class Grid extends React.Component {
     render() {
-        const { children, ...props } = this.props;
+        const { children } = this.props;
         return (
             <div className='container'>
                 {children}
@@ -11,7 +11,7 @@ export class Grid extends React.Component {
 }
 export class Row extends React.Component {
     render() {
-        const { children, ...props } = this.props;
+        const { children } = this.props;
         return (
             <div className='row'>
                 {children}
@@ -21,7 +21,7 @@ export class Row extends React.Component {
 }
 export class Col extends React.Component {
     render() {
-        const { children, type,  ...props } = this.props;
+        const { children, type } = this.props;
         const typeCol = type || 'col-md-12';
         return (
             <div className={typeCol}>

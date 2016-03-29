@@ -19,7 +19,7 @@ const TreeField = React.createClass({
         this.setState({ multipleValue: value });
     },
     render() {
-        const { style, children, type,  ...props } = this.props;
+        const { style } = this.props;
         return (
             <div style={{margin: 20}}>
                 <TreeSelect

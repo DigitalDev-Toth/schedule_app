@@ -9,7 +9,7 @@ export default class Styles extends React.Component {
     }
 
     render() {
-        const { children, color, ...props } = this.props;
+        const { children, color } = this.props;
         const colorTheme = color || 'teal500';
         const muiTheme = getMuiTheme({
             palette: {
