@@ -12,9 +12,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const MODE_ENV = process.env.MODE_ENV;
-const __DEPLOYMENT__ = MODE_ENV === 'deploy' ? true : false;
-const __PRODUCTION__ = MODE_ENV === 'prod' ? true : false;
-const __DEVELOPMENT__ = MODE_ENV === 'dev' ? true : false;
+const __DEPLOYMENT__ = MODE_ENV === 'deploy';
+const __PRODUCTION__ = MODE_ENV === 'prod';
+const __DEVELOPMENT__ = MODE_ENV === 'dev';
+const __TESTING__ = MODE_ENV === 'testing';
 
 const PATHS = {
     source: path.join(__dirname, 'web', 'static', 'js'),
@@ -83,7 +84,7 @@ const postcss = function() {
     return [autoprefixer, precss, csswring]
 };
 
-const devtool = __DEVELOPMENT__ ? 'eval' : 'source-map';
+const devtool = (__DEVELOPMENT__ || __TESTING__) ? 'eval' : 'source-map';
 
 const plugins = [
     new webpack.ProvidePlugin({
@@ -106,7 +107,7 @@ const preLoaders = [{
     include: PATHS.source
 }];
 
-if (!__DEVELOPMENT__) {
+if (__DEPLOYMENT__ || __PRODUCTION__) {
     output.path = PATHS.production;
     output.filename = 'js/schedule.js';
     loaders.push({
@@ -157,7 +158,7 @@ if (!__DEVELOPMENT__) {
         loader: 'style!css'
     });
     modules.loaders = loaders;
-    modules.preLoaders = preLoaders;
+    modules.preLoaders = __DEVELOPMENT__ ? preLoaders: [];
     plugins.push(new webpack.HotModuleReplacementPlugin());
     plugins.push(new NpmInstallPlugin({
         save: true
