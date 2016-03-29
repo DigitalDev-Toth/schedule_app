@@ -7,9 +7,11 @@
         <meta name="author" content="Toth Limitada">
         <meta name="description" content="Toth schedule module">
         <title>Toth Schedule Module</title>
+        <link rel="stylesheet" href="<%= static_path(@conn, "/css/schedule.css") %>">
     </head>
 
-    <body>
+    <body class="looker">
         <%= render @view_module, @view_template, assigns %>
+        <script src="<%= static_path(@conn, "/js/schedule.js") %>"></script>
     </body>
 </html>

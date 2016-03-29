@@ -4,20 +4,13 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
-import Main from '../components/Main';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import { API } from '../api';
-
-API.ScheduleModel.getSchedule();
-console.log('scheduleActions');
-injectTapEventPlugin();
 
 /**
- * App container
+ * Looker Container
  *
  * @class
  */
-class App extends Component {
+class Looker extends Component {
     /**
      * React properties types definitions
      */
@@ -46,7 +39,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Main />
+                Hello World!
             </div>
         );
     }
@@ -82,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(App);
+)(Looker);

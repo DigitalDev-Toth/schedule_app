@@ -1,6 +1,12 @@
-body {
+body,
+body.app {
 	background-color: #000;
 }
+
+body.looker {
+    background-color: green;
+}
+
 .rc-tree-select-selection--multiple {
     z-index: 9999;
 }

@@ -8,7 +8,7 @@ defmodule Schedule.ScheduleController do
     def onlooker(conn, _params) do
         # render conn, :onlooker
         conn
-        |> put_layout("utilities.html")
+        |> put_layout("looker.html")
         |> render(:onlooker)
     end
 end

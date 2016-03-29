@@ -96,7 +96,8 @@ const plugins = [
             NODE_ENV: JSON.stringify('production'),
             __DEPLOYMENT__: __DEPLOYMENT__,
             __PRODUCTION__: __PRODUCTION__,
-            __DEVELOPMENT__: __DEVELOPMENT__
+            __DEVELOPMENT__: __DEVELOPMENT__,
+            __TESTING__: __TESTING__
         }
     })
 ];
