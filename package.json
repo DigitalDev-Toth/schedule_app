@@ -43,6 +43,7 @@
     "deploy": "MODE_ENV=deploy ./node_modules/.bin/webpack -p",
     "build": "MODE_ENV=prod ./node_modules/.bin/webpack --watch-stdin --progress --colors",
     "dev": "MODE_ENV=dev ./node_modules/.bin/webpack-dev-server",
+    "testing": "MODE_ENV=testing ./node_modules/.bin/webpack-dev-server",
     "test:units": "./node_modules/.bin/mocha --compilers js:babel-register --slow 3s --no-timeouts --recursive ./test/static/units",
     "test:features": "./node_modules/.bin/cucumber-js --compiler js:babel-register ./test/static/features"
   },

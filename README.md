@@ -33,11 +33,13 @@ Testing
 $ npm run test:units
 $ npm run test:features
 ```
+
 ### PRODUCTION
 Build assets and start the production server
 ```
 $ MODE_ENV=prod mix phoenix.server
 ```
+
 ### DEPLOYMENT
 Initial setup
 ```
@@ -60,6 +62,30 @@ $ PORT=4001 MIX_ENV=prod iex -S mix phoenix.server
 Or daemonizes the process
 ```
 $ PORT=4001 MIX_ENV=prod elixir --detached -S mix do compile, phoenix.server
+```
+
+CI-CD STRIDER PHASES
+---
+### PREPARE
+```
+/home/toth/.asdf/shims/mix deps.get
+sh /etc/init.d/xvfb start && 
+npm run testing & 
+sleep 30s 
+```
+
+### TEST
+```
+npm run test:units ; 
+npm run test:features 
+```
+### DEPLOY
+TODO
+
+### CLEANUP
+```
+killall -9 node && 
+sh /etc/init.d/xvfb stop
 ```
 
 TECHNOLOGIES
