@@ -1,13 +1,11 @@
-import PouchDB from 'pouchdb';
-const db = new PouchDB('http://toth.cl:5984/schedule');
+import DB from '../db/db';
 
 export default class ScheduleModel {
     static fetchAllSchedules() {}
 
     static getSchedule() {
-        db.allDocs({include_docs: true, descending: true}, function(err, doc) {
-            console.log(doc.rows);
-        });
+        const options = DB.getDefaultOptions();
+        console.log(options);
     }
 
     static newSchedule() {}
