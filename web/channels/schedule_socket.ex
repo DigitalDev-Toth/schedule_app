@@ -1,9 +1,7 @@
 defmodule Schedule.ScheduleSocket do
     use Phoenix.Socket
 
-    ## Channels
-    # channel "rooms:*", Schedule.RoomChannel
-    channel "schedules:*", Schedule.ScheduleChannel
+    channel "schedule:*", Schedule.ScheduleChannel
 
     ## Transports
     transport :websocket, Phoenix.Transports.WebSocket
