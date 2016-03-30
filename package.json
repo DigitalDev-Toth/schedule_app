@@ -1,10 +1,10 @@
 {
   "name": "schedule",
   "version": "0.0.0-dev",
-  "description": "Toth schedule module",
+  "description": "Toth Schedule-Calendar Module",
   "license": "MIT",
   "author": {
-    "name": "Toth Limitada",
+    "name": "Toth Development Team!",
     "email": "contacto@toth.cl",
     "url": "http://www.toth.cl/"
   },
@@ -100,6 +100,7 @@
     "npm-install-webpack-plugin": "^3.0.0",
     "postcss": "^5.0.19",
     "postcss-loader": "^0.8.1",
+    "pouchdb-find": "^0.9.0",
     "precss": "^1.4.0",
     "rc-tree-select": "^1.2.5",
     "react": "^0.14.7",
