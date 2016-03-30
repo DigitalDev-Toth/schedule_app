@@ -27,7 +27,7 @@ export default function() {
             .receive('ok', resp => { console.log('Joined successfully to Toth Schedule Module', resp); });*/
 
         socket = new Socket('/socket', {
-            logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data, 1) })
+            logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data, 1); })
         });
 
         socket.connect({user_id: '123'});
@@ -41,7 +41,7 @@ export default function() {
         channel.join()
             .receive('ignore', () => console.log('auth error', 3))
             .receive('ok', () => console.log('join ok', 3));
-            /*.after(10000, () => console.log('Connection interruption', 3));*/
+        /*.after(10000, () => console.log('Connection interruption', 3));*/
 
         channel.onError(event => console.log('something went wrong', event, 2));
         channel.onClose(event => console.log('channel closed', event, 2));
@@ -50,10 +50,10 @@ export default function() {
 
         channel.on('new:msg', msg => {
             console.log(msg, 4);
-        })
+        });
 
         channel.on('user:entered', msg => {
             console.log(msg, 5);
-        })
+        });
     }
 }
