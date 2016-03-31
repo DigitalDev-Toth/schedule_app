@@ -1,11 +1,11 @@
 import 'phoenix_html';
-import connectToBackend from './socket';
+import connectToChannel from './utilities/Socket';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory, Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
+import ConfigureStore from './store/ConfigureStore';
 import App from './containers/App';
 import Looker from './containers/Looker';
 import { ErrorMessage } from './containers/ErrorMessage';
@@ -14,9 +14,9 @@ import '../assets/images/ren_y_stimpy.jpg';
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __TESTING__ = process.env.__TESTING__;
-const store = configureStore();
+const store = ConfigureStore();
 const history = syncHistoryWithStore(browserHistory, store);
-connectToBackend();
+connectToChannel();
 
 ReactDOM.render(
     <div>

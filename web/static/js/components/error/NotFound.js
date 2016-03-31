@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 /**
- * Error 404
+ * Error 404 component
  *
  * @class
  */

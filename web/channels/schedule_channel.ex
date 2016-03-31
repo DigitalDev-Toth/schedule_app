@@ -4,7 +4,7 @@ defmodule Schedule.ScheduleChannel do
     def join("schedule:lobby", message, socket) do
         send(self, {:after_join, message})
 
-        {:ok, socket}
+        {:ok, message, socket}
     end
 
     def join("schedule:" <> _private_subtopic, _message, _socket) do
@@ -24,7 +24,7 @@ defmodule Schedule.ScheduleChannel do
         {:noreply, socket}
     end
 
-    def terminate(rearon, _socket) do
+    def terminate(_rearon, _socket) do
         :ok
     end
 
