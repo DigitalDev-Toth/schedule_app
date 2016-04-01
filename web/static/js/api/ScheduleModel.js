@@ -4,8 +4,12 @@ export default class ScheduleModel {
     static fetchAllSchedules() {}
 
     static getSchedule() {
-        const options = DB.getDefaultOptions();
-        console.log(options);
+        DB.getConfigSchedule('1234')
+            .then((doc) => {
+                console.log(doc);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     static newSchedule() {}

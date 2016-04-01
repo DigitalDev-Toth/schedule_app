@@ -9,7 +9,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { API } from '../api';
 
 API.ScheduleModel.getSchedule();
-console.log('scheduleActions');
 injectTapEventPlugin();
 
 /**
