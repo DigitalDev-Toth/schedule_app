@@ -10,32 +10,27 @@ const dbSync = { 'name': 'None', 'dbIndex': 0 };
 export default class DB {
 
     static setActiveServer() {
-        var url = couchServers[dbSync.dbIndex].url + '/' + dbName;
-        dbSync.name = couchServers[dbSync.dbIndex].name;
-        db.sync(url, {
-            live: true,
-            retry: true
-        }).on('change', function (info) {
-            console.log('change ', dbSync.name ,info);
-        }).on('paused', function () {
-            console.log('paused ', dbSync.name);
-        }).on('active', function () {
-            console.log('active ', dbSync.name);
-        }).on('denied', function (info) {
-            console.log('denied ', dbSync.name, info);
-        }).on('complete', function (info) {
-            console.log('complete ', dbSync.name, info);
-        }).on('error', function (err) {
-            console.log('error ', dbSync.name, err);
-            dbSync.dbIndex += 1;
-            this.setActiveServer();
+        return new Promise((resolve, reject) => {
+            let url = couchServers[dbSync.dbIndex].url + '/' + dbName;
+            dbSync.name = couchServers[dbSync.dbIndex].name;
+            db.sync(url, {
+                live: true,
+                retry: true
+            }).on('change', function(info) {
+                resolve(info);
+            }).on('denied', function(info) {
+                reject(info);
+            }).on('complete', function(info) {
+                resolve(info);
+            }).on('error', function(err) {
+                reject(err);
+            });
         });
     }
 
     /**
      * { function_description }
      *
-     * @method     getDefaultOptions
      * @return     {Promise}  { description_of_the_return_value }
      */
     static getDefaultOptions() {
@@ -53,8 +48,6 @@ export default class DB {
     /**
      * { function_description }
      *
-     * @method     getRoom
-     * @param      {<type>}   id      { description }
      * @return     {Promise}  { description_of_the_return_value }
      */
     static getRoom(id) {
@@ -72,19 +65,21 @@ export default class DB {
     /**
      * Promise.all
      *
-     * @method     getConfigSchedule
-     * @param         _id
      * @return     {Promise}  return Object with config
      */
     static getConfigSchedule(_id) {
-        this.setActiveServer();
         return new Promise((resolve, reject) => {
-            let promises = [this.getDefaultOptions(), this.getRoom(_id)];
+            let promises = [
+                this.setActiveServer(),
+                this.getDefaultOptions(),
+                this.getRoom(_id)
+            ];
             Promise.all(promises)
                 .then(responses => {
+                    console.log('Sync response ', responses[0]);
                     let json = {
-                        defaultOptions: responses[0].options,
-                        roomOptions: responses[1]
+                        defaultOptions: responses[1].options,
+                        roomOptions: responses[2]
                     };
                     resolve(json);
                 })
