@@ -1,7 +1,8 @@
 import PouchDB from 'pouchdb';
 import PouchFind from 'pouchdb-find';
-PouchDB.plugin(PouchFind);
 import { couchServers } from './servers';
+import { Verify } from './db.verify';
+PouchDB.plugin(PouchFind);
 
 const dbName = 'schedule';
 const db = new PouchDB(dbName);
@@ -14,17 +15,15 @@ export default class DB {
             let url = couchServers[dbSync.dbIndex].url + '/' + dbName;
             dbSync.name = couchServers[dbSync.dbIndex].name;
             db.sync(url, {
-                live: true,
-                retry: true
-            }).on('change', function(info) {
-                resolve(info);
-            }).on('denied', function(info) {
-                reject(info);
-            }).on('complete', function(info) {
-                resolve(info);
-            }).on('error', function(err) {
-                reject(err);
-            });
+                    live: true,
+                    retry: true
+                })
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(err => {
+                    reject(err);
+                });
         });
     }
 
@@ -68,6 +67,13 @@ export default class DB {
      * @return     {Promise}  return Object with config
      */
     static getConfigSchedule(_id) {
+        Verify()
+            .then(server => {
+                console.log('server', server);
+            })
+            .catch(err => {
+                console.log(err);
+            });
         return new Promise((resolve, reject) => {
             let promises = [
                 this.setActiveServer(),

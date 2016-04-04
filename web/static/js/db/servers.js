@@ -1,7 +1,7 @@
 export const couchServers = [
     {
         'name': 'cloudant',
-        'url': 'https://toth.cloudant.com'
+        'url': 'https://toth:Mipapajuandijosisualma15@toth.cloudant.com'
     },
     {
         'name': 'toth',
