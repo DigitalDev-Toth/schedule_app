@@ -42,10 +42,10 @@ class Schedule extends Component {
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:user_entered', params => {
-                this.props.actions.getScheduleUserEntered(params['user']);
+                this.props.actions.getScheduleUserEntered(params.user);
             });
         }
-    }
+    };
 
     /**
      * React DOM rendering
@@ -65,7 +65,7 @@ class Schedule extends Component {
                 <Notifier open={open} message={message} />
             </div>
         );
-    }
+    };
 }
 
 /**

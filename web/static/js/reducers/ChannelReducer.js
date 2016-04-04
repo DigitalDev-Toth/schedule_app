@@ -1,5 +1,3 @@
-import { InitialState } from '../utilities/InitialState';
-
 export function getScheduleUserEnteredReducer(state = {user: ''}, action) {
     switch (action.type) {
         case 'SCHEDULE_USER_ENTERED': {

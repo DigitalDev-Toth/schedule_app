@@ -13,7 +13,7 @@ let connectToChannel = () => {
 
         channel.join()
             .receive('ignore', () => {})
-            .receive('ok', (response) => {});
+            .receive('ok', () => {});
 
         /*channel.push('schedule:message', {params});
 

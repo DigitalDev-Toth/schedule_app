@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Snackbar from 'material-ui/lib/snackbar';
 
-const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
-const __PRODUCTION__ = process.env.__PRODUCTION__;
-
 /**
  * Notifier component
  *
@@ -31,17 +28,19 @@ class Notifier extends Component {
      * React DOM rendering
      */
     render = () => {
+        let message = this.props.message === undefined ? '' : this.props.message;
+
         return (
             <div>
                 <Snackbar
                     open={this.props.open}
-                    message={this.props.message}
+                    message={message}
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
                 />
             </div>
         );
-    }
+    };
 }
 
 export default Notifier;

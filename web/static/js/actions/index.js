@@ -6,7 +6,7 @@ export let getScheduleOptions = (options) => {
         type: 'SCHEDULE_OPTIONS',
         options
     };
-}
+};
 
 export let getScheduleUserEntered = (user) => {
     let message = `Bienvenido ${user}`;
@@ -20,4 +20,4 @@ export let getScheduleUserEntered = (user) => {
         user,
         message
     };
-}
+};
