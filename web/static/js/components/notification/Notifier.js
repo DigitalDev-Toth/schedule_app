@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Snackbar from 'material-ui/lib/snackbar';
-import RaisedButton from 'material-ui/lib/raised-button';
+
+const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
+const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
  * Notifier component
@@ -8,35 +10,32 @@ import RaisedButton from 'material-ui/lib/raised-button';
  * @class
  */
 class Notifier extends Component {
+    /**
+     * React properties types definitions
+     */
+    static propTypes = {
+        open: PropTypes.any,
+        message: PropTypes.any
+    };
+
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
-        this.state = {
-            open: false,
-        };
     }
 
-    handleTouchTap = () => {
-        this.setState({
-            open: true,
-        });
-    };
-
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
-    };
-
-    render() {
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         return (
             <div>
-                <RaisedButton
-                    onTouchTap={this.handleTouchTap}
-                    label="Add to my calendar"
-                />
                 <Snackbar
-                    open={this.state.open}
-                    message="Event added to your calendar"
+                    open={this.props.open}
+                    message={this.props.message}
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
                 />
@@ -44,3 +43,5 @@ class Notifier extends Component {
         );
     }
 }
+
+export default Notifier;

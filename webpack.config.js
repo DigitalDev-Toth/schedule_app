@@ -90,15 +90,6 @@ const plugins = [
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery'
-    }),
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: JSON.stringify('production'),
-            __DEPLOYMENT__: __DEPLOYMENT__,
-            __PRODUCTION__: __PRODUCTION__,
-            __DEVELOPMENT__: __DEVELOPMENT__,
-            __TESTING__: __TESTING__
-        }
     })
 ];
 
@@ -137,6 +128,15 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
             ]
         }
     ));
+    plugins.push(new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify('production'),
+            __DEPLOYMENT__: __DEPLOYMENT__,
+            __PRODUCTION__: __PRODUCTION__,
+            __DEVELOPMENT__: __DEVELOPMENT__,
+            __TESTING__: __TESTING__
+        }
+    }));
     /*plugins.push( new ManifestPlugin() );
     plugins.push(new ChunkManifestPlugin({
         filename: "chunk-manifest.json",
@@ -178,6 +178,15 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
             ]
         }
     ));
+    plugins.push(new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify('dev'),
+            __DEPLOYMENT__: __DEPLOYMENT__,
+            __PRODUCTION__: __PRODUCTION__,
+            __DEVELOPMENT__: __DEVELOPMENT__,
+            __TESTING__: __TESTING__
+        }
+    }));
 }
 
 const devServer = {
@@ -187,7 +196,8 @@ const devServer = {
     colors: true,
     port: 3000,
     hot: true,
-    inline: true
+    inline: true,
+    historyApiFallback: true
 };
 
 module.exports = {

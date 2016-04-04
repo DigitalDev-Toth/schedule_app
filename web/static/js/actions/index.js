@@ -1,9 +1,23 @@
 import { API } from '../api';
 
-export function loadSchedules(schedules) {
+export let getScheduleOptions = (options) => {
     console.log(API);
     return {
-        type: 'LOAD_SCHEDULES',
-        schedules
+        type: 'SCHEDULE_OPTIONS',
+        options
+    };
+}
+
+export let getScheduleUserEntered = (user) => {
+    let message = `Bienvenido ${user}`;
+
+    if (user !== 'toth') {
+        message = `El usuario ${user} se ha conectado`;
+    }
+
+    return {
+        type: 'SCHEDULE_USER_ENTERED',
+        user,
+        message
     };
 }

@@ -6,7 +6,7 @@ import { NotFound } from '../components/error/NotFound';
  *
  * @class
  */
-export class ErrorMessage extends Component {
+class ErrorMessage extends Component {
     /**
      * Basic React component constructor
      *
@@ -33,3 +33,5 @@ export class ErrorMessage extends Component {
         );
     }
 }
+
+export default ErrorMessage;

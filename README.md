@@ -64,7 +64,7 @@ Or daemonizes the process
 $ PORT=4001 MIX_ENV=prod elixir --detached -S mix do compile, phoenix.server
 ```
 
-CI-CD STRIDER PHASES
+STRIDER CI-CD PHASES
 ---
 ### PREPARE
 ```

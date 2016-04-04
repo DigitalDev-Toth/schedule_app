@@ -1,14 +1,14 @@
 import 'phoenix_html';
-import connectToChannel from './utilities/Socket';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { browserHistory, Router, Route } from 'react-router';
+import { render } from 'react-dom';
+import { browserHistory, Router, Route, IndexRoute, Redirect } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import ConfigureStore from './store/ConfigureStore';
 import App from './containers/App';
+import Schedule from './containers/Schedule';
 import Looker from './containers/Looker';
-import { ErrorMessage } from './containers/ErrorMessage';
+import ErrorMessage from './containers/ErrorMessage';
 import DevTools from './containers/DevTools';
 import '../assets/images/ren_y_stimpy.jpg';
 
@@ -16,16 +16,17 @@ const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __TESTING__ = process.env.__TESTING__;
 const store = ConfigureStore();
 const history = syncHistoryWithStore(browserHistory, store);
-connectToChannel();
 
-ReactDOM.render(
+render(
     <div>
         <Provider store={store}>
             <Router history={history}>
-                <Route path='/' component={App} />
-                <Route path='/schedules' component={App} />
-                <Route path='/onlooker' component={Looker} />
-                <Route path='*' component={ErrorMessage} code={404} />
+                <Redirect from='/schedule' to='/' />
+                <Route path='/' component={App}>
+                    <IndexRoute component={Schedule} />
+                    <Route path='onlooker' component={Looker} />
+                    <Route path='*' component={ErrorMessage} />
+                </Route>
             </Router>
         </Provider>
         { (() => {

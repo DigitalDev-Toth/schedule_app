@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css';
-
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,8 +13,7 @@ class Looker extends Component {
      * React properties types definitions
      */
     static propTypes = {
-        schedules: PropTypes.object,
-        actions: PropTypes.object
+        channel: PropTypes.object.any
     };
 
     /*static contextTypes = {

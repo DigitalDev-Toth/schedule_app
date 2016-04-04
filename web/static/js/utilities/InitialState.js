@@ -1,8 +1,13 @@
+import ConnectToChannel from './Socket';
 import { API } from '../api';
 
-export function InitialState(api = API) {
-    console.log(api);
+const channel = ConnectToChannel();
+
+export function InitialState() {
+    console.log(API);
+    console.log(channel);
     return {
-        message: 'testing'
+        channel,
+        options: 'testing'
     };
 }

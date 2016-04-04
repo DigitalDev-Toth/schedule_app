@@ -1,15 +1,7 @@
+import React, { Component, PropTypes } from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as scheduleActions from '../actions';
-import Main from '../components/Main';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import { API } from '../api';
-
-API.ScheduleModel.getSchedule();
-console.log('scheduleActions');
 injectTapEventPlugin();
 
 /**
@@ -22,23 +14,8 @@ class App extends Component {
      * React properties types definitions
      */
     static propTypes = {
-        schedules: PropTypes.object,
-        actions: PropTypes.object
+        children: PropTypes.any
     };
-
-    /*static contextTypes = {
-        store: PropTypes.object
-    };*/
-
-    /**
-     * Basic React component constructor
-     *
-     * @param      {Object}  props    React properties
-     * @param      {Object}  context  Redux properties
-     */
-    constructor(props, context) {
-        super(props, context);
-    }
 
     /**
      * React DOM rendering
@@ -46,40 +23,10 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Main />
+                {this.props.children}
             </div>
         );
     }
 }
 
-/**
- * Map Redux states to React properties
- *
- * @param      {Object}  state   Redux state
- * @return     {Object}  Redux states
- */
-const mapStateToProps = (state) => {
-    return {
-        state: state.loadSchedules
-    };
-};
-
-/**
- * Map Redux actions to React properties
- *
- * @param      {Function}  dispatch  Redux action
- * @return     {Object}  Redux actions
- */
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(scheduleActions, dispatch)
-    };
-};
-
-/**
- * Connect React component with Redux store
- */
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App);
+export default App;

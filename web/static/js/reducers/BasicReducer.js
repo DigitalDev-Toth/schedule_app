@@ -1,10 +1,11 @@
 import { InitialState } from '../utilities/InitialState';
 
-export function LoadSchedulesReducer(state = InitialState(), action) {
+export function getScheduleOptionsReducer(state = InitialState(), action) {
     switch (action.type) {
-        case 'LOAD_SCHEDULES': {
-            return Object.assign({ type: 'LOAD_SCHEDULES' }, state, {
-                schedules: action.schedules
+        case 'SCHEDULE_OPTIONS': {
+            return Object.assign(...state, {
+                type: action.type,
+                options: action.options
             });
         }
 
