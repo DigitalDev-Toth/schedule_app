@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 import Main from '../components/Main';
 import Notifier from '../components/notification/Notifier';
+import { API } from '../api';
+API.ScheduleModel.getSchedule();
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;

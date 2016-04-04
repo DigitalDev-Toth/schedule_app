@@ -67,6 +67,7 @@ export default class DB {
      * @return     {Promise}  return Object with config
      */
     static getConfigSchedule(_id) {
+        console.log('here');
         Verify()
             .then(server => {
                 console.log('server', server);

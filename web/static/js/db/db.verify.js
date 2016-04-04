@@ -7,11 +7,9 @@ export function Verify() {
     return new Promise((resolve, reject) => {
         couchServers.forEach((server) => {
             let url = `${server.url}/${dbName}`;
-            console.log(url);
-            let db = new PouchDB(url);
+            let db = new PouchDB(url, server.auth);
             db.info()
-                .then((info) => {
-                    console.log(info);
+                .then(() => {
                     resolve(server);
                     return;
                 }).catch((err) => {
