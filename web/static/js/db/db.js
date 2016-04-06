@@ -67,17 +67,15 @@ export default class DB {
      * @return     {Promise}  return Object with config
      */
     static getConfigSchedule(_id) {
-        console.log('here');
         Verify()
-            .then(server => {
+            .then((server) => {
                 console.log('server', server);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
             });
         return new Promise((resolve, reject) => {
             let promises = [
-                this.setActiveServer(),
                 this.getDefaultOptions(),
                 this.getRoom(_id)
             ];
