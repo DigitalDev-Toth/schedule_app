@@ -21,3 +21,10 @@ export let getScheduleUserEntered = (user) => {
         message
     };
 };
+
+export let getScheduleErrorCode = (code = 404) => {
+    return {
+        type: 'SCHEDULE_ERROR_CODE',
+        code
+    };
+};

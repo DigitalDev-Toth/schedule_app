@@ -13,7 +13,7 @@ class Looker extends Component {
      * React properties types definitions
      */
     static propTypes = {
-        channel: PropTypes.object.any
+        channel: PropTypes.any
     };
 
     /*static contextTypes = {
@@ -50,7 +50,7 @@ class Looker extends Component {
  */
 const mapStateToProps = (state) => {
     return {
-        state: state.loadSchedules
+        state
     };
 };
 

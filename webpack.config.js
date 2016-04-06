@@ -84,7 +84,7 @@ const postcss = function() {
     return [autoprefixer, precss, csswring]
 };
 
-const devtool = (__DEVELOPMENT__ || __TESTING__) ? 'eval' : 'source-map';
+const devtool = (__DEVELOPMENT__ || __TESTING__) ? 'source-map' : 'source-map';
 
 const plugins = [
     new webpack.ProvidePlugin({

@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
+const codeStyle = {
+    fontSize: '98pt'
+};
+
 /**
  * Error 404 component
  *
@@ -29,13 +33,14 @@ export class NotFound extends Component {
     render() {
         return (
             <div>
-                <h2>{this.props.code}</h2>
+                <h1 style={codeStyle}>{this.props.code}</h1>
                 <div>
-                    <h3>
-                        <i className='fa fa-warning' /> Oops! Pagina no encontrada.
-                    </h3>
+                    <h2>
+                        <i className='fa fa-warning' /> Oops! Página no encontrada.
+                    </h2>
+                    <br />
                     <p>
-                        La pagina que ha solicitado no se encuentra disponible, esto puede ser debido
+                        La página que ha solicitado no se encuentra disponible, esto puede ser debido
                         a que la ruta ha cambiado, o la dirección que ha escrito es incorrecta.
                     </p>
                 </div>
