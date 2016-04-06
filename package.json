@@ -49,6 +49,8 @@
   },
   "dependencies": {
     "api": "^0.3.1",
+    "are-u-alive": "0.0.1",
+    "is-alive": "0.0.5",
     "pouchdb": "^5.3.0"
   },
   "devDependencies": {
@@ -121,6 +123,7 @@
     "sass-loader": "^3.1.2",
     "static-render-webpack-plugin": "^0.1.2",
     "style-loader": "^0.13.0",
+    "sync-promise": "^1.0.1",
     "url-loader": "^0.5.7",
     "webdriverio": "^4.0.3",
     "webpack": "^1.12.14",
