@@ -6,23 +6,29 @@ PouchDB.plugin(PouchFind);
 
 const dbName = 'schedule';
 const db = new PouchDB(dbName);
-const dbSync = { 'name': 'None', 'dbIndex': 0 };
 
 export default class DB {
 
     static setActiveServer() {
-        return new Promise((resolve, reject) => {
-            let url = couchServers[dbSync.dbIndex].url + '/' + dbName;
-            dbSync.name = couchServers[dbSync.dbIndex].name;
-            db.sync(url, {
-                    live: true,
-                    retry: true
+        return new Promise((resolve) => {
+            Verify(couchServers)
+                .then((server) => {
+                    let url = server.url + '/' + dbName;
+                    const dbSync = new PouchDB(url, server.auth);
+                    console.warn('server online', url);
+                    db.sync(dbSync, {
+                        live: true,
+                        retry: true
+                    }).on('complete', function(info) {
+                        resolve(info);
+                    }).on('paused', function() {
+                        resolve(true);
+                    }).on('error', function(err) {
+                        console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
+                    });
                 })
-                .then(response => {
-                    resolve(response);
-                })
-                .catch(err => {
-                    reject(err);
+                .catch((err) => {
+                    console.error('CANT COMPLETE SYNC: ', err);
                 });
         });
     }
@@ -67,20 +73,15 @@ export default class DB {
      * @return     {Promise}  return Object with config
      */
     static getConfigSchedule(_id) {
-        Verify()
-            .then((server) => {
-                console.log('server', server);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
         return new Promise((resolve, reject) => {
             let promises = [
+                this.setActiveServer(),
                 this.getDefaultOptions(),
                 this.getRoom(_id)
             ];
             Promise.all(promises)
                 .then(responses => {
+                    console.log('asdas');
                     console.log('Sync response ', responses[0]);
                     let json = {
                         defaultOptions: responses[1].options,
