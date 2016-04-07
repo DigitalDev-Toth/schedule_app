@@ -22,6 +22,10 @@ export let getScheduleUserEntered = (user) => {
     };
 };
 
+/*export let getScheduleOnLooker = () => {
+
+};*/
+
 export let getScheduleErrorCode = (code = 404) => {
     return {
         type: 'SCHEDULE_ERROR_CODE',

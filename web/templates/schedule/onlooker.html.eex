@@ -1,1 +1,5 @@
+<script type="text/javascript">
+    window.remoteIP = '<%= @remote_ip %>';
+</script>
 <div id="schedule"></div>
+<p><%= @remote_ip %></p>
