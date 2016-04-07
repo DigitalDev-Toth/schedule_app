@@ -49,7 +49,8 @@
   },
   "dependencies": {
     "api": "^0.3.1",
-    "pouchdb": "^5.3.0"
+    "pouchdb": "^5.3.0",
+    "url-loader": "^0.5.7"
   },
   "devDependencies": {
     "appcache-webpack-plugin": "^1.2.1",

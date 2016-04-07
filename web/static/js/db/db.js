@@ -17,14 +17,17 @@ export default class DB {
                     const dbSync = new PouchDB(url, server.auth);
                     console.warn('server online', url);
                     db.sync(dbSync, {
-                        live: true,
-                        retry: true
-                    }).on('complete', function(info) {
+                        live: true
+                    }).on('complete', (info)=> {
                         resolve(info);
-                    }).on('paused', function() {
+                    }).on('paused', ()=> {
                         resolve(true);
-                    }).on('error', function(err) {
+                    }).on('error', (err)=> {
                         console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
+                        this.setActiveServer();
+                    }).on('denied', (err)=> {
+                        console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
+                        this.setActiveServer();
                     });
                 })
                 .catch((err) => {
@@ -90,7 +93,7 @@ export default class DB {
                     resolve(json);
                 })
                 .catch(err => {
-                    reject(err);
+                    reject('error', err);
                 });
         });
     }
