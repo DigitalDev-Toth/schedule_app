@@ -5,7 +5,12 @@ import * as scheduleActions from '../actions';
 import Main from '../components/Main';
 import Notifier from '../components/notification/Notifier';
 import { API } from '../api';
-API.ScheduleModel.getSchedule();
+API.ScheduleModel.getSchedule()
+    .then((doc) => {
+        console.log(doc);
+    }).catch((err) => {
+        console.log('error', err);
+    });
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;

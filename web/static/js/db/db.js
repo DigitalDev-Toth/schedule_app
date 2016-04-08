@@ -20,6 +20,8 @@ export default class DB {
                         live: true
                     }).on('complete', (info)=> {
                         resolve(info);
+                    }).on('change', (info)=> {
+                        console.log('DATA CHANGED', info);
                     }).on('paused', ()=> {
                         resolve(true);
                     }).on('error', (err)=> {
