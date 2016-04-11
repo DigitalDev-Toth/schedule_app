@@ -27,7 +27,7 @@ function urlStatus(couchServers) {
                 completedRequests++;
                 if (server.name === 'cloudant' && response.statusCode === 200) {
                     server.status = response.statusCode;
-                    serversOnline.push(server);
+                    serversOnline.unshift(server);
                 } else if (response.statusCode === 200) {
                     server.status = response.statusCode;
                     serversOnline.push(server);
