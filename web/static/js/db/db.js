@@ -1,5 +1,5 @@
 import PouchDB from 'pouchdb';
-import { setActiveServer } from './db.sync';
+import setActiveServer from './db.sync';
 setActiveServer();
 
 const dbName = 'schedule';

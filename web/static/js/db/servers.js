@@ -13,11 +13,5 @@ export const couchServers = [
         'url': 'http://toth.cl:5984',
         'ssl': false,
         'auth': null
-    },
-    {
-        'name': 'tothLocal',
-        'url': 'http://192.168.0.32:5984',
-        'ssl': false,
-        'auth': null
     }
 ];
