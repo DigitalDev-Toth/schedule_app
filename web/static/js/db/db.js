@@ -1,53 +1,17 @@
 import PouchDB from 'pouchdb';
-import PouchFind from 'pouchdb-find';
-import { couchServers } from './servers';
-import { Verify } from './db.verify';
-PouchDB.plugin(PouchFind);
+import { setActiveServer } from './db.sync';
+setActiveServer();
 
 const dbName = 'schedule';
-const db = new PouchDB(dbName);
+const db = new PouchDB(dbName, { skipSetup: true });
 
 export default class DB {
-
-    static setActiveServer() {
-        return new Promise((resolve) => {
-            Verify(couchServers)
-                .then((server) => {
-                    let url = server.url + '/' + dbName;
-                    const dbSync = new PouchDB(url, server.auth);
-                    console.warn('server online', url);
-                    db.sync(dbSync, {
-                        live: true
-                    }).on('complete', (info)=> {
-                        resolve(info);
-                    }).on('change', (info)=> {
-                        console.log('DATA CHANGED', info);
-                    }).on('paused', ()=> {
-                        resolve(true);
-                    }).on('error', (err)=> {
-                        console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
-                        this.setActiveServer();
-                    }).on('denied', (err)=> {
-                        console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
-                        this.setActiveServer();
-                    });
-                })
-                .catch((err) => {
-                    console.error('CANT COMPLETE SYNC: ', err);
-                });
-        });
-    }
-
-    /**
-     * { function_description }
-     *
-     * @return     {Promise}  { description_of_the_return_value }
-     */
-    static getDefaultOptions() {
+    static getDoc(doc, type) {
+        const search = doc + (type ? type : '');
         return new Promise((resolve, reject) => {
-            db.get('options/default')
-                .then(doc => {
-                    resolve(doc);
+            db.get(search)
+                .then(result => {
+                    resolve(result);
                 })
                 .catch(err => {
                     reject(err);
@@ -55,42 +19,30 @@ export default class DB {
         });
     }
 
-    /**
-     * { function_description }
-     *
-     * @return     {Promise}  { description_of_the_return_value }
-     */
-    static getRoom(id) {
+    static getAll(search) {
         return new Promise((resolve, reject) => {
-            db.get(`room/${id}`)
-                .then(doc => {
-                    resolve(doc);
-                })
-                .catch(err => {
-                    reject(err);
-                });
+            db.allDocs({
+                include_docs: true,
+                startkey: search,
+                endkey: search + '\uffff'
+            }).then(function(doc) {
+                resolve(doc.rows);
+            }).catch(function(err) {
+                reject(err);
+            });
         });
     }
-
-    /**
-     * Promise.all
-     *
-     * @return     {Promise}  return Object with config
-     */
-    static getConfigSchedule(_id) {
+    static getConfig(room) {
         return new Promise((resolve, reject) => {
             let promises = [
-                this.setActiveServer(),
-                this.getDefaultOptions(),
-                this.getRoom(_id)
+                this.getDoc('options/default'),
+                this.getDoc('room/', room)
             ];
             Promise.all(promises)
                 .then(responses => {
-                    console.log('asdas');
-                    console.log('Sync response ', responses[0]);
                     let json = {
-                        defaultOptions: responses[1].options,
-                        roomOptions: responses[2]
+                        defaultOptions: responses[0].options,
+                        roomOptions: responses[1]
                     };
                     resolve(json);
                 })

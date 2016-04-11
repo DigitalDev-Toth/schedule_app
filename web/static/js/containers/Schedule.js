@@ -11,6 +11,12 @@ API.ScheduleModel.getSchedule()
     }).catch((err) => {
         console.log('error', err);
     });
+API.UserModel.getUser('username2')
+    .then((doc) => {
+        console.log('user', doc);
+    }).catch((err) => {
+        console.log('error', err);
+    });
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
