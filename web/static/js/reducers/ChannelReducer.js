@@ -3,7 +3,7 @@ const InitialState = {
     usersRemote: []
 }
 
-export function getScheduleChannelReducer(state = InitialState, action) {
+export let getScheduleChannelReducer = (state = InitialState, action) => {
     switch (action.type) {
         case 'SCHEDULE_USER_ENTERED': {
             return Object.assign(...state, {
@@ -18,7 +18,7 @@ export function getScheduleChannelReducer(state = InitialState, action) {
             console.log(state);
             return Object.assign(...state, {
                 type: action.type,
-                /*usersRemote: action.userRemote*/
+                usersRemote: action.usersRemote
             });
         }
 

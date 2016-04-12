@@ -7,16 +7,17 @@ const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
- * Looker Container
+ * Onlooker Container
  *
  * @class
  */
-class Looker extends Component {
+class Onlooker extends Component {
     /**
      * React properties types definitions
      */
     static propTypes = {
-        channel: PropTypes.any
+        channel: PropTypes.any,
+        usersRemote: PropTypes.any
     };
 
     /*static contextTypes = {
@@ -39,7 +40,7 @@ class Looker extends Component {
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:onlooker', params => {
-                this.props.actions.addScheduleOnlookerUserRemote(params.userRemote);
+                this.props.actions.addScheduleOnlookerUserRemote(params.usersRemote);
             });
         }
     };
@@ -48,9 +49,12 @@ class Looker extends Component {
      * React DOM rendering
      */
     render() {
-        console.log(this.props)
+        let usersRemote = this.props.usersRemote === undefined ? [] : this.props.usersRemote;
+
+        console.log(usersRemote);
         return (
             <div>
+
                 Hello World!
             </div>
         );
@@ -89,4 +93,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Looker);
+)(Onlooker);

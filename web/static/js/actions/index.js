@@ -22,10 +22,10 @@ export let getScheduleUserEntered = (user) => {
     };
 };
 
-export let addScheduleOnlookerUserRemote = (userRemote) => {
+export let addScheduleOnlookerUserRemote = (usersRemote) => {
     return {
         type: 'SCHEDULE_USER_REMOTE',
-        userRemote
+        usersRemote
     };
 };
 

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import ConfigureStore from './store/ConfigureStore';
 import App from './containers/App';
 import Schedule from './containers/Schedule';
-import Looker from './containers/Looker';
+import Onlooker from './containers/Onlooker';
 /*import Api from './containers/Api';*/
 import ErrorMessage from './containers/ErrorMessage';
 import DevTools from './containers/DevTools';
@@ -25,7 +25,7 @@ render(
                 <Redirect from='/schedule' to='/' />
                 <Route path='/' component={App}>
                     <IndexRoute component={Schedule} />
-                    <Route path='onlooker' component={Looker} />
+                    <Route path='onlooker' component={Onlooker} />
                     {/*<Route path='api'>
                         <Route path='v1' component={Api} />
                     </Route>*/}

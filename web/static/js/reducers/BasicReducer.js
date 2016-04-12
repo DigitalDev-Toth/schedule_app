@@ -1,6 +1,6 @@
 import { InitialState } from '../utilities/InitialState';
 
-export function getScheduleOptionsReducer(state = InitialState(), action) {
+export let getScheduleOptionsReducer = (state = InitialState(), action) => {
     switch (action.type) {
         case 'SCHEDULE_OPTIONS': {
             return Object.assign(...state, {

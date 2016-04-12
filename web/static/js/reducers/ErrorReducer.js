@@ -1,4 +1,4 @@
-export function getScheduleErrorCodeReducer(state = {code: 404}, action) {
+export let getScheduleErrorCodeReducer = (state = {code: 404}, action) => {
     switch (action.type) {
         case 'SCHEDULE_ERROR_CODE': {
             return Object.assign(...state, {
