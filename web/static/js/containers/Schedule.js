@@ -55,6 +55,7 @@ class Schedule extends Component {
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:user_entered', params => {
+                console.log(params);
                 this.props.actions.getScheduleUserEntered(params.user);
                 this.props.channel.push('schedule:onlooker', {onlooker: true});
             });

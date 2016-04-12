@@ -2,6 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
+import { Grid, Row, Col } from '../components/box/Container';
+import Table from 'material-ui/lib/table/table';
+import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
+import TableRow from 'material-ui/lib/table/table-row';
+import TableHeader from 'material-ui/lib/table/table-header';
+import TableRowColumn from 'material-ui/lib/table/table-row-column';
+import TableBody from 'material-ui/lib/table/table-body';
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
@@ -51,11 +58,39 @@ class Onlooker extends Component {
     render() {
         let usersRemote = this.props.usersRemote === undefined ? [] : this.props.usersRemote;
 
-        console.log(usersRemote);
+        let users = usersRemote.map((userRemote) => {
+            return (
+                <TableRow>
+                    <TableRowColumn style={{width: '150px'}}>username</TableRowColumn>
+                    <TableRowColumn style={{width: '150px'}}>{userRemote.ip}</TableRowColumn>
+                    <TableRowColumn style={{width: '100px'}}>{userRemote.method}</TableRowColumn>
+                    <TableRowColumn>{userRemote.agent}</TableRowColumn>
+                </TableRow>
+            );
+        });
+
         return (
             <div>
-
-                Hello World!
+                <Grid>
+                    <Row center='xs' center='md' around='xs' around='md'>
+                        <Col type='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center' >
+                            <h1>Lista de usuarios conectados</h1>
+                            <Table selectable={false} >
+                                <TableHeader displaySelectAll={false} adjustForCheckbox={false} displayRowCheckbox={false}>
+                                    <TableRow>
+                                        <TableHeaderColumn style={{width: '150px'}}>Usuario</TableHeaderColumn>
+                                        <TableHeaderColumn style={{width: '150px'}}>IP</TableHeaderColumn>
+                                        <TableHeaderColumn style={{width: '100px'}}>Método</TableHeaderColumn>
+                                        <TableHeaderColumn>Agente</TableHeaderColumn>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody displaySelectAll={false} adjustForCheckbox={false} displayRowCheckbox={false}>
+                                    {users}
+                                </TableBody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         );
     }

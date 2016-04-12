@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="<%= static_path(@conn, "/css/schedule.css") %>">
     </head>
 
-    <body class="looker">
+    <body class="onlooker">
         <%= render @view_module, @view_template, assigns %>
         <script src="<%= static_path(@conn, "/js/schedule.js") %>"></script>
     </body>

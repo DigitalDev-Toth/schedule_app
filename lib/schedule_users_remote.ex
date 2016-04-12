@@ -16,49 +16,37 @@ defmodule ScheduleUsersRemote do
         {:ok, %{ets_table_limit: ets_table_limit, ets_table_name: ets_table_name}}
     end
 
-    def new_schedule_user_remote(topic, userRemote) do
-        GenServer.call(:schedule_users_remote, {topic, userRemote})
+    def new_schedule_user_remote(key, userRemote) do
+        GenServer.call(:schedule_users_remote, {key, userRemote})
     end
 
-    def get_schedule_users_remote(topic) do
-        GenServer.call(:schedule_users_remote, {topic})
+    def get_schedule_users_remote() do
+        GenServer.call(:schedule_users_remote, {nil})
     end
 
-    def handle_call({topic, userRemote}, _from, state) do
+    def handle_call({key, userRemote}, _from, state) do
         %{ets_table_name: ets_table_name} = state
-        result = new_schedule_user_remote(topic, userRemote, ets_table_name)
+        result = new_schedule_user_remote(key, userRemote, ets_table_name)
         {:reply, result, state}
     end
 
-    def handle_call({topic}, _from, state) do
+    def handle_call({_key}, _from, state) do
         %{ets_table_name: ets_table_name} = state
-        result = :ets.lookup(ets_table_name, topic)
-        # result = :ets.match_object(ets_table_name, :"$1")
-        IO.inspect result
+        # result = :ets.lookup(ets_table_name, key)
+        result = :ets.match_object(ets_table_name, :"$1")
         {:reply, result, state}
     end
 
-    defp new_schedule_user_remote(topic, userRemote, ets_table_name) do
-        check_exist(topic, userRemote, ets_table_name)
-
-        case :ets.member(ets_table_name, topic) do
+    defp new_schedule_user_remote(key, userRemote, ets_table_name) do
+        case :ets.member(ets_table_name, key) do
             false ->
-                true = :ets.insert(ets_table_name, {topic, [userRemote]})
+                # true = :ets.insert(ets_table_name, {key, [userRemote]})
+                :ets.insert_new(ets_table_name, {key, [userRemote]})
                 {:ok, userRemote}
             true ->
-                [{_topic, usersRemote}]= :ets.lookup(ets_table_name, topic)
-                :ets.insert(ets_table_name, {topic, [userRemote | usersRemote]})
+                # [{_topic, usersRemote}]= :ets.lookup(ets_table_name, topic)
+                # :ets.insert(ets_table_name, {topic, [userRemote | usersRemote]})
                 {:ok, userRemote}
         end
-    end
-
-    def check_exist(topic, userRemote, ets_table_name) do
-        check = false
-
-        result = :ets.match(ets_table_name, {:"$1", ["$2", "192.168.1.103", :"_"]})
-
-        IO.puts "========================================"
-        IO.inspect result
-        IO.puts "========================================"
     end
 end

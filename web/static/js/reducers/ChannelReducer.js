@@ -14,8 +14,6 @@ export let getScheduleChannelReducer = (state = InitialState, action) => {
         }
 
         case 'SCHEDULE_USER_REMOTE': {
-            console.log(action);
-            console.log(state);
             return Object.assign(...state, {
                 type: action.type,
                 usersRemote: action.usersRemote

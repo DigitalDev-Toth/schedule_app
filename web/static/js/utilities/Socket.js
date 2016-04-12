@@ -18,12 +18,6 @@ let connectToChannel = () => {
             .receive('ignore', () => {})
             .receive('ok', () => {});
 
-        /*channel.push('schedule:message', {params});
-
-        channel.on('schedule:message', params => {
-            console.log(params);
-        });*/
-
         return channel;
     }
 
