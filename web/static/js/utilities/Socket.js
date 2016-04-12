@@ -9,7 +9,10 @@ let connectToChannel = () => {
 
         socket.connect();
 
-        let channel = socket.channel('schedule:lobby', {user: 'toth'});
+        let channel = socket.channel('schedule:lobby', {
+            user: 'toth',
+            userRemote: window.UserRemote
+        });
 
         channel.join()
             .receive('ignore', () => {})

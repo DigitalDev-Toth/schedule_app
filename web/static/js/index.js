@@ -8,6 +8,7 @@ import ConfigureStore from './store/ConfigureStore';
 import App from './containers/App';
 import Schedule from './containers/Schedule';
 import Looker from './containers/Looker';
+/*import Api from './containers/Api';*/
 import ErrorMessage from './containers/ErrorMessage';
 import DevTools from './containers/DevTools';
 import '../assets/images/ren_y_stimpy.jpg';
@@ -25,6 +26,9 @@ render(
                 <Route path='/' component={App}>
                     <IndexRoute component={Schedule} />
                     <Route path='onlooker' component={Looker} />
+                    {/*<Route path='api'>
+                        <Route path='v1' component={Api} />
+                    </Route>*/}
                     <Route path='*' component={ErrorMessage} />
                 </Route>
             </Router>

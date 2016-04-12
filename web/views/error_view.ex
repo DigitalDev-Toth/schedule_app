@@ -1,7 +1,7 @@
 defmodule Schedule.ErrorView do
     use Schedule.Web, :view
 
-    def render("404.html", _assigns) do
+    def render(:not_found, _assigns) do
         "Page not found"
     end
 

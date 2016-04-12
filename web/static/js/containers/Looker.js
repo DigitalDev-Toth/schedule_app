@@ -3,6 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 
+const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
+const __PRODUCTION__ = process.env.__PRODUCTION__;
+
 /**
  * Looker Container
  *
@@ -31,9 +34,21 @@ class Looker extends Component {
     }
 
     /**
+     * React component did mount
+     */
+    componentDidMount = () => {
+        if (__DEPLOYMENT__ || __PRODUCTION__) {
+            this.props.channel.on('schedule:onlooker', params => {
+                this.props.actions.addScheduleOnlookerUserRemote(params.userRemote);
+            });
+        }
+    };
+
+    /**
      * React DOM rendering
      */
     render() {
+        console.log(this.props)
         return (
             <div>
                 Hello World!
@@ -50,6 +65,8 @@ class Looker extends Component {
  */
 const mapStateToProps = (state) => {
     return {
+        channel: state.ScheduleOptions.channel,
+        usersRemote: state.ScheduleChannel.usersRemote,
         state
     };
 };

@@ -1,6 +1,8 @@
 defmodule Schedule.ScheduleChannel do
     use Phoenix.Channel
 
+    @usersRemote []
+
     def join("schedule:lobby", params, socket) do
         send(self, {:after_join, params})
 
@@ -12,16 +14,18 @@ defmodule Schedule.ScheduleChannel do
     # end
 
     def handle_info({:after_join, params}, socket) do
-        broadcast! socket, "schedule:user_entered", %{user: params["user"]}
+        @usersRemote = Enum.into(@usersRemote, params["userRemote"])
+
+        broadcast! socket, "schedule:user_entered", %{user: params["user"], userRemote: @usersRemote}
         push socket, "join", %{status: "connected"}
 
         {:noreply, socket}
     end
 
-    def handle_in("schedule:message", params, socket) do
-        broadcast! socket, "schedule:message", %{params: params}
+    def handle_in("schedule:onlooker", params, socket) do
+        broadcast! socket, "schedule:onlooker", %{usersRemote: @usersRemote}
 
-        {:reply, {:ok, %{params: params}}, assign(socket, :schedule, params)}
+        {:reply, {:ok, %{usersRemote: @usersRemote}}, assign(socket, :schedule, params)}
     end
 
     # def terminate(_reason, _socket) do

@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import { getScheduleOptionsReducer } from './BasicReducer';
-import { getScheduleUserEnteredReducer } from './ChannelReducer';
+import { getScheduleChannelReducer } from './ChannelReducer';
 import { getScheduleErrorCodeReducer } from './ErrorReducer';
 
 const GlobalReducers = combineReducers({
     ScheduleOptions: getScheduleOptionsReducer,
-    ScheduleUserEntered: getScheduleUserEnteredReducer,
+    ScheduleChannel: getScheduleChannelReducer,
     ScheduleErrorCode: getScheduleErrorCodeReducer,
     routing: routerReducer
 });

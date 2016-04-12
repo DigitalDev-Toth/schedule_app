@@ -20,6 +20,8 @@ defmodule Schedule.Router do
         get "/schedule", ScheduleController, :index
 
         get "/onlooker", ScheduleController, :onlooker
+
+        get "/api", ScheduleController, :api
     end
 
     # Other scopes may use custom stacks.

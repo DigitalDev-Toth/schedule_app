@@ -4,7 +4,6 @@ import ConnectToChannel from './Socket';
 const channel = ConnectToChannel();
 
 export function InitialState() {
-    console.log(channel);
     return {
         channel,
         options: 'testing'

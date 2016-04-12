@@ -22,9 +22,12 @@ export let getScheduleUserEntered = (user) => {
     };
 };
 
-/*export let getScheduleOnLooker = () => {
-
-};*/
+export let addScheduleOnlookerUserRemote = (userRemote) => {
+    return {
+        type: 'SCHEDULE_USER_REMOTE',
+        userRemote
+    };
+};
 
 export let getScheduleErrorCode = (code = 404) => {
     return {

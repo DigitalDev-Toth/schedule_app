@@ -1,1 +1,8 @@
+<script type="text/javascript">
+    window.UserRemote = {
+        method: '<%= @remote_method %>',
+        ip: '<%= @remote_ip %>',
+        agent: '<%= @remote_user_agent %>'
+    };
+</script>
 <div id="schedule"></div>
