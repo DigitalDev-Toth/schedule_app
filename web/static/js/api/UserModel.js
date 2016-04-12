@@ -1,22 +1,9 @@
 import DB from '../db/db';
 
-export default class ScheduleModel {
-    static getConfig(room) {
+export default class UserModel {
+    static fetchAllUsers() {
         return new Promise((resolve, reject) => {
-            room = room ? room : '1234';
-            DB.getConfig(room)
-                .then((doc) => {
-                    resolve(doc);
-                }).catch((err) => {
-                    reject(err);
-                });
-        });
-    }
-    static fetchAllSchedules() {}
-
-    static getSchedule() {
-        return new Promise((resolve, reject) => {
-            DB.getConfig('1234')
+            DB.getAll('user/')
                 .then((doc) => {
                     resolve(doc);
                 }).catch((err) => {
@@ -25,9 +12,21 @@ export default class ScheduleModel {
         });
     }
 
-    static newSchedule() {}
+    static getUser(user) {
+        return new Promise((resolve, reject) => {
+            user = user ? user : 'username1';
+            DB.getDoc('user/', user)
+                .then((doc) => {
+                    resolve(doc);
+                }).catch((err) => {
+                    reject(err);
+                });
+        });
+    }
 
-    static updateSchedule() {}
+    static newUser() {}
 
-    static deleteSchedule() {}
+    static updateUser() {}
+
+    static deleteUser() {}
 }
