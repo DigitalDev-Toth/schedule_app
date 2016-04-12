@@ -20,13 +20,13 @@ export default function setActiveServer() {
                 options.skipSetup = true;
                 options.cache = true;
                 const dbSync = new PouchDB(url, options);
-                console.warn('server online', url);
+                console.info('server online', url);
                 db.sync(dbSync, {
                     live: true
                 }).on('complete', (info) => {
                     resolve(info);
                 }).on('change', (info) => {
-                    console.log('DATA CHANGED', info);
+                    console.info('DATA CHANGED', info);
                 }).on('paused', () => {
                     resolve(true);
                 }).on('error', (err) => {
