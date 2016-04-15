@@ -13,4 +13,4 @@ export let getScheduleOptionsReducer = (state = InitialState(), action) => {
             return state;
         }
     }
-}
+};

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 /*import Main from '../components/Main';*/
-import ScheduleGrid from '../components/schedule/ScheduleGrid';
+import ScheduleToth from '../components/schedule/ScheduleToth';
 import Notifier from '../components/notification/Notifier';
 import { API } from '../api';
 API.ScheduleModel.getSchedule()
@@ -77,7 +77,7 @@ class Schedule extends Component {
 
         return (
             <div>
-                <ScheduleGrid />
+                <ScheduleToth />
                 <Notifier open={open} message={message} />
             </div>
         );

@@ -11,4 +11,4 @@ export let getScheduleErrorCodeReducer = (state = {code: 404}, action) => {
             return state;
         }
     }
-}
+};

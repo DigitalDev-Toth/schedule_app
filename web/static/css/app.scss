@@ -1,6 +1,9 @@
-body,
+body {
+    height: 100%;
+}
+,
 body.app {
-	background-color: #FFF;
+    background-color: #FFF;
 }
 
 body.onlooker {
@@ -27,4 +30,27 @@ body.onlooker {
 
 .rc-tree-select-dropdown {
     z-index: 9999;
+}
+
+.slot {
+    background: #009688;
+    color:#efefef;
+    /*height: 100% !important;
+    min-height: 100% !important;*/
+}
+
+.header {
+    background: #009688;
+    color:#efefef;
+}
+
+.schedule-body {
+    color:#efefef;
+    background: #00796b;
+}
+.container {
+    height:100%;
+}
+.container-fluid {
+    height:100%;
 }

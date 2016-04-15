@@ -1,7 +1,7 @@
 const InitialState = {
     user: '',
     usersRemote: []
-}
+};
 
 export let getScheduleChannelReducer = (state = InitialState, action) => {
     switch (action.type) {
@@ -24,4 +24,4 @@ export let getScheduleChannelReducer = (state = InitialState, action) => {
             return state;
         }
     }
-}
+};

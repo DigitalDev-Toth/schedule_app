@@ -1,9 +1,10 @@
 import React from 'react';
 export class Grid extends React.Component {
     render() {
-        const { children } = this.props;
+        const { type, children } = this.props;
+        let typeContainer = type ? type : 'container';
         return (
-            <div className='container'>
+            <div className={typeContainer}>
                 {children}
             </div>
         );
