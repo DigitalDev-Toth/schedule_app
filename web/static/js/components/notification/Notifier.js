@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Snackbar from 'material-ui/lib/snackbar';
+import { Snackbar } from 'material-ui';
 
 /**
  * Notifier component

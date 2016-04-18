@@ -191,6 +191,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
 
 const devServer = {
     contentBase: PATHS.development,
+    outputPath: PATHS.development,
     stats: 'errors-only',
     progress: true,
     colors: true,
