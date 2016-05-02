@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactGridLayout from 'react-grid-layout';
+import { WidthProvider } from 'react-grid-layout';
+const ReactGrid = WidthProvider(ReactGridLayout);
 /*import { Responsive as ResponsiveReactGridLayout } from 'react-grid-layout';*/
 
 export default class SlotSchedule extends React.Component {
@@ -20,7 +22,7 @@ export default class SlotSchedule extends React.Component {
         ];
         console.log(layout);
         return (
-            <ReactGridLayout className='layout' layout={layout} cols={14} rowHeight={30.5} width={1880}>
+            <ReactGrid className='layout' layout={layout} cols={14} rowHeight={30.5} width={1880}>
                 <div className='slot' key={'a'}>a</div>
                 <div className='slot' key={'b'}>b</div>
                 <div className='slot' key={'c'}>c</div>
@@ -28,7 +30,7 @@ export default class SlotSchedule extends React.Component {
                 <div className='slot' key={'e'}>e</div>
                 <div className='slot' key={'f'}>f</div>
                 <div className='slot' key={'g'}>g</div>
-            </ReactGridLayout>
+            </ReactGrid>
         );
     }
 }
