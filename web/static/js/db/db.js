@@ -5,7 +5,20 @@ setActiveServer();
 const dbName = 'schedule';
 const db = new PouchDB(dbName, { skipSetup: true });
 
+const schemaDB = new PouchDB('schema', { skipSetup: true });
+
 export default class DB {
+    static getSchema(schema) {
+        return new Promise((resolve, reject) => {
+            schemaDB.get(schema)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    }
     static getDoc(doc, type) {
         const search = doc + (type ? type : '');
         return new Promise((resolve, reject) => {
@@ -18,7 +31,6 @@ export default class DB {
                 });
         });
     }
-
     static getAll(search) {
         return new Promise((resolve, reject) => {
             db.allDocs({
