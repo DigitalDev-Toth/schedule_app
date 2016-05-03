@@ -30,9 +30,8 @@ defmodule ScheduleUsersRemote do
         {:reply, result, state}
     end
 
-    def handle_call({_key}, _from, state) do
+    def handle_call({key}, _from, state) do
         %{ets_table_name: ets_table_name} = state
-        # result = :ets.lookup(ets_table_name, key)
         result = :ets.match_object(ets_table_name, :"$1")
         {:reply, result, state}
     end

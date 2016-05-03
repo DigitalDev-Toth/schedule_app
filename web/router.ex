@@ -18,8 +18,10 @@ defmodule Schedule.Router do
 
         get "/", ScheduleController, :index
         get "/schedule", ScheduleController, :index
+        get "/schedule/:token", ScheduleController, :index
 
         get "/onlooker", ScheduleController, :onlooker
+        get "/onlooker/:token", ScheduleController, :onlooker
 
         get "/api/:version", ScheduleController, :api
     end

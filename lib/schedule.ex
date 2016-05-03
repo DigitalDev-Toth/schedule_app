@@ -12,6 +12,7 @@ defmodule Schedule do
             # Here you could define other workers and supervisors as children
             # worker(Schedule.Worker, [arg1, arg2, arg3]),
             worker(ScheduleUsersRemote, [[name: :schedule_users_remote]]),
+            worker(ScheduleUsersChannelToken, [[name: :schedule_users_channel_token]]),
         ]
 
         # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

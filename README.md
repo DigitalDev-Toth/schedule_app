@@ -101,7 +101,7 @@ TECHNOLOGIES
 - Language: `JavaScript (ES2015)`
 - Views: `ReactJS`, `Material-UI`
 - StyleSheet: `SASS`
-- Utils: `Redux`, `Babel [ES2015, Stage-* (*Decorators), ReactJS]`, `Webpack`, `ESlint`, `JSCS`, `Appcache`, `Docblockr`
+- Utils: `Redux`, `Babel [ES2015, Stage-* (0, 1), ReactJS]`, `Webpack`, `ESlint`, `JSCS`, `Appcache`, `Docblockr`
 
 ### DATABASE
 - Backend: `CouchDB`, `*PostgreSQL`

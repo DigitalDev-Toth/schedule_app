@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 import { Grid, Row, Col } from '../components/box/Container';
 import { Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody } from 'material-ui';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
@@ -27,6 +28,13 @@ class Onlooker extends Component {
     };*/
 
     /**
+     * Material-UI context types
+     */
+    static childContextTypes = {
+        muiTheme: React.PropTypes.object.isRequired,
+    };
+
+    /**
      * Basic React component constructor
      *
      * @param      {Object}  props    React properties
@@ -45,6 +53,15 @@ class Onlooker extends Component {
                 this.props.actions.addScheduleOnlookerUserRemote(params.usersRemote);
             });
         }
+    };
+
+    /**
+     * Get the child context.
+     *
+     * @return     {Object}  Child context.
+     */
+    getChildContext = () => {
+        return {muiTheme: getMuiTheme()};
     };
 
     /**

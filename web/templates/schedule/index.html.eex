@@ -4,5 +4,6 @@
         ip: '<%= @remote_ip %>',
         agent: '<%= @remote_user_agent %>'
     };
+    window.token = '<%= @token %>';
 </script>
 <div id="schedule"></div>
