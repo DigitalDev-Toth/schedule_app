@@ -203,6 +203,11 @@ const devServer = {
 };
 
 module.exports = {
+    node: {
+      net: 'empty',
+      tls: 'empty',
+      dns: 'empty'
+    },
     entry: entry,
     output: output,
     resolve: resolve,

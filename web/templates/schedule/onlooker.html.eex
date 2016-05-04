@@ -1,1 +1,5 @@
+<script type="text/javascript">
+    window.UserToken = '<%= @user_token %>';
+    window.ChannelToken = '<%= @channel_token %>';
+</script>
 <div id="schedule"></div>

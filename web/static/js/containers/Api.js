@@ -35,9 +35,6 @@ class Api extends Component {
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.push('schedule:api', {api: 'WOOOLA', topic: 'schedule:asdasd'});
-            this.props.channel.on('schedule:asdasd', params => {
-                console.log(params, 'API!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            });
         }
     };
 

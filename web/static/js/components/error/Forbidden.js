@@ -5,11 +5,11 @@ const codeStyle = {
 };
 
 /**
- * Error 404 component
+ * Error 403 component
  *
  * @class
  */
-class NotFound extends Component {
+class Forbidden extends Component {
     /**
      * React DOM rendering
      */
@@ -17,15 +17,15 @@ class NotFound extends Component {
         return (
             <div className='container'>
                 <section>
-                    <h1 style={codeStyle}>404</h1>
+                    <h1 style={codeStyle}>403</h1>
                     <div>
                         <h2>
-                            <i className='fa fa-warning' /> Oops! Página no encontrada.
+                            <i className='fa fa-warning' /> Oops! Acceso no permitido.
                         </h2>
                         <br />
                         <p>
-                            La página que ha solicitado no se encuentra disponible, esto puede ser debido
-                            a que la ruta ha cambiado, o la dirección que ha escrito es incorrecta.
+                            Tal parece que intentas acceder a esta página sin autorización. Intenta
+                            ingresar desde un sitio con permisos.
                         </p>
                     </div>
                 </section>
@@ -34,4 +34,4 @@ class NotFound extends Component {
     }
 }
 
-export default NotFound;
+export default Forbidden;

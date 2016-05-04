@@ -8,13 +8,17 @@ defmodule Schedule.ScheduleSocket do
     transport :longpoll, Phoenix.Transports.LongPoll
 
     def connect(%{"ip" => ip, "token" => token}, socket) do
-        channel_token = ScheduleUsersChannelToken.get_schedule_user_channel_token(ip)
-        |> parse_user_channel_token
-
-        if authorized_lobby?(channel_token, token) do
-            {:ok, assign(socket, :channel_token, channel_token)}
+        if (ip == 1 or ip == "1") do
+            {:ok, assign(socket, :channel_token, token)}
         else
-            :error
+            channel_token = ScheduleUsersChannelToken.get_schedule_user_channel_token(ip)
+            |> parse_user_channel_token
+
+            if authorized_lobby?(channel_token, token) do
+                {:ok, assign(socket, :channel_token, channel_token)}
+            else
+                :error
+            end
         end
     end
     def connect(_params, _socket), do: :error

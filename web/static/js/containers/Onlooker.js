@@ -31,7 +31,7 @@ class Onlooker extends Component {
      * Material-UI context types
      */
     static childContextTypes = {
-        muiTheme: React.PropTypes.object.isRequired,
+        muiTheme: React.PropTypes.object.isRequired
     };
 
     /**

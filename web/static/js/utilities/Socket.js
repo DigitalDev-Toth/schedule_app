@@ -7,8 +7,8 @@ let connectToChannel = () => {
     if (__DEPLOYMENT__ || __PRODUCTION__) {
         let socket = new Socket('/socket', {
             params: {
-                ip: window.UserRemote.ip,
-                token: window.token
+                ip: window.UserRemote === undefined ? 1 : window.UserRemote.ip,
+                token: window.ChannelToken
             }
         });
 
@@ -17,7 +17,7 @@ let connectToChannel = () => {
         let channel = socket.channel('schedule:lobby', {
             user: 'toth',
             userRemote: window.UserRemote,
-            token: window.token
+            token: window.ChannelToken
         });
 
         channel.join()

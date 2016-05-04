@@ -28,10 +28,3 @@ export let addScheduleOnlookerUserRemote = (usersRemote) => {
         usersRemote
     };
 };
-
-export let getScheduleErrorCode = (code = 404) => {
-    return {
-        type: 'SCHEDULE_ERROR_CODE',
-        code
-    };
-};
