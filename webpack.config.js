@@ -1,15 +1,15 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const AppCachePlugin = require('appcache-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const csswring = require('csswring');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
+const csswring = require('csswring');
 
 const MODE_ENV = process.env.MODE_ENV;
 const __DEPLOYMENT__ = MODE_ENV === 'deploy';
@@ -20,7 +20,7 @@ const __TESTING__ = MODE_ENV === 'testing';
 const PATHS = {
     source: path.join(__dirname, 'web', 'static', 'js'),
     production: path.join(__dirname, 'priv', 'static'),
-    development: path.join(__dirname, 'development'),
+    development: path.join(__dirname, 'dev'),
     styles: path.join(__dirname, 'web', 'static', 'css'),
     assets: path.join(__dirname, 'web', 'static', 'assets'),
     test: path.join(__dirname, 'test'),
@@ -31,6 +31,12 @@ const PATHS = {
 };
 
 const PATHS_EXCLUDE = [PATHS.test, PATHS.modules, PATHS.development, PATHS.styles, PATHS.assets];
+
+const node = {
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty'
+};
 
 const entry = [PATHS.source, PATHS.styles + '/app.scss'];
 
@@ -203,11 +209,7 @@ const devServer = {
 };
 
 module.exports = {
-    node: {
-      net: 'empty',
-      tls: 'empty',
-      dns: 'empty'
-    },
+    node: node,
     entry: entry,
     output: output,
     resolve: resolve,

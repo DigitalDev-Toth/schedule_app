@@ -9,7 +9,7 @@ erl_crash.dump
 
 # Static artifacts
 /node_modules/**
-/development/**
+/dev/**
 
 # Ignore npm-debug file
 npm-debug.log
