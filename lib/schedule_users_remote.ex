@@ -24,15 +24,25 @@ defmodule ScheduleUsersRemote do
         GenServer.call(:schedule_users_remote, {nil})
     end
 
+    def remove_schedule_user_remote(key) do
+        GenServer.call(:schedule_users_remote, {key, nil})
+    end
+
     def handle_call({key, userRemote}, _from, state) do
         %{ets_table_name: ets_table_name} = state
         result = new_schedule_user_remote(key, userRemote, ets_table_name)
         {:reply, result, state}
     end
 
-    def handle_call({key}, _from, state) do
+    def handle_call({_key}, _from, state) do
         %{ets_table_name: ets_table_name} = state
         result = :ets.match_object(ets_table_name, :"$1")
+        {:reply, result, state}
+    end
+
+    def handle_call({key, _rm}, _from, state) do
+        %{ets_table_name: ets_table_name} = state
+        result = :ets.delete(ets_table_name, key)
         {:reply, result, state}
     end
 

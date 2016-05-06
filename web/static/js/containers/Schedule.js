@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
+import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
 import ScheduleToth from '../components/schedule/ScheduleToth';
-import Notifier from '../components/notification/Notifier';
 import { API } from '../api';
 API.ScheduleModel.getSchedule()
     .then((doc) => {
@@ -31,7 +31,7 @@ const __PRODUCTION__ = process.env.__PRODUCTION__;
 /**
  * Schedule container
  *
- * @class
+ * @class      Schedule (name)
  */
 class Schedule extends Component {
     /**
@@ -41,10 +41,6 @@ class Schedule extends Component {
         channel: PropTypes.any,
         userEntered: PropTypes.any
     };
-
-    /*static contextTypes = {
-        store: PropTypes.object
-    };*/
 
     /**
      * Basic React component constructor
@@ -61,8 +57,7 @@ class Schedule extends Component {
      */
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
-            this.props.channel.on('schedule:user_entered', params => {
-                this.props.actions.getScheduleUserEntered(params.user);
+            this.props.channel.on('schedule:user_entered', () => {
                 this.props.channel.push('schedule:onlooker', {onlooker: true});
             });
         }
@@ -72,18 +67,10 @@ class Schedule extends Component {
      * React DOM rendering
      */
     render = () => {
-        let userEntered = this.props.userEntered;
-        let open = false;
-        let message = this.props.message;
-
-        if (userEntered !== '') {
-            open = true;
-        }
-
         return (
             <div>
                 <ScheduleToth />
-                <Notifier open={open} message={message} />
+                <Notifier />
             </div>
         );
     };
@@ -99,7 +86,6 @@ const mapStateToProps = (state) => {
     return {
         channel: state.ScheduleOptions.channel,
         userEntered: state.ScheduleChannel.user,
-        message: state.ScheduleChannel.message,
         state
     };
 };

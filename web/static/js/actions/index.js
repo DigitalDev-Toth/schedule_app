@@ -22,7 +22,7 @@ export let getScheduleUserEntered = (user) => {
     };
 };
 
-export let addScheduleOnlookerUserRemote = (usersRemote) => {
+export let showScheduleOnlookerUserRemote = (usersRemote) => {
     return {
         type: 'SCHEDULE_USER_REMOTE',
         usersRemote

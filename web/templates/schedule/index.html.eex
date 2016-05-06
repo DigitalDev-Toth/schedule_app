@@ -1,10 +1,6 @@
 <script type="text/javascript">
+    window.ScheduleToken =  '<%= @schedule_token %>';
     window.UserToken = '<%= @user_token %>';
-    window.UserRemote = {
-        method: '<%= @remote_method %>',
-        ip: '<%= @remote_ip %>',
-        agent: '<%= @remote_user_agent %>'
-    };
     window.ChannelToken = '<%= @channel_token %>';
 </script>
 <div id="schedule"></div>

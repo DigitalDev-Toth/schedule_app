@@ -10,9 +10,9 @@ const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
- * Onlooker Container
+ * Onlooker container
  *
- * @class
+ * @class      Onlooker (name)
  */
 class Onlooker extends Component {
     /**
@@ -22,10 +22,6 @@ class Onlooker extends Component {
         channel: PropTypes.any,
         usersRemote: PropTypes.any
     };
-
-    /*static contextTypes = {
-        store: PropTypes.object
-    };*/
 
     /**
      * Material-UI context types
@@ -50,7 +46,7 @@ class Onlooker extends Component {
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:onlooker', params => {
-                this.props.actions.addScheduleOnlookerUserRemote(params.usersRemote);
+                this.props.actions.showScheduleOnlookerUserRemote(params.usersRemote);
             });
         }
     };
@@ -67,7 +63,7 @@ class Onlooker extends Component {
     /**
      * React DOM rendering
      */
-    render() {
+    render = () => {
         let usersRemote = this.props.usersRemote === undefined ? [] : this.props.usersRemote;
 
         let users = usersRemote.map((userRemote) => {
@@ -105,7 +101,7 @@ class Onlooker extends Component {
                 </Grid>
             </div>
         );
-    }
+    };
 }
 
 /**

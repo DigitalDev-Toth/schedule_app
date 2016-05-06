@@ -2,21 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
+import Notification from '../components/notifier/Notification';
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
- * Api container
+ * Notifier container
  *
- * @class      Api (name)
+ * @class      Notifier (name)
  */
-class Api extends Component {
+class Notifier extends Component {
     /**
      * React properties types definitions
      */
     static propTypes = {
-        channel: PropTypes.any
+        channel: PropTypes.any,
+        userEntered: PropTypes.any
     };
 
     /**
@@ -34,7 +36,9 @@ class Api extends Component {
      */
     componentDidMount = () => {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
-            this.props.channel.push('schedule:api', {api: 'WOOOLA', topic: 'schedule:asdasd'});
+            this.props.channel.on('schedule:user_entered', params => {
+                this.props.actions.getScheduleUserEntered(params.user);
+            });
         }
     };
 
@@ -42,9 +46,17 @@ class Api extends Component {
      * React DOM rendering
      */
     render = () => {
+        let userEntered = this.props.userEntered;
+        let show = false;
+        let message = this.props.message;
+
+        if (userEntered !== '') {
+            show = true;
+        }
+
         return (
-            <div className='container'>
-                API v1
+            <div>
+                <Notification show={show} message={message} />
             </div>
         );
     };
@@ -59,6 +71,8 @@ class Api extends Component {
 const mapStateToProps = (state) => {
     return {
         channel: state.ScheduleOptions.channel,
+        userEntered: state.ScheduleChannel.user,
+        message: state.ScheduleChannel.message,
         state
     };
 };
@@ -81,4 +95,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Api);
+)(Notifier);

@@ -12,7 +12,13 @@ defmodule Schedule.ScheduleController do
         remote_user_agent = Enum.at(Tuple.to_list(List.keyfind(conn.req_headers, "user-agent", 0)), 1)
 
         current_time = Enum.at(Tuple.to_list(Timex.format(DateTime.now, "%s", :strftime)), 1)
-        channel_token = JsonWebToken.sign(%{time: current_time}, %{key: "gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr9C"})
+        channel_token = JsonWebToken.sign(%{
+            time: current_time,
+            remote_ip: remote_ip,
+            remote_method: remote_method,
+            remote_user_agent: remote_user_agent}, %{key: "gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr9C"})
+
+        schedule_token = JsonWebToken.sign(%{controller: "index"}, %{key: "gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr9C"})
 
         ScheduleUsersChannelToken.new_schedule_user_channel_token(remote_ip, %{
             ip: remote_ip,
@@ -20,10 +26,8 @@ defmodule Schedule.ScheduleController do
         })
 
         conn
+        |> assign(:schedule_token, schedule_token)
         |> assign(:user_token, user_token)
-        |> assign(:remote_method, remote_method)
-        |> assign(:remote_ip, remote_ip)
-        |> assign(:remote_user_agent, remote_user_agent)
         |> assign(:channel_token, channel_token)
         |> render(:index)
     end

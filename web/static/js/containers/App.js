@@ -10,7 +10,7 @@ injectTapEventPlugin();
 /**
  * App container
  *
- * @class
+ * @class      App (name)
  */
 class App extends Component {
     /**
@@ -23,13 +23,13 @@ class App extends Component {
     /**
      * React DOM rendering
      */
-    render() {
+    render = () => {
         return (
             <div>
                 {this.props.children}
             </div>
         );
-    }
+    };
 }
 
 export default App;

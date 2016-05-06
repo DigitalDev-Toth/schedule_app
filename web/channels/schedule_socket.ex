@@ -7,11 +7,14 @@ defmodule Schedule.ScheduleSocket do
     transport :websocket, Phoenix.Transports.WebSocket
     transport :longpoll, Phoenix.Transports.LongPoll
 
-    def connect(%{"ip" => ip, "token" => token}, socket) do
-        if (ip == 1 or ip == "1") do
+    def connect(%{"schedule" => schedule, "token" => token}, socket) do
+        if (schedule == 1 or schedule == "1") do
             {:ok, assign(socket, :channel_token, token)}
         else
-            channel_token = ScheduleUsersChannelToken.get_schedule_user_channel_token(ip)
+            content_token = JsonWebToken.verify(token, %{key: "gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr9C"})
+            remote_ip = Enum.at(Tuple.to_list(content_token), 1)[:remote_ip]
+
+            channel_token = ScheduleUsersChannelToken.get_schedule_user_channel_token(remote_ip)
             |> parse_user_channel_token
 
             if authorized_lobby?(channel_token, token) do

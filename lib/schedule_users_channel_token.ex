@@ -24,6 +24,10 @@ defmodule ScheduleUsersChannelToken do
         GenServer.call(:schedule_users_channel_token, {key})
     end
 
+    def remove_schedule_user_channel_token(key) do
+        GenServer.call(:schedule_users_remote, {key, nil})
+    end
+
     def handle_call({key, userChannelToken}, _from, state) do
         %{ets_table_name: ets_table_name} = state
         result = new_schedule_user_channel_token(key, userChannelToken, ets_table_name)
@@ -33,6 +37,12 @@ defmodule ScheduleUsersChannelToken do
     def handle_call({key}, _from, state) do
         %{ets_table_name: ets_table_name} = state
         result = :ets.lookup(ets_table_name, key)
+        {:reply, result, state}
+    end
+
+    def handle_call({key, _rm}, _from, state) do
+        %{ets_table_name: ets_table_name} = state
+        result = :ets.delete(ets_table_name, key)
         {:reply, result, state}
     end
 

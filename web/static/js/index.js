@@ -16,6 +16,7 @@ import userAuth from './utilities/Auth';
 import '../assets/images/ren_y_stimpy.jpg';
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
+const __PRODUCTION__ = process.env.__PRODUCTION__;
 const __TESTING__ = process.env.__TESTING__;
 const store = ConfigureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -24,36 +25,72 @@ const ScheduleAccess = auth ? Schedule : Forbidden;
 const OnlookerAccess = auth ? Onlooker : Forbidden;
 const ApiAccess = auth ? Api : Forbidden;
 
-render(
-    <div>
-        <Provider store={store}>
-            <Router history={history}>
-                <Redirect from='/schedule' to='/' />
-                <Route path='/' component={App}>
-                    <IndexRoute component={Forbidden} />
-                    <Route path='schedule'>
-                        <Route path=':token' component={ScheduleAccess} />
+if (__DEPLOYMENT__ || __PRODUCTION__) {
+    render(
+        <div>
+            <Provider store={store}>
+                <Router history={history}>
+                    <Redirect from='/schedule' to='/' />
+                    <Route path='/' component={App}>
+                        <IndexRoute component={Forbidden} />
+                        <Route path='schedule'>
+                            <Route path=':token' component={ScheduleAccess} />
+                        </Route>
+                        <Route path='onlooker' component={Forbidden} />
+                        <Route path='onlooker'>
+                            <Route path=':token' component={OnlookerAccess} />
+                        </Route>
+                        <Route path='api'>
+                            <Route path='v1' component={ApiAccess} />
+                        </Route>
+                        <Route path='*' component={NotFound} />
                     </Route>
-                    <Route path='onlooker' component={Forbidden} />
-                    <Route path='onlooker'>
-                        <Route path=':token' component={OnlookerAccess} />
+                </Router>
+            </Provider>
+            { (() => {
+                if (!__DEPLOYMENT__ && !__TESTING__) {
+                    return (
+                        <Provider store={store}>
+                            <DevTools />
+                        </Provider>
+                    );
+                }
+            })() }
+        </div>,
+        document.getElementById('schedule')
+    );
+} else {
+    render(
+        <div>
+            <Provider store={store}>
+                <Router history={history}>
+                    <Redirect from='/schedule' to='/' />
+                    <Route path='/' component={App}>
+                        <IndexRoute component={Schedule} />
+                        <Route path='schedule'>
+                            <Route path=':token' component={Schedule} />
+                        </Route>
+                        <Route path='onlooker' component={Onlooker} />
+                        <Route path='onlooker'>
+                            <Route path=':token' component={Onlooker} />
+                        </Route>
+                        <Route path='api'>
+                            <Route path='v1' component={Api} />
+                        </Route>
+                        <Route path='*' component={NotFound} />
                     </Route>
-                    <Route path='api'>
-                        <Route path='v1' component={ApiAccess} />
-                    </Route>
-                    <Route path='*' component={NotFound} />
-                </Route>
-            </Router>
-        </Provider>
-        { (() => {
-            if (!__DEPLOYMENT__ && !__TESTING__) {
-                return (
-                    <Provider store={store}>
-                        <DevTools />
-                    </Provider>
-                );
-            }
-        })() }
-    </div>,
-    document.getElementById('schedule')
-);
+                </Router>
+            </Provider>
+            { (() => {
+                if (!__DEPLOYMENT__ && !__TESTING__) {
+                    return (
+                        <Provider store={store}>
+                            <DevTools />
+                        </Provider>
+                    );
+                }
+            })() }
+        </div>,
+        document.getElementById('schedule')
+    );
+}

@@ -12,16 +12,31 @@ defmodule Schedule.ScheduleChannel do
     # end
 
     def handle_info({:after_join, payload}, socket) do
-        unless payload["userRemote"]["ip"] === nil do
-            ScheduleUsersRemote.new_schedule_user_remote(payload["userRemote"]["ip"], %{
-                ip: payload["userRemote"]["ip"],
-                method: payload["userRemote"]["method"],
-                agent: payload["userRemote"]["agent"]
-            })
-        end
+        username = payload["user"]
+        schedule_token = payload["scheduleToken"]
+        channel_token = payload["channelToken"]
 
-        broadcast! socket, "schedule:user_entered", %{user: payload["user"]}
-        push socket, "join", %{status: "connected"}
+        content_channel_token = JsonWebToken.verify(channel_token, %{key: "gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr9C"})
+        remote_ip = Enum.at(Tuple.to_list(content_channel_token), 1)[:remote_ip]
+        remote_method = Enum.at(Tuple.to_list(content_channel_token), 1)[:remote_method]
+        remote_user_agent = Enum.at(Tuple.to_list(content_channel_token), 1)[:remote_user_agent]
+
+        if schedule_token !== nil do
+            ScheduleUsersRemote.new_schedule_user_remote(remote_ip, %{
+                ip: remote_ip,
+                method: remote_method,
+                agent: remote_user_agent
+            })
+
+            broadcast! socket, "schedule:user_entered", %{user: payload["user"]}
+            push socket, "join", %{status: "connected"}
+        else
+            users_remote = ScheduleUsersRemote.get_schedule_users_remote()
+            |> parse_users_remote
+
+            broadcast! socket, "schedule:onlooker", %{usersRemote: users_remote}
+            push socket, "join", %{status: "connected"}
+        end
 
         {:noreply, socket}
     end
@@ -35,7 +50,10 @@ defmodule Schedule.ScheduleChannel do
         {:reply, {:ok, %{usersRemote: users_remote}}, assign(socket, :schedule, payload)}
     end
 
-    # def terminate(_reason, _socket) do
+    # def terminate(_reason, socket) do
+    #     IO.puts "======================================="
+    #     IO.inspect socket
+    #     IO.puts "======================================="
     #     :ok
     # end
 
