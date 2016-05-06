@@ -67,13 +67,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
                     <Redirect from='/schedule' to='/' />
                     <Route path='/' component={App}>
                         <IndexRoute component={Schedule} />
-                        <Route path='schedule'>
-                            <Route path=':token' component={Schedule} />
-                        </Route>
                         <Route path='onlooker' component={Onlooker} />
-                        <Route path='onlooker'>
-                            <Route path=':token' component={Onlooker} />
-                        </Route>
                         <Route path='api'>
                             <Route path='v1' component={Api} />
                         </Route>
