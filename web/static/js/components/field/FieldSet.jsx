@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class FieldSet extends React.Component {
+/**
+ * FieldSet component
+ *
+ * @class      FieldSet (name)
+ */
+class FieldSet extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
     }
-    render() {
-        //const { children, ...props } = this.props;
+
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         return (
             <fieldset>
                 <div className='form-group'>
@@ -30,5 +43,7 @@ export default class FieldSet extends React.Component {
                 </div>
             </fieldset>
         );
-    }
+    };
 }
+
+export default FieldSet;

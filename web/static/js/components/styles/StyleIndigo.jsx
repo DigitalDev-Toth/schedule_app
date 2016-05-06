@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { indigo500 } from 'material-ui/lib/styles/colors';
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
@@ -9,13 +9,27 @@ const muiTheme = getMuiTheme({
     }
 });
 
-export default class StyleIndigo extends React.Component {
+/**
+ * StyleIndigo component
+ *
+ * @class      StyleIndigo (name)
+ */
+class StyleIndigo extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
     }
 
-    render() {
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         const { children, ...props } = this.props;
+
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div>
@@ -23,5 +37,7 @@ export default class StyleIndigo extends React.Component {
                 </div>
             </MuiThemeProvider>
         );
-    }
+    };
 }
+
+export default StyleIndigo;

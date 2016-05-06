@@ -1,9 +1,6 @@
-import React from 'react';
-import RaisedButton from 'material-ui/lib/raised-button';
-import Dialog from 'material-ui/lib/dialog';
-import { indigo500 } from 'material-ui/lib/styles/colors';
-import FlatButton from 'material-ui/lib/flat-button';
-import {Grid, Row, Col} from './box/Container';
+import React, { Component } from 'react';
+import { RaisedButton, Dialog, FlatButton, indigo500 } from 'material-ui';
+import { Grid, Row, Col } from './box/Container';
 import ProcedureForm from './form/ProcedureForm';
 import Styles from './styles/Style';
 
@@ -17,9 +14,22 @@ const styles = {
         maxWidth: 'none'
     }
 };
-class Main extends React.Component {
+
+/**
+ * Main component
+ *
+ * @class      Main (name)
+ */
+class Main extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     * @param      {Object}  context  Redux properties
+     */
     constructor(props, context) {
         super(props, context);
+
         this.handleRequestClose = this.handleRequestClose.bind(this);
         this.handleTouchTap = this.handleTouchTap.bind(this);
 
@@ -28,19 +38,28 @@ class Main extends React.Component {
         };
     }
 
-    handleRequestClose() {
+    /**
+     * Request close handler
+     */
+    handleRequestClose = () => {
         this.setState({
             open: false
         });
-    }
+    };
 
-    handleTouchTap() {
+    /**
+     * Touch tap handler
+     */
+    handleTouchTap = () => {
         this.setState({
             open: true
         });
-    }
+    };
 
-    render() {
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         const standardActions = (
             <FlatButton
                 label='Cancelar'
@@ -49,6 +68,7 @@ class Main extends React.Component {
                 keyboardFocused={true}
             />
         );
+
         return (
             <Grid>
                 <Row center='xs' center='md' around='xs' around='md'>
@@ -78,7 +98,7 @@ class Main extends React.Component {
                 </Row>
             </Grid>
         );
-    }
+    };
 }
 
 export default Main;

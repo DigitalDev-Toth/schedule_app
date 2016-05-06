@@ -1,24 +1,45 @@
 import 'rc-tree-select/assets/index.css';
-import React from 'react';
+import React, { Component } from 'react';
 import TreeSelect from 'rc-tree-select';
 import { gData } from './TreeData';
 
-const TreeField = React.createClass({
-    getInitialState() {
-        return {
+class TreeField extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
+    constructor(props) {
+        super(props);
+
+        this.state = {
             value: '0-0-0-0-value',
             multipleValue: []
         };
-    },
-    componentDidMount() {
-    },
-    onChange(value) {
+    }
+
+    /**
+     * Change handler
+     *
+     * @param      {String|Integer|Boolean}  value   The value
+     */
+    onChange = (value) => {
         this.setState({ value });
-    },
-    onMultipleChange(value) {
+    };
+
+    /**
+     * Multi change handler
+     *
+     * @param      {String|Integer|Boolean}  value   The value
+     */
+    onMultipleChange = (value) => {
         this.setState({ multipleValue: value });
-    },
-    render() {
+    };
+
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         const { style } = this.props;
         return (
             <div style={{margin: 20}}>
@@ -40,6 +61,7 @@ const TreeField = React.createClass({
                     onChange={this.onChange} />
             </div>
         );
-    }
-});
+    };
+}
+
 export default TreeField;

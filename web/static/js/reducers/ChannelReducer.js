@@ -3,6 +3,11 @@ const InitialState = {
     usersRemote: []
 };
 
+/**
+ * Redux Reducer
+ *
+ * Set the Schedule Channel actions to Redux Store
+ */
 export let getScheduleChannelReducer = (state = InitialState, action) => {
     switch (action.type) {
         case 'SCHEDULE_USER_ENTERED': {

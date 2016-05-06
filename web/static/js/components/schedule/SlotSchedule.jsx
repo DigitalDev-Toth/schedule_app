@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { WidthProvider } from 'react-grid-layout';
-const ReactGrid = WidthProvider(ReactGridLayout);
-/*import { Responsive as ResponsiveReactGridLayout } from 'react-grid-layout';*/
 
-export default class SlotSchedule extends React.Component {
+const ReactGrid = WidthProvider(ReactGridLayout);
+
+/**
+ * SlotSchedule component
+ *
+ * @class      SlotSchedule (name)
+ */
+class SlotSchedule extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
     }
 
-    render() {
-        //static: true
-        var layout = [
+    /**
+     * React DOM rendering
+     */
+    render = () => {
+        let layout = [
             { i: 'a', x: 0, y: 0, w: 2, h: 23, maxH: Infinity },
             { i: 'b', x: 2, y: 0, w: 2, h: 23, maxH: Infinity },
             { i: 'c', x: 4, y: 0, w: 2, h: 23, maxH: Infinity },
@@ -20,7 +32,7 @@ export default class SlotSchedule extends React.Component {
             { i: 'f', x: 10, y: 0, w: 2, h: 23, maxH: Infinity },
             { i: 'g', x: 12, y: 0, w: 2, h: 23, maxH: Infinity }
         ];
-        console.log(layout);
+
         return (
             <ReactGrid className='layout' layout={layout} cols={14} rowHeight={30.5} width={1880}>
                 <div className='slot' key={'a'}>a</div>
@@ -32,27 +44,7 @@ export default class SlotSchedule extends React.Component {
                 <div className='slot' key={'g'}>g</div>
             </ReactGrid>
         );
-    }
+    };
 }
-/*{
-    "layouts": {
-        "lg": [
-                { "w": 2, "h": 3, "x": 0, "y": 0, "i": "1", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 2, "y": 0, "i": "2", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 4, "y": 0, "i": "3", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 6, "y": 0, "i": "4", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 8, "y": 0, "i": "5", "moved": false, "static": false }],
-        "md": [
-                { "w": 2, "h": 3, "x": 0, "y": 0, "i": "1", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 2, "y": 0, "i": "2", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 4, "y": 0, "i": "3", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 6, "y": 0, "i": "4", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 8, "y": 0, "i": "5", "moved": false, "static": false }],
-        "sm": [
-                { "w": 2, "h": 3, "x": 0, "y": 0, "i": "1", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 2, "y": 0, "i": "2", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 4, "y": 0, "i": "3", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 4, "y": 3, "i": "4", "moved": false, "static": false },
-                { "w": 2, "h": 3, "x": 4, "y": 6, "i": "5", "moved": false, "static": false }]
-    }
-}*/
+
+export default SlotSchedule;

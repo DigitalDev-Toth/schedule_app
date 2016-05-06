@@ -1,5 +1,10 @@
 import { API } from '../api';
 
+/**
+ * Redux Action
+ *
+ * Get schedule options for draw it
+ */
 export let getScheduleOptions = (options) => {
     console.log(API);
     return {
@@ -8,6 +13,11 @@ export let getScheduleOptions = (options) => {
     };
 };
 
+/**
+ * Redux Action
+ *
+ * Get the user entered by channel event
+ */
 export let getScheduleUserEntered = (user) => {
     let message = `Bienvenido ${user}`;
 
@@ -22,6 +32,11 @@ export let getScheduleUserEntered = (user) => {
     };
 };
 
+/**
+ * Redux Action
+ *
+ * Show the list of users connected by channels
+ */
 export let showScheduleOnlookerUserRemote = (usersRemote) => {
     return {
         type: 'SCHEDULE_USER_REMOTE',

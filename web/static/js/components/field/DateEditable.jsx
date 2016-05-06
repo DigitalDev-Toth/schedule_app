@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DateEdit from './editables/DateEdit';
 
-export default class DateEditable extends React.Component {
+/**
+ * DateEditable component
+ *
+ * @class      DateEditable (name)
+ */
+class DateEditable extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
         const {textInline} = this.props;
@@ -11,30 +21,48 @@ export default class DateEditable extends React.Component {
         };
     }
 
-    dataChanged(data) {
+    /**
+     * Change handler
+     *
+     * @param      {Object}  data    The data
+     */
+    dataChanged = (data) => {
         if (this.props.onEdit) {
             this.props.onEdit(data);
             this.setState({...data });
         }
-    }
+    };
 
-    customValidateText(text) {
+    /**
+     * Validation handler
+     *
+     * @param      {String}  text    The text
+     * @return     {Boolean}  Validation
+     */
+    customValidateText = (text) => {
         return (text.length > 0 && text.length < 64);
-    }
+    };
 
-    render() {
-        return (<div>
-            <DateEdit
-                validate={this.customValidateText}
-                text={this.state.message}
-                editingElement='date'
-                paramName='message'
-                change={this.dataChanged}
-                style={{
-                    minWidth: 150,
-                    display: 'inline-block'
-                }}
-            />
-        </div>);
-    }
+    /**
+     * React DOM rendering
+     */
+    render = () => {
+        return (
+            <div>
+                <DateEdit
+                    validate={this.customValidateText}
+                    text={this.state.message}
+                    editingElement='date'
+                    paramName='message'
+                    change={this.dataChanged}
+                    style={{
+                        minWidth: 150,
+                        display: 'inline-block'
+                    }}
+                />
+            </div>
+        );
+    };
 }
+
+export default DateEditable;

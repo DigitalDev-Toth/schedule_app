@@ -1,21 +1,33 @@
-import React from 'react';
-import * as colors from 'material-ui/lib/styles/colors';
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
+import React, { Component } from 'react';
+import { MuiThemeProvider, getMuiTheme, colors } from 'material-ui/styles';
 
-export default class Styles extends React.Component {
+/**
+ * Styles component
+ *
+ * @class      Styles (name)
+ */
+class Styles extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
     }
 
-    render() {
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         const { children, color } = this.props;
-        const colorTheme = color || 'teal500';
+        const colorTheme = color ||'teal500';
         const muiTheme = getMuiTheme({
             palette: {
                 accent1Color: colors[colorTheme]
             }
         });
+
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div>
@@ -23,5 +35,7 @@ export default class Styles extends React.Component {
                 </div>
             </MuiThemeProvider>
         );
-    }
+    };
 }
+
+export default Styles;

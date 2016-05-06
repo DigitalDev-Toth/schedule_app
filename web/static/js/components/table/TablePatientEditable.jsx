@@ -1,17 +1,23 @@
 import React from 'react';
-import Table from 'material-ui/lib/table/table';
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
-import TableRow from 'material-ui/lib/table/table-row';
-import TableHeader from 'material-ui/lib/table/table-header';
-import TableRowColumn from 'material-ui/lib/table/table-row-column';
-import TableBody from 'material-ui/lib/table/table-body';
+import { Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody } from 'material-ui';
 import EditInline from '../field/EditInline';
 import DateEdit from '../field/editables/DateEdit';
 import SelectEdit from '../field/editables/SelectEdit';
 
-export default class TableSimple extends React.Component {
+/**
+ * TableSimple component
+ *
+ * @class      TableSimple (name)
+ */
+class TableSimple extends React.Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
+
         /* Pouch DB State*/
         this.state = {
             changed: false,
@@ -31,7 +37,28 @@ export default class TableSimple extends React.Component {
             }
         };
     }
-    render() {
+
+    /**
+     * Change handler
+     *
+     * @param      {Object}  tagData  The tag data
+     * @param      {Object}  data     The data
+     */
+    changeFieldPatient = (tagData, data) => {
+        if (this.state.patientData[tagData]) {
+            const patientData = this.state.patientData;
+            patientData[tagData] = data;
+            this.setState({
+                changed: true,
+                patientData
+            });
+        }
+    };
+
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         return (
             <Table selectable={false} >
                 <TableHeader>
@@ -94,18 +121,7 @@ export default class TableSimple extends React.Component {
                 </TableBody>
             </Table>
         );
-    }
-    changeFieldPatient = (tagData, data) => {
-        if (this.state.patientData[tagData]) {
-            const patientData = this.state.patientData;
-            patientData[tagData] = data;
-            this.setState({
-                changed: true,
-                patientData
-            });
-        }
     };
-
 }
 
 export default TableSimple;

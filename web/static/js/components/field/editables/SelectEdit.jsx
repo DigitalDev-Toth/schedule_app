@@ -1,8 +1,17 @@
-import React from 'react';
-import SelectField from 'material-ui/lib/select-field';
-import MenuItem from 'material-ui/lib/menus/menu-item';
+import React, { Component } from 'react';
+import { SelectField, MenuItem } from 'material-ui';
 
-export default class  extends React.Component {
+/**
+ * SelectEdit component
+ *
+ * @class      SelectEdit (name)
+ */
+class SelectEdit extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
         const { previsions, selected, tagData } = this.props;
@@ -12,20 +21,13 @@ export default class  extends React.Component {
             tagData
         };
     }
-    render() {
-        const previsions = this.state.previsions;
-        return (
-            <SelectField value={this.state.selected} onChange={this.handleChange}>
-                {previsions.map(prevision =>
-                    <MenuItem
-                        value={prevision.value}
-                        key={prevision.value}
-                        primaryText={prevision.text}
-                    />
-                )}
-            </SelectField>
-        );
-    }
+
+    /**
+     * Change handler
+     *
+     * @param      {Object}  event         The event
+     * @param      {Integer}  index         The index
+     */
     handleChange = (event, index, changedValue) => {
         event = event ? event : null;
         index = index ? index : null;
@@ -38,4 +40,24 @@ export default class  extends React.Component {
             }
         }
     };
+
+    /**
+     * React DOM rendering
+     */
+    render = () => {
+        const previsions = this.state.previsions;
+        return (
+            <SelectField value={this.state.selected} onChange={this.handleChange}>
+                {previsions.map(prevision =>
+                    <MenuItem
+                        value={prevision.value}
+                        key={prevision.value}
+                        primaryText={prevision.text}
+                    />
+                )}
+            </SelectField>
+        );
+    };
 }
+
+export default SelectEdit;

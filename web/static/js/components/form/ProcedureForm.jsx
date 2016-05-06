@@ -1,14 +1,20 @@
-import React from 'react';
-import TextField from 'material-ui/lib/text-field';
-import DatePicker from 'material-ui/lib/date-picker/date-picker';
-import TimePicker from 'material-ui/lib/time-picker/time-picker';
-import {Row, Col} from '../box/Container.jsx';
+import React, { Component } from 'react';
+import { TextField, DatePicker, TimePicker, teal500 } from 'material-ui';
+import { Row, Col } from '../box/Container.jsx';
 import TreeField from '../field/TreeField.jsx';
 import TableSimple from '../table/TablePatientEditable.jsx';
-import { teal500 } from 'material-ui/lib/styles/colors';
-console.log('teal500 ' , teal500);
 
-export default class ProcedureForm extends React.Component {
+/**
+ * ProcedureForm component
+ *
+ * @class      ProcedureForm (name)
+ */
+class ProcedureForm extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -18,12 +24,23 @@ export default class ProcedureForm extends React.Component {
             controlledTime: new Date()
         };
     }
+
+    /**
+     * Change event handler
+     *
+     * @param      {Object}  event   The event
+     * @param      {String}  date    The date
+     */
     _handleChange = (event, date) => {
         this.setState({
             controlledDate: date
         });
     };
-    render() {
+
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         return (
             <Row>
                 <Col type='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
@@ -60,33 +77,7 @@ export default class ProcedureForm extends React.Component {
                 </Col>
             </Row>
         );
-    }
+    };
 }
-/*<br/>
-                <TextField
-                    defaultValue='Default Value'
-                />
-                <br/>
-                <TextField
-                    hintText='Hint Text'
-                    floatingLabelText='Floating Label Text'
-                />
-                <br/>
-                <TextField
-                    hintText='Password Field'
-                    floatingLabelText='Password'
-                    type='password'
-                />
-                <br/>
-                <TextField
-                    hintText='MultiLine with rows: 2 and rowsMax: 4'
-                    multiLine={true}
-                    rows={2}
-                    rowsMax={4}
-                /><br/>
-                <TextField
-                    hintText='Message Field'
-                    floatingLabelText='MultiLine and FloatingLabel'
-                    multiLine={true}
-                    rows={2}
-                />*/
+
+export default ProcedureForm;

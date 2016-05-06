@@ -1,7 +1,7 @@
 const x = 3;
 const y = 2;
 const z = 1;
-const gData = []; // 手工构造数据
+const gData = [];
 const generateData = (_level, _preKey, _tns) => {
     const preKey = _preKey || '0';
     const tns = _tns || gData;
@@ -28,16 +28,16 @@ const generateData = (_level, _preKey, _tns) => {
 };
 generateData(z);
 
-function generateTreeNodes(treeNode) {
+let generateTreeNodes = (treeNode) => {
     const arr = [];
     const key = treeNode.props.eventKey;
     for (let i = 0; i < 3; i++) {
         arr.push({ label: `${key}-${i}-label`, value: `${key}-${i}-value`, key: `${key}-${i}` });
     }
     return arr;
-}
+};
 
-function setLeaf(treeData, curKey, level) {
+let setLeaf = (treeData, curKey, level) => {
     const loopLeaf = (data, lev) => {
         const l = lev - 1;
         data.forEach((item) => {
@@ -53,9 +53,9 @@ function setLeaf(treeData, curKey, level) {
         });
     };
     loopLeaf(treeData, level + 1);
-}
+};
 
-function getNewTreeData(treeData, curKey, child, level) {
+let getNewTreeData = (treeData, curKey, child, level) => {
     const loop = (data) => {
         if (level < 1 || curKey.length - 3 > level * 2) {
             return;
@@ -72,9 +72,9 @@ function getNewTreeData(treeData, curKey, child, level) {
     };
     loop(treeData);
     setLeaf(treeData, curKey, level);
-}
+};
 
-function loopData(data, callback) {
+let loopData = (data, callback) => {
     const loop = (d, level = 0) => {
         d.forEach((item, index) => {
             const pos = `${level}-${index}`;
@@ -85,16 +85,15 @@ function loopData(data, callback) {
         });
     };
     loop(data);
-}
+};
 
-function isInclude(smallArray, bigArray) {
+let isInclude = (smallArray, bigArray) => {
     return smallArray.every((ii, i) => {
         return ii === bigArray[i];
     });
-}
-// console.log(isInclude(['0', '1'], ['0', '10', '1']));
+};
 
-function getFilterValue(val, sVal, delVal) {
+let getFilterValue = (val, sVal, delVal) => {
     const allPos = [];
     const delPos = [];
     loopData(gData, (item, index, pos) => {
@@ -113,8 +112,7 @@ function getFilterValue(val, sVal, delVal) {
             if (item === i ||
                 nArr.length > iArr.length && isInclude(iArr, nArr) ||
                 nArr.length < iArr.length && isInclude(nArr, iArr)) {
-                // 过滤掉 父级节点 和 所有子节点。
-                // 因为 node节点 不选时，其 父级节点 和 所有子节点 都不选。
+
                 return;
             }
             newPos.push(i);
@@ -129,6 +127,6 @@ function getFilterValue(val, sVal, delVal) {
         });
     }
     return newVal;
-}
+};
 
 export { gData, getNewTreeData, generateTreeNodes, getFilterValue };

@@ -1,19 +1,34 @@
-import React from 'react';
-import {Grid} from '../box/Container';
+import React, { Component } from 'react';
+import { Grid } from '../box/Container';
 import Header from './Header';
 import ScheduleGrid from './ScheduleGrid';
 
-export default class Layout extends React.Component {
+/**
+ * Layout component
+ *
+ * @class      Layout (name)
+ */
+class Layout extends Component {
+    /**
+     * Basic React component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
     }
 
-    render() {
+    /**
+     * React DOM rendering
+     */
+    render = () => {
         return (
             <Grid type='container-fluid'>
                 <Header />
                 <ScheduleGrid />
             </Grid>
         );
-    }
+    };
 }
+
+export default Layout;

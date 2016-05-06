@@ -25,6 +25,9 @@ const ScheduleAccess = auth ? Schedule : Forbidden;
 const OnlookerAccess = auth ? Onlooker : Forbidden;
 const ApiAccess = auth ? Api : Forbidden;
 
+/**
+ * Routing
+ */
 if (__DEPLOYMENT__ || __PRODUCTION__) {
     render(
         <div>
