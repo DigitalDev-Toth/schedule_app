@@ -4,8 +4,6 @@ import moment from 'moment';
 
 /**
  * DateEdit component
- *
- * @class      DateEdit (name)
  */
 class DateEdit extends Component {
     /**
@@ -15,6 +13,7 @@ class DateEdit extends Component {
      */
     constructor(props) {
         super(props);
+
         const { defaultDate, tagData } = this.props;
         this.state = {
             defaultDate,
@@ -28,9 +27,9 @@ class DateEdit extends Component {
      * @param      {String}  date    The date
      * @return     {String}  Date formated
      */
-    formatDate = (date) => {
+    formatDate(date) {
         return `${moment(date).format('DD')} - ${moment(date).format('MM')} - ${moment(date).format('YYYY')}`;
-    };
+    }
 
     /**
      * Finish edition callback
@@ -38,7 +37,7 @@ class DateEdit extends Component {
      * @param      {Object}  event   The event
      * @param      {String}  date    The date
      */
-    finishEdit = (event, date) => {
+    finishEdit(event, date) {
         event = event ? event : null;
 
         const newValue = moment(date).format('DD-MM-YYYY');
@@ -53,12 +52,14 @@ class DateEdit extends Component {
                 this.props.onEdit(this.state.tagData, newValue);
             }
         }
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const dateMoment = moment(this.props.defaultDate, 'DD-MM-YYYY')._d;
 
         return <DatePicker
@@ -71,7 +72,7 @@ class DateEdit extends Component {
             formatDate={this.formatDate}
             onChange={ this.finishEdit }
         />;
-    };
+    }
 }
 
 export default DateEdit;

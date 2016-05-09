@@ -11,25 +11,8 @@ const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
  * Onlooker container
- *
- * @class      Onlooker (name)
  */
 class Onlooker extends Component {
-    /**
-     * React properties types definitions
-     */
-    static propTypes = {
-        channel: PropTypes.any,
-        usersRemote: PropTypes.any
-    };
-
-    /**
-     * Material-UI context types
-     */
-    static childContextTypes = {
-        muiTheme: React.PropTypes.object.isRequired
-    };
-
     /**
      * Basic React component constructor
      *
@@ -43,27 +26,29 @@ class Onlooker extends Component {
     /**
      * React component did mount
      */
-    componentDidMount = () => {
+    componentDidMount() {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:onlooker', params => {
                 this.props.actions.showScheduleOnlookerUserRemote(params.usersRemote);
             });
         }
-    };
+    }
 
     /**
      * Get the child context.
      *
      * @return     {Object}  Child context.
      */
-    getChildContext = () => {
+    getChildContext() {
         return {muiTheme: getMuiTheme()};
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         let usersRemote = this.props.usersRemote === undefined ? [] : this.props.usersRemote;
 
         let users = usersRemote.map((userRemote) => {
@@ -101,8 +86,23 @@ class Onlooker extends Component {
                 </Grid>
             </div>
         );
-    };
+    }
 }
+
+/**
+ * React properties types definitions
+ */
+Onlooker.propTypes = {
+    channel: PropTypes.any,
+    usersRemote: PropTypes.any
+};
+
+/**
+ * Material-UI context types
+ */
+Onlooker.childContextTypes = {
+    muiTheme: React.PropTypes.object.isRequired
+};
 
 /**
  * Map Redux states to React properties

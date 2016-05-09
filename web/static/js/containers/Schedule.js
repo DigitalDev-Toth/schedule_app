@@ -30,18 +30,8 @@ const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
  * Schedule container
- *
- * @class      Schedule (name)
  */
 class Schedule extends Component {
-    /**
-     * React properties types definitions
-     */
-    static propTypes = {
-        channel: PropTypes.any,
-        userEntered: PropTypes.any
-    };
-
     /**
      * Basic React component constructor
      *
@@ -55,26 +45,36 @@ class Schedule extends Component {
     /**
      * React component did mount
      */
-    componentDidMount = () => {
+    componentDidMount() {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:user_entered', () => {
                 this.props.channel.push('schedule:onlooker', {onlooker: true});
             });
         }
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div>
                 <ScheduleToth />
                 <Notifier />
             </div>
         );
-    };
+    }
 }
+
+/**
+ * React properties types definitions
+ */
+Schedule.propTypes = {
+    channel: PropTypes.any,
+    userEntered: PropTypes.any
+};
 
 /**
  * Map Redux states to React properties

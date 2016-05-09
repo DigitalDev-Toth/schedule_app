@@ -6,8 +6,6 @@ import SelectEdit from '../field/editables/SelectEdit';
 
 /**
  * TableSimple component
- *
- * @class      TableSimple (name)
  */
 class TableSimple extends React.Component {
     /**
@@ -44,7 +42,7 @@ class TableSimple extends React.Component {
      * @param      {Object}  tagData  The tag data
      * @param      {Object}  data     The data
      */
-    changeFieldPatient = (tagData, data) => {
+    changeFieldPatient(tagData, data) {
         if (this.state.patientData[tagData]) {
             const patientData = this.state.patientData;
             patientData[tagData] = data;
@@ -53,12 +51,14 @@ class TableSimple extends React.Component {
                 patientData
             });
         }
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <Table selectable={false} >
                 <TableHeader>
@@ -121,7 +121,7 @@ class TableSimple extends React.Component {
                 </TableBody>
             </Table>
         );
-    };
+    }
 }
 
 export default TableSimple;

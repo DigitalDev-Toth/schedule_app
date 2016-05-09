@@ -6,14 +6,14 @@ const codeStyle = {
 
 /**
  * Error 403 component
- *
- * @class      Forbidden (name)
  */
 class Forbidden extends Component {
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div className='container'>
                 <section>
@@ -31,7 +31,7 @@ class Forbidden extends Component {
                 </section>
             </div>
         );
-    };
+    }
 }
 
 export default Forbidden;

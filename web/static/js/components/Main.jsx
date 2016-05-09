@@ -17,8 +17,6 @@ const styles = {
 
 /**
  * Main component
- *
- * @class      Main (name)
  */
 class Main extends Component {
     /**
@@ -41,25 +39,27 @@ class Main extends Component {
     /**
      * Request close handler
      */
-    handleRequestClose = () => {
+    handleRequestClose() {
         this.setState({
             open: false
         });
-    };
+    }
 
     /**
      * Touch tap handler
      */
-    handleTouchTap = () => {
+    handleTouchTap() {
         this.setState({
             open: true
         });
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const standardActions = (
             <FlatButton
                 label='Cancelar'
@@ -98,7 +98,7 @@ class Main extends Component {
                 </Row>
             </Grid>
         );
-    };
+    }
 }
 
 export default Main;

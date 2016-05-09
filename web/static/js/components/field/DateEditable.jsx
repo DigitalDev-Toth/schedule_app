@@ -3,8 +3,6 @@ import DateEdit from './editables/DateEdit';
 
 /**
  * DateEditable component
- *
- * @class      DateEditable (name)
  */
 class DateEditable extends Component {
     /**
@@ -26,12 +24,12 @@ class DateEditable extends Component {
      *
      * @param      {Object}  data    The data
      */
-    dataChanged = (data) => {
+    dataChanged(data) {
         if (this.props.onEdit) {
             this.props.onEdit(data);
             this.setState({...data });
         }
-    };
+    }
 
     /**
      * Validation handler
@@ -39,14 +37,16 @@ class DateEditable extends Component {
      * @param      {String}  text    The text
      * @return     {Boolean}  Validation
      */
-    customValidateText = (text) => {
+    customValidateText(text) {
         return (text.length > 0 && text.length < 64);
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div>
                 <DateEdit
@@ -62,7 +62,7 @@ class DateEditable extends Component {
                 />
             </div>
         );
-    };
+    }
 }
 
 export default DateEditable;

@@ -5,8 +5,6 @@ import ScheduleGrid from './ScheduleGrid';
 
 /**
  * Layout component
- *
- * @class      Layout (name)
  */
 class Layout extends Component {
     /**
@@ -20,15 +18,17 @@ class Layout extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <Grid type='container-fluid'>
                 <Header />
                 <ScheduleGrid />
             </Grid>
         );
-    };
+    }
 }
 
 export default Layout;

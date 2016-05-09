@@ -9,18 +9,8 @@ const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
  * Notifier container
- *
- * @class      Notifier (name)
  */
 class Notifier extends Component {
-    /**
-     * React properties types definitions
-     */
-    static propTypes = {
-        channel: PropTypes.any,
-        userEntered: PropTypes.any
-    };
-
     /**
      * Basic React component constructor
      *
@@ -34,18 +24,20 @@ class Notifier extends Component {
     /**
      * React component did mount
      */
-    componentDidMount = () => {
+    componentDidMount() {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.on('schedule:user_entered', params => {
                 this.props.actions.getScheduleUserEntered(params.user);
             });
         }
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         let userEntered = this.props.userEntered;
         let show = false;
         let message = this.props.message;
@@ -59,8 +51,16 @@ class Notifier extends Component {
                 <Notification show={show} message={message} />
             </div>
         );
-    };
+    }
 }
+
+/**
+ * React properties types definitions
+ */
+Notifier.propTypes = {
+    channel: PropTypes.any,
+    userEntered: PropTypes.any
+};
 
 /**
  * Map Redux states to React properties

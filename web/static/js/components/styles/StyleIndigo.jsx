@@ -11,8 +11,6 @@ const muiTheme = getMuiTheme({
 
 /**
  * StyleIndigo component
- *
- * @class      StyleIndigo (name)
  */
 class StyleIndigo extends Component {
     /**
@@ -26,8 +24,10 @@ class StyleIndigo extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { children, ...props } = this.props;
 
         return (
@@ -37,7 +37,7 @@ class StyleIndigo extends Component {
                 </div>
             </MuiThemeProvider>
         );
-    };
+    }
 }
 
 export default StyleIndigo;

@@ -6,8 +6,6 @@ const ReactGrid = WidthProvider(ReactGridLayout);
 
 /**
  * SlotSchedule component
- *
- * @class      SlotSchedule (name)
  */
 class SlotSchedule extends Component {
     /**
@@ -21,8 +19,10 @@ class SlotSchedule extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         let layout = [
             { i: 'a', x: 0, y: 0, w: 2, h: 23, maxH: Infinity },
             { i: 'b', x: 2, y: 0, w: 2, h: 23, maxH: Infinity },
@@ -44,7 +44,7 @@ class SlotSchedule extends Component {
                 <div className='slot' key={'g'}>g</div>
             </ReactGrid>
         );
-    };
+    }
 }
 
 export default SlotSchedule;

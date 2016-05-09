@@ -3,18 +3,8 @@ import NotificationSystem from 'react-notification-system';
 
 /**
  * Notification component
- *
- * @class      Notifier (name)
  */
 class Notification extends Component {
-    /**
-     * React properties types definitions
-     */
-    static propTypes = {
-        show: PropTypes.any,
-        message: PropTypes.any
-    };
-
     /**
      * Basic React component constructor
      *
@@ -34,33 +24,35 @@ class Notification extends Component {
     /**
      * React component will mount
      */
-    componentWillMount = () => {
+    componentWillMount() {
         this.setState({viewHeight: window.innerHeight});
-    };
+    }
 
     /**
      * React component did mount
      */
-    componentDidMount = () => {
+    componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
-    };
+    }
 
     /**
      * Show new notification
      *
      * @param      {String}  message  The message to show
      */
-    addNotification = (message) => {
+    addNotification(message) {
         this.notificationSystem.addNotification({
             message,
             level: 'success'
         });
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         let message = this.props.message;
         let show = this.props.show;
         let notificationSystem = this.notificationSystem;
@@ -74,7 +66,15 @@ class Notification extends Component {
                 <NotificationSystem ref='notificationSystem' />
             </div>
         );
-    };
+    }
 }
+
+/**
+ * React properties types definitions
+ */
+Notification.propTypes = {
+    show: PropTypes.any,
+    message: PropTypes.any
+};
 
 export default Notification;

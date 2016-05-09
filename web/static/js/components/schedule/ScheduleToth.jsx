@@ -3,8 +3,6 @@ import Layout from './Layout';
 
 /**
  * ScheduleToth component
- *
- * @class      ScheduleToth (name)
  */
 class ScheduleToth extends Component {
     /**
@@ -18,12 +16,14 @@ class ScheduleToth extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <Layout />
         );
-    };
+    }
 }
 
 export default ScheduleToth;

@@ -19,8 +19,6 @@ const styles = {
 
 /**
  * CardPanel component
- *
- * @class      CardPanel (name)
  */
 class CardPanel extends Component {
     /**
@@ -34,8 +32,10 @@ class CardPanel extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { children, ...props } = this.props;
 
         return (
@@ -57,7 +57,7 @@ class CardPanel extends Component {
                 </Card>
              </Styles>
         );
-    };
+    }
 }
 
 export default CardPanel;

@@ -3,8 +3,6 @@ import { SelectField, MenuItem } from 'material-ui';
 
 /**
  * SelectEdit component
- *
- * @class      SelectEdit (name)
  */
 class SelectEdit extends Component {
     /**
@@ -28,7 +26,7 @@ class SelectEdit extends Component {
      * @param      {Object}  event         The event
      * @param      {Integer}  index         The index
      */
-    handleChange = (event, index, changedValue) => {
+    handleChange(event, index, changedValue) {
         event = event ? event : null;
         index = index ? index : null;
         if (this.state.selected !== changedValue) {
@@ -39,12 +37,14 @@ class SelectEdit extends Component {
                 this.props.onEdit(this.state.tagData, changedValue);
             }
         }
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const previsions = this.state.previsions;
         return (
             <SelectField value={this.state.selected} onChange={this.handleChange}>
@@ -57,7 +57,7 @@ class SelectEdit extends Component {
                 )}
             </SelectField>
         );
-    };
+    }
 }
 
 export default SelectEdit;

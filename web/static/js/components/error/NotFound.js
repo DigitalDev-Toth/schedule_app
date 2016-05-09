@@ -6,14 +6,14 @@ const codeStyle = {
 
 /**
  * Error 404 component
- *
- * @class      NotFound (name)
  */
 class NotFound extends Component {
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div className='container'>
                 <section>
@@ -31,7 +31,7 @@ class NotFound extends Component {
                 </section>
             </div>
         );
-    };
+    }
 }
 
 export default NotFound;

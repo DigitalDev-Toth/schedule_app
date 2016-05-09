@@ -3,8 +3,6 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 
 /**
  * Home component
- *
- * @class      Home (name)
  */
 const Home = () => (
     <Grid fluid>

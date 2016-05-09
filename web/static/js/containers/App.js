@@ -9,27 +9,27 @@ injectTapEventPlugin();
 
 /**
  * App container
- *
- * @class      App (name)
  */
 class App extends Component {
     /**
-     * React properties types definitions
-     */
-    static propTypes = {
-        children: PropTypes.any
-    };
-
-    /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div>
                 {this.props.children}
             </div>
         );
-    };
+    }
 }
+
+/**
+ * React properties types definitions
+ */
+App.propTypes = {
+    children: PropTypes.any
+};
 
 export default App;

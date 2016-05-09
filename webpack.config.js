@@ -167,9 +167,9 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
     modules.loaders = loaders;
     modules.preLoaders = __DEVELOPMENT__ ? preLoaders: [];
     plugins.push(new webpack.HotModuleReplacementPlugin());
-    plugins.push(new NpmInstallPlugin({
+    /*plugins.push(new NpmInstallPlugin({
         save: true
-    }));
+    }));*/
     plugins.push(new HtmlWebpackPlugin({
         title: 'Toth Schedule Module',
         template: PATHS.template,

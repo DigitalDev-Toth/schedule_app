@@ -3,8 +3,6 @@ import SlotSchedule from './SlotSchedule';
 
 /**
  * ScheduleGrid component
- *
- * @class      ScheduleGrid (name)
  */
 class ScheduleGrid extends Component {
     /**
@@ -18,8 +16,10 @@ class ScheduleGrid extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div className='text-center' >
                 <div>
@@ -27,7 +27,7 @@ class ScheduleGrid extends Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 export default ScheduleGrid;

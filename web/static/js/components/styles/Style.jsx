@@ -3,8 +3,6 @@ import { MuiThemeProvider, getMuiTheme, colors } from 'material-ui/styles';
 
 /**
  * Styles component
- *
- * @class      Styles (name)
  */
 class Styles extends Component {
     /**
@@ -18,8 +16,10 @@ class Styles extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { children, color } = this.props;
         const colorTheme = color ||'teal500';
         const muiTheme = getMuiTheme({
@@ -35,7 +35,7 @@ class Styles extends Component {
                 </div>
             </MuiThemeProvider>
         );
-    };
+    }
 }
 
 export default Styles;

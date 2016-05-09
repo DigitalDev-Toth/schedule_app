@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 /**
  * FieldSet component
- *
- * @class      FieldSet (name)
  */
 class FieldSet extends Component {
     /**
@@ -17,8 +15,10 @@ class FieldSet extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <fieldset>
                 <div className='form-group'>
@@ -43,7 +43,7 @@ class FieldSet extends Component {
                 </div>
             </fieldset>
         );
-    };
+    }
 }
 
 export default FieldSet;

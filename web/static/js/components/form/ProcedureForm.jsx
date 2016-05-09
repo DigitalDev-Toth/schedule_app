@@ -6,8 +6,6 @@ import TableSimple from '../table/TablePatientEditable.jsx';
 
 /**
  * ProcedureForm component
- *
- * @class      ProcedureForm (name)
  */
 class ProcedureForm extends Component {
     /**
@@ -31,16 +29,18 @@ class ProcedureForm extends Component {
      * @param      {Object}  event   The event
      * @param      {String}  date    The date
      */
-    _handleChange = (event, date) => {
+    _handleChange(event, date) {
         this.setState({
             controlledDate: date
         });
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <Row>
                 <Col type='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
@@ -77,7 +77,7 @@ class ProcedureForm extends Component {
                 </Col>
             </Row>
         );
-    };
+    }
 }
 
 export default ProcedureForm;

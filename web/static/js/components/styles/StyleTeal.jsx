@@ -9,6 +9,9 @@ const muiTheme = getMuiTheme({
     }
 });
 
+/**
+ * StyleTeal Component
+ */
 class StyleTeal extends Component {
     /**
      * Basic React component constructor
@@ -21,8 +24,10 @@ class StyleTeal extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { children, ...props } = this.props;
 
         return (
@@ -32,7 +37,7 @@ class StyleTeal extends Component {
                 </div>
             </MuiThemeProvider>
         );
-    };
+    }
 }
 
 export default StyleTeal;

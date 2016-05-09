@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 /**
  * Grid component
- *
- * @class      Grid (name)
  */
 export class Grid extends Component {
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { type, children } = this.props;
         let typeContainer = type ? type : 'container';
 
@@ -18,19 +18,19 @@ export class Grid extends Component {
                 {children}
             </div>
         );
-    };
+    }
 }
 
 /**
  * Row component
- *
- * @class      Row (name)
  */
 export class Row extends Component {
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { children } = this.props;
 
         return (
@@ -38,19 +38,19 @@ export class Row extends Component {
                 {children}
             </div>
         );
-    };
+    }
 }
 
 /**
  * Col component
- *
- * @class      Col (name)
  */
 export class Col extends Component {
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         const { children, type } = this.props;
         const typeCol = type || 'col-md-12';
 

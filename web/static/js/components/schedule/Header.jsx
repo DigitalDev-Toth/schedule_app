@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+/**
+ * Header component
+ */
 class Header extends Component {
     /**
      * Basic React component constructor
@@ -12,8 +15,10 @@ class Header extends Component {
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div className='text-center' >
                 <div className='header'>
@@ -23,7 +28,7 @@ class Header extends Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 export default Header;

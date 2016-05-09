@@ -8,17 +8,8 @@ const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
  * Api container
- *
- * @class      Api (name)
  */
 class Api extends Component {
-    /**
-     * React properties types definitions
-     */
-    static propTypes = {
-        channel: PropTypes.any
-    };
-
     /**
      * Basic React component constructor
      *
@@ -32,23 +23,32 @@ class Api extends Component {
     /**
      * React component did mount
      */
-    componentDidMount = () => {
+    componentDidMount() {
         if (__DEPLOYMENT__ || __PRODUCTION__) {
             this.props.channel.push('schedule:api', {api: 'WOOOLA', topic: 'schedule:asdasd'});
         }
-    };
+    }
 
     /**
      * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
      */
-    render = () => {
+    render() {
         return (
             <div className='container'>
                 API v1
             </div>
         );
-    };
+    }
 }
+
+/**
+ * React properties types definitions
+ */
+Api.propTypes = {
+    channel: PropTypes.any
+};
 
 /**
  * Map Redux states to React properties
