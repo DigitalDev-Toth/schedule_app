@@ -1,7 +1,7 @@
 import http from 'http';
 import https from 'https';
 
-export function Verify(couchServers) {
+export function VerifyServer(couchServers) {
     return new Promise((resolve, reject) => {
         urlStatus(couchServers)
             .then((server) => {
