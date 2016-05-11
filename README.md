@@ -127,4 +127,5 @@ GUIDES
 - [Testing + Redux + React + Immutable](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)
 - [nvm](https://github.com/creationix/nvm)
 
+***
 © [Toth Limitada](http://www.toth.cl) - Todos los derechos reservados
