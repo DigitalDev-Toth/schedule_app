@@ -5,6 +5,7 @@ export function VerifyServer(couchServers) {
     return new Promise((resolve, reject) => {
         urlStatus(couchServers)
             .then((server) => {
+                console.log('response', server);
                 if (typeof server[0] === 'object') {
                     resolve(server[0]);
                 }

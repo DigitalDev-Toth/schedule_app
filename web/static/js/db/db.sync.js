@@ -7,10 +7,10 @@ PouchDB.plugin({ PouchFind, PouchAuth });
 
 const dbName = 'schedule';
 
-export default function setActiveServer(db) {
+export default function verifyAndSync() {
     return new Promise((resolve) => {
         VerifyServer(couchServers)
-        PouchSync()
+            .then(PouchSync)
             .then((info) => {
                 resolve(info);
             })
@@ -19,8 +19,9 @@ export default function setActiveServer(db) {
             });
     });
 }
-export default function PouchSync(server) {
+export function PouchSync(server) {
     return new Promise((resolve) => {
+        let db = new PouchDB(dbName, { skipSetup: true });
         let url = server.url + '/' + dbName;
         const options = {};
         if (server.auth) {
@@ -40,10 +41,10 @@ export default function PouchSync(server) {
             resolve(true);
         }).on('error', (err) => {
             console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
-            setActiveServer(db);
+            verifyAndSync(db);
         }).on('denied', (err) => {
             console.error('ERROR WHILE SYNCHRONIZATION IS PERFORMED: ', err);
-            setActiveServer(db);
+            verifyAndSync(db);
         });
     });
 }

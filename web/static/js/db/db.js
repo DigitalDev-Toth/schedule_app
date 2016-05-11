@@ -1,9 +1,9 @@
 import PouchDB from 'pouchdb';
-import setActiveServer from './db.sync';
+import verifyAndSync from './db.sync';
 
 const dbName = 'schedule';
 const db = new PouchDB(dbName, { skipSetup: true });
-setActiveServer(db);
+verifyAndSync(db);
 const schemaDB = new PouchDB('schema', { skipSetup: true });
 
 export default class DB {
