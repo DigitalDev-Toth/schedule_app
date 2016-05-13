@@ -1,7 +1,5 @@
-import ScheduleModel from './ScheduleModel';
-import UserModel from './UserModel';
+import Model from './Model';
 
 export const API = {
-    ScheduleModel,
-    UserModel
+    Model
 };

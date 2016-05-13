@@ -6,24 +6,14 @@ import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
 import ScheduleToth from '../components/schedule/ScheduleToth';
 import { API } from '../api';
-API.ScheduleModel.getSchedule()
-    .then((doc) => {
-        console.log(doc);
-    }).catch((err) => {
-        console.log('error', err);
-    });
-API.UserModel.getUser('username2')
-    .then((doc) => {
-        console.log('user', doc);
-    }).catch((err) => {
-        console.log('error', err);
-    });
-API.UserModel.getSchema('user')
-    .then((doc) => {
-        console.log('user', doc);
-    }).catch((err) => {
-        console.log('error', err);
-    });
+
+let user = new API.Model('user');
+console.log(user);
+user.getDocument('username1')
+    .then((data) => {
+        console.log(data);
+    })
+//user.getDoc('username1');
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;

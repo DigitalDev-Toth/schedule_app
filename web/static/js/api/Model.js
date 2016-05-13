@@ -1,11 +1,22 @@
 import DB from '../db/db';
 
-export default class ScheduleModel {
-    static getSchema(room) {
+export default class Model {
+    constructor(schema) {
+        this.schema = schema;
+        this.getSchema(schema);
+    }
+
+    getSchema(schema) {
         return new Promise((resolve, reject) => {
+            DB.getSchema(schema)
+                .then((doc) => {
+                    resolve(doc);
+                }).catch((err) => {
+                    reject(err);
+                });
         });
     }
-    static addDocument() {
+   /* static addDocument() {
         return new Promise((resolve, reject) => {
         });
     }
@@ -19,15 +30,25 @@ export default class ScheduleModel {
         return new Promise((resolve, reject) => {
         });
     }
-    
-    static getDocument() {
+    */
+    getDocument(doc) {
         return new Promise((resolve, reject) => {
+            if (!doc) {
+                reject('Error: ');
+            } else {
+                DB.getDoc(this.schema + '/', doc)
+                    .then((doc) => {
+                        resolve(doc);
+                    }).catch((err) => {
+                        reject(err);
+                    });
+            }
         });
     }
-    
+    /*
     static getAllDocuments() {
         return new Promise((resolve, reject) => {
         });
     }
-
+*/
 }
