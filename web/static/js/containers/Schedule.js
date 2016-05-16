@@ -8,11 +8,10 @@ import ScheduleToth from '../components/schedule/ScheduleToth';
 import { API } from '../api';
 
 let user = new API.Model('user');
-console.log(user);
 user.getDocument('username1')
     .then((data) => {
         console.log(data);
-    })
+    });
 //user.getDoc('username1');
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
@@ -41,6 +40,7 @@ class Schedule extends Component {
                 this.props.channel.push('schedule:onlooker', {onlooker: true});
             });
         }
+        this.props.actions.getScheduleOptions(this.props.scheduleOptions);
     }
 
     /**
@@ -49,6 +49,9 @@ class Schedule extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
+        if(this.props.state.ScheduleOptions.type) {
+            console.log('holi actions', this.props.state.ScheduleOptions.options);
+        }
         return (
             <div>
                 <ScheduleToth />
@@ -63,7 +66,9 @@ class Schedule extends Component {
  */
 Schedule.propTypes = {
     channel: PropTypes.any,
-    userEntered: PropTypes.any
+    userEntered: PropTypes.any,
+    scheduleOptions: PropTypes.any,
+    options: PropTypes.any
 };
 
 /**
@@ -74,8 +79,10 @@ Schedule.propTypes = {
  */
 const mapStateToProps = (state) => {
     return {
+        scheduleOptions: state.ScheduleOptions.promiseSchedule,
         channel: state.ScheduleOptions.channel,
         userEntered: state.ScheduleChannel.user,
+        options: state.ScheduleOptions.options,
         state
     };
 };

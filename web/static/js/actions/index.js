@@ -7,9 +7,18 @@ import { API } from '../api';
  */
 export let getScheduleOptions = (options) => {
     console.log(API);
+    let _options = Promise.all(options)
+    .then(responses => {
+        let json = {
+            defaultOptions: responses[0].options,
+            roomOptions: responses[1]
+        };
+        return json;
+    });
+
     return {
         type: 'SCHEDULE_OPTIONS',
-        options
+        options: _options
     };
 };
 
