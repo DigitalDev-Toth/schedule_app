@@ -1,24 +1,14 @@
-import { API } from '../api';
+/*import { API } from '../api';*/
 
 /**
  * Redux Action
  *
  * Get schedule options for draw it
  */
-export let getScheduleOptions = (options) => {
-    console.log(API);
-    let _options = Promise.all(options)
-    .then(responses => {
-        let json = {
-            defaultOptions: responses[0].options,
-            roomOptions: responses[1]
-        };
-        return json;
-    });
-
+export let getScheduleOptions = (payload) => {
     return {
-        type: 'SCHEDULE_OPTIONS',
-        options: _options
+        type: 'SCHEDULE_DEFAULT_OPTIONS',
+        payload
     };
 };
 

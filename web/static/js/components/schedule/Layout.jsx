@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Grid } from '../box/Container';
 import Header from './Header';
 import ScheduleGrid from './ScheduleGrid';
-import { API } from '../../api';
+/*import { API } from '../../api';
 
 const room = new API.Model('room');
-const options = new API.Model('options');
+const options = new API.Model('options');*/
 
 /**
  * Layout component
@@ -20,12 +20,12 @@ class Layout extends Component {
         super(props);
         this.state = {};
     }
-    componentDidMount() {
+    /*componentDidMount() {
         this.getState().then((value) => {
             this.changeState(value);
         });
-    }
-    getState() {
+    }*/
+    /*getState() {
         return new Promise((resolve, reject) => {
             let promises = [
                 options.getDocument('default'),
@@ -43,10 +43,10 @@ class Layout extends Component {
                     reject('error', err);
                 });
         });
-    }
-    changeState(state) {
+    }*/
+    /*changeState(state) {
         this.setState({ state });
-    }
+    }*/
     /**
      * React DOM rendering
      *

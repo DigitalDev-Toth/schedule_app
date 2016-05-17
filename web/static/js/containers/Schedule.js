@@ -5,14 +5,8 @@ import * as scheduleActions from '../actions';
 import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
 import ScheduleToth from '../components/schedule/ScheduleToth';
-import { API } from '../api';
-
-let user = new API.Model('user');
-user.getDocument('username1')
-    .then((data) => {
-        console.log(data);
-    });
-//user.getDoc('username1');
+import Model from '../models/Model';
+import API from '../api';
 
 const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
@@ -40,7 +34,13 @@ class Schedule extends Component {
                 this.props.channel.push('schedule:onlooker', {onlooker: true});
             });
         }
-        this.props.actions.getScheduleOptions(this.props.scheduleOptions);
+
+        const room = new Model('room');
+        const options = new Model('options');
+
+        API.Documents.getDocuments(
+            [room, options],
+            ['1234', 'default'], this.props.actions);
     }
 
     /**
@@ -49,9 +49,8 @@ class Schedule extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        if(this.props.state.ScheduleOptions.type) {
-            console.log('holi actions', this.props.state.ScheduleOptions.options);
-        }
+        console.log('default', this.props.optionsDefault, this.props.roomsDefault);
+
         return (
             <div>
                 <ScheduleToth />
@@ -67,8 +66,8 @@ class Schedule extends Component {
 Schedule.propTypes = {
     channel: PropTypes.any,
     userEntered: PropTypes.any,
-    scheduleOptions: PropTypes.any,
-    options: PropTypes.any
+    optionsDefault: PropTypes.any,
+    roomsDefault: PropTypes.any
 };
 
 /**
@@ -79,10 +78,10 @@ Schedule.propTypes = {
  */
 const mapStateToProps = (state) => {
     return {
-        scheduleOptions: state.ScheduleOptions.promiseSchedule,
         channel: state.ScheduleOptions.channel,
         userEntered: state.ScheduleChannel.user,
-        options: state.ScheduleOptions.options,
+        optionsDefault: state.ScheduleOptions.optionsDefault,
+        roomsDefault: state.ScheduleOptions.roomsDefault,
         state
     };
 };

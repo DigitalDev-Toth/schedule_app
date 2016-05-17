@@ -7,10 +7,11 @@ import { InitialState } from '../utilities/InitialState';
  */
 export let getScheduleOptionsReducer = (state = InitialState(), action) => {
     switch (action.type) {
-        case 'SCHEDULE_OPTIONS': {
+        case 'SCHEDULE_DEFAULT_OPTIONS': {
             return Object.assign(...state, {
                 type: action.type,
-                options: action.options
+                optionsDefault: action.payload[1],
+                roomsDefault: action.payload[0]
             });
         }
 

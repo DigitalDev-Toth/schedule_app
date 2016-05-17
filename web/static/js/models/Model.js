@@ -45,6 +45,7 @@ export default class Model {
             }
         });
     }
+
     /*
     static getAllDocuments() {
         return new Promise((resolve, reject) => {

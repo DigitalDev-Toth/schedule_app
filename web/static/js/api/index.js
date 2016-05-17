@@ -1,5 +1,10 @@
-import Model from './Model';
+import { getDocuments } from './api.v1';
 
-export const API = {
-    Model
+/**
+ * Export API functions
+ */
+export default {
+    Documents: {
+        getDocuments
+    }
 };

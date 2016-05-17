@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 /**
  * Token authentication for access to Schedule, Api and Onlooker
  *
- * @return     {boolean}  { description_of_the_return_value }
+ * @return     {boolean}  The access result
  */
 let userAuth = () => {
     try {
