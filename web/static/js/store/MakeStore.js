@@ -15,7 +15,7 @@ const createStoreWithMiddleware = compose(
 /**
  * Prepare to creare and configure Redux Store
  */
-export default function configureStore(initialState) {
+export default function makeStore(initialState) {
     const store = createStoreWithMiddleware(GlobalReducers, initialState);
 
     if (module.hot) {

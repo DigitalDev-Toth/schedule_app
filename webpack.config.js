@@ -68,7 +68,7 @@ const loaders = [{
     include: PATHS.source
 }, {
     test: /\.(png|jpg)$/,
-    loader: 'url-loader?limit=8192&name=/assets/images/[name].[ext]'
+    loader: 'url-loader?limit=8192&name=/images/[name].[ext]'
 }, {
     test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
     loader: 'url?limit=10000&mimetype=application/font-woff&name=/fonts/[name].[ext]'
@@ -110,7 +110,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
     output.filename = 'js/schedule.js';
     loaders.push({
         test: /\.(scss|sass)$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'sass-loader'),
+        loader: ExtractTextPlugin.extract('style', 'css!sass'),
         include: PATHS.styles
     }, {
         test: /\.css$/,
@@ -124,16 +124,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
         }
     }));
     plugins.push(new ExtractTextPlugin('css/schedule.css'));
-    plugins.push(new CopyWebpackPlugin(
-        [{
-            from: PATHS.assets,
-            to: 'assets'
-        }], {
-            ignore: [
-                { glob: 'images/*', dot: true }
-            ]
-        }
-    ));
+    plugins.push(new CopyWebpackPlugin([{from: PATHS.assets}]));
     plugins.push(new webpack.DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify('production'),
@@ -158,14 +149,14 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
     output.filename = 'schedule.js';
     loaders.push({
         test: /\.(scss|sass)$/,
-        loader: 'style-loader!css-loader',
+        loader: 'style!css!sass',
         include: PATHS.styles
     }, {
         test: /\.css$/,
         loader: 'style!css'
     });
     modules.loaders = loaders;
-    modules.preLoaders = __DEVELOPMENT__ ? preLoaders: [];
+    modules.preLoaders = __DEVELOPMENT__ ? preLoaders : [];
     plugins.push(new webpack.HotModuleReplacementPlugin());
     /*plugins.push(new NpmInstallPlugin({
         save: true
@@ -177,13 +168,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
         inject: false,
         mobile: true
     }));
-    plugins.push(new CopyWebpackPlugin(
-        [{ from: PATHS.assets }], {
-            ignore: [
-                { glob: 'images/*', dot: true }
-            ]
-        }
-    ));
+    plugins.push(new CopyWebpackPlugin([{from: PATHS.assets}]));
     plugins.push(new webpack.DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify('dev'),
