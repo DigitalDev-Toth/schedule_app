@@ -1,19 +1,19 @@
 /**
- * Get the documents.
+ * Get the default documents.
  *
- * @param      {Array}  schemas  The schemas
- * @param      {Array}  docs     The docs
- * @param      {Object}  actions  The actions
+ * @param      {Array}     schemes             The schemes
+ * @param      {Array}     docs                The docs
+ * @param      {Function}  getScheduleOptions  The get schedule options
  */
-export let getDocuments = (schemas, docs, actions) => {
+export let getDefaultDocuments = (schemes, docs, getScheduleOptions) => {
     let promises = [];
 
-    for (let i = 0; i < schemas.length; i++) {
-        promises.push(schemas[i].getDocument(docs[i]));
+    for (let i = 0; i < schemes.length; i++) {
+        promises.push(schemes[i].getDocument(docs[i]));
     }
 
     Promise.all(promises)
-    .then(actions.getScheduleOptions)
+    .then(getScheduleOptions)
     .catch(error => {
         console.log('ERROR!!', error);
     });

@@ -38,9 +38,10 @@ class Schedule extends Component {
         const room = new Model('room');
         const options = new Model('options');
 
-        API.Documents.getDocuments(
+        API.Docs.getDefaultDocuments(
             [room, options],
-            ['1234', 'default'], this.props.actions);
+            ['1234', 'default'],
+            this.props.actions.getScheduleOptions);
     }
 
     /**

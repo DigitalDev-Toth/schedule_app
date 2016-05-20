@@ -5,9 +5,9 @@ import GlobalReducers from '../reducers';
 import DevTools from '../containers/DevTools';
 
 /**
- * Create Redux Store with Middlewares
+ * Create Redux Store with Middlewares and Plugins
  */
-const createStoreWithMiddleware = compose(
+const createStoreWithMiddlewaresAndPlugins = compose(
     applyMiddleware(thunkMiddleware),
     DevTools.instrument()
 )(createStore);
@@ -16,7 +16,8 @@ const createStoreWithMiddleware = compose(
  * Prepare to creare and configure Redux Store
  */
 export default function makeStore(initialState) {
-    const store = createStoreWithMiddleware(GlobalReducers, initialState);
+    const store =
+        createStoreWithMiddlewaresAndPlugins(GlobalReducers, initialState);
 
     if (module.hot) {
         module.hot.accept('../reducers', () =>

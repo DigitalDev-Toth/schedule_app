@@ -1,10 +1,10 @@
-import { getDocuments } from './api.v1';
+import { getDefaultDocuments } from './api.v1';
 
 /**
  * Export API functions
  */
 export default {
-    Documents: {
-        getDocuments
+    Docs: {
+        getDefaultDocuments
     }
 };
