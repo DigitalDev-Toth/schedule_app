@@ -50,14 +50,21 @@ class Schedule extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        console.log('default', this.props.optionsDefault, this.props.roomsDefault);
-
-        return (
-            <div>
-                <ScheduleToth />
-                <Notifier />
-            </div>
-        );
+        //console.log('default',this.props.optionsDefault,this.props.roomsDefault);
+        if (typeof this.props.optionsDefault == 'object' && !Object.keys(this.props.optionsDefault).length) {
+            return (
+                <div>
+                    <Notifier />
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <ScheduleToth optionsDefault={this.props.optionsDefault} roomsDefault={this.props.roomsDefault} />
+                    <Notifier />
+                </div>
+            );
+        }
     }
 }
 

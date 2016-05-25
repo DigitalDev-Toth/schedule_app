@@ -201,6 +201,9 @@ module.exports = {
     module: modules,
     postcss: postcss,
     devtool: devtool,
+    watchOptions: {
+      poll: true
+    },
     devServer: (__DEVELOPMENT__ || __TESTING__) ? devServer : undefined,
     plugins: plugins
 };

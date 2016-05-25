@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ReactGridLayout from 'react-grid-layout';
-import { WidthProvider } from 'react-grid-layout';
-
-const ReactGrid = WidthProvider(ReactGridLayout);
+import { Responsive, WidthProvider } from 'react-grid-layout';
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
+//import Schedule from '../../containers/Schedule.js';
 
 /**
  * SlotSchedule component
  */
+
 class SlotSchedule extends Component {
     /**
      * Basic React component constructor
@@ -15,6 +15,10 @@ class SlotSchedule extends Component {
      */
     constructor(props) {
         super(props);
+        this.state = {
+            optionsDefault: this.props.optionsDefault,
+            roomsDefault: this.props.roomsDefault
+        };
     }
 
     /**
@@ -22,27 +26,24 @@ class SlotSchedule extends Component {
      *
      * @return     {Object}  React DOM object
      */
-    render() {
-        let layout = [
-            { i: 'a', x: 0, y: 0, w: 2, h: 23, maxH: Infinity },
-            { i: 'b', x: 2, y: 0, w: 2, h: 23, maxH: Infinity },
-            { i: 'c', x: 4, y: 0, w: 2, h: 23, maxH: Infinity },
-            { i: 'd', x: 6, y: 0, w: 2, h: 23, maxH: Infinity },
-            { i: 'e', x: 8, y: 0, w: 2, h: 23, maxH: Infinity },
-            { i: 'f', x: 10, y: 0, w: 2, h: 23, maxH: Infinity },
-            { i: 'g', x: 12, y: 0, w: 2, h: 23, maxH: Infinity }
-        ];
+    componentDidMount() {
 
+    }
+    render() {
+        let optionsDefault = this.state.optionsDefault;
+        //let roomsDefault = this.state.roomsDefault;
+        let columsLength = optionsDefault.options.days_of_week.length;
         return (
-            <ReactGrid className='layout' layout={layout} cols={14} rowHeight={30.5} width={1880}>
-                <div className='slot' key={'a'}>a</div>
-                <div className='slot' key={'b'}>b</div>
-                <div className='slot' key={'c'}>c</div>
-                <div className='slot' key={'d'}>d</div>
-                <div className='slot' key={'e'}>e</div>
-                <div className='slot' key={'f'}>f</div>
-                <div className='slot' key={'g'}>g</div>
-            </ReactGrid>
+                <ResponsiveReactGridLayout className='layout' rowHeight={850}
+                        breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+                        cols={{lg: columsLength, md: columsLength, sm: columsLength, xs: columsLength, xxs: columsLength}}>
+                        {optionsDefault.options.days_of_week.map(this.renderTopCell, this)}
+                </ResponsiveReactGridLayout>
+        );
+    }
+    renderTopCell(options,data) {
+        return (
+            <div key={options} _grid={{x: data, y: 0, w: 1, h: 1, maxW: 2}} className='slot'>{options}</div>
         );
     }
 }

@@ -12,6 +12,10 @@ class ScheduleGrid extends Component {
      */
     constructor(props) {
         super(props);
+        this.state = {
+            optionsDefault: this.props.optionsDefault,
+            roomsDefault: this.props.roomsDefault
+        };
     }
 
     /**
@@ -23,7 +27,7 @@ class ScheduleGrid extends Component {
         return (
             <div className='text-center' >
                 <div>
-                    <SlotSchedule />
+                    <SlotSchedule optionsDefault={this.props.optionsDefault} roomsDefault={this.props.roomsDefault}/>
                 </div>
             </div>
         );

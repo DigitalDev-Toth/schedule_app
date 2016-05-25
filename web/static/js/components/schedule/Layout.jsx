@@ -18,7 +18,10 @@ class Layout extends Component {
      */
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            optionsDefault: this.props.optionsDefault,
+            roomsDefault: this.props.roomsDefault
+        };
     }
     /*componentDidMount() {
         this.getState().then((value) => {
@@ -56,7 +59,7 @@ class Layout extends Component {
         return (
             <Grid type='container-fluid'>
                 <Header />
-                <ScheduleGrid />
+                <ScheduleGrid optionsDefault={this.state.optionsDefault} roomsDefault={this.state.roomsDefault} />
             </Grid>
         );
     }

@@ -12,8 +12,11 @@ class ScheduleToth extends Component {
      */
     constructor(props) {
         super(props);
+        this.state = {
+            optionsDefault: this.props.optionsDefault,
+            roomsDefault: this.props.roomsDefault
+        };
     }
-
     /**
      * React DOM rendering
      *
@@ -21,7 +24,7 @@ class ScheduleToth extends Component {
      */
     render() {
         return (
-            <Layout />
+            <Layout optionsDefault={this.state.optionsDefault} roomsDefault={this.state.roomsDefault}/>
         );
     }
 }
