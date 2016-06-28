@@ -17,8 +17,6 @@ const defaultHeaders = {
  * @return     {Object}  The headers.
  */
 let buildHeaders = () => {
-    const token = localStorage.getItem('token');
-
     return {
         ...defaultHeaders,
         Authorization: getToken()
@@ -64,7 +62,7 @@ export let getRequest = (url) => {
         headers: buildHeaders()
     })
     .then(checkStatus)
-    .then(parseJSON)
+    .then(parseJSON);
 };
 
 /**
@@ -80,10 +78,10 @@ export let postRequest = (url, data) => {
     return fetch(url, {
         method: 'post',
         headers: buildHeaders(),
-        body: body
+        body
     })
     .then(checkStatus)
-    .then(parseJSON)
+    .then(parseJSON);
 };
 
 /**
@@ -98,5 +96,5 @@ export let deleteRequest = (url) => {
         headers: buildHeaders()
     })
     .then(checkStatus)
-    .then(parseJSON)
+    .then(parseJSON);
 };

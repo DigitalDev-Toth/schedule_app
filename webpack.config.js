@@ -104,7 +104,7 @@ const preLoaders = [{
     include: PATHS.source
 }];
 
-const devServer = undefined;
+var devServer = undefined;
 
 const watchOptions = {
     poll: true

@@ -30,5 +30,5 @@ export let ChannelInitialState = () => {
 export let LookerInitialState = () => {
     return {
         users: undefined
-    }
+    };
 };

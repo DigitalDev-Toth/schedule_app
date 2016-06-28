@@ -1,5 +1,5 @@
 import Model from '../models/Model';
-import { postRequest, deleteRequest } from '../helpers/requests';
+import { postRequest } from '../helpers/requests';
 import { login, getToken, getUserId, getUserFullName } from '../helpers/Auth';
 
 /**
@@ -19,8 +19,8 @@ export let authenticate = (nextState, replace, next, token, username) => {
     .then(user => {
         const data = {
             session: {
-                token: token,
-                user: user
+                token,
+                user
             }
         };
 

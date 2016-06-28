@@ -1,5 +1,4 @@
 import API from '../api';
-import { getRequest, postRequest, deleteRequest } from './requests';
 
 const _TOKEN_ = 'token';
 const _USER_ID_ = 'user';

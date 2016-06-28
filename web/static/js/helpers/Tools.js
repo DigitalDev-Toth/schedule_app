@@ -39,4 +39,4 @@ export let getModuleName = () => {
     const module = window.module ? window.module : undefined;
 
     return module;
-}
+};
