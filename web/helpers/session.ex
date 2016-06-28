@@ -1,4 +1,13 @@
 defmodule ScheduleApp.Session do
+
+    ##
+    ## @brief      Authenticate
+    ##
+    ## @param      token  The token
+    ## @param      user   The user
+    ##
+    ## @return     The authentication result
+    ##
     def authenticate(%{"token" => token, "user" => user}) do
         {:ok, %{username: username, password: password}} =
             JsonWebToken.verify(token, %{key: "gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr9C"})
