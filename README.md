@@ -68,14 +68,10 @@ $ PORT=4001 MIX_ENV=prod elixir --detached -S mix do compile, phoenix.server
 
 STRIDER CI-CD PHASES
 ---
-### ENVIRONMENT
-```
-npm install
-```
-
 ### PREPARE
 ```
 /home/toth/.asdf/shims/mix deps.get
+npm install
 sh /etc/init.d/xvfb start && 
 npm run testing & 
 sleep 30s 
