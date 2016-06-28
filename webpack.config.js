@@ -161,7 +161,7 @@ if (__PRODUCTION__ || __DEVFULLSTACK__) {
         loader: 'style!css'
     });
     modules.loaders = loaders;
-    modules.preLoaders = __DEVELOPMENT__ ? preLoaders : [];
+    modules.preLoaders = __DEVFRONTEND__ ? preLoaders : [];
     plugins.push(new webpack.HotModuleReplacementPlugin());
     plugins.push(new HtmlWebpackPlugin({
         title: 'Toth Schedule App',

@@ -1,4 +1,4 @@
-TOTH SCHEDULE MODULE
+TOTH SCHEDULE APP
 ===
 
 INSTALL
@@ -6,7 +6,7 @@ INSTALL
 - Get `Erlang`, `Elixir` and `NodeJS` (`asdf`, `nvm`)
 - Get it:
 ```
-$ git clone git@github.com:DigitalDev-Toth/schedule.git
+$ git clone git@github.com:DigitalDev-Toth/schedule_app.git
 $ cd schedule
 ```
 - Dependencies:
