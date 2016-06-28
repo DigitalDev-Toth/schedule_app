@@ -1,3 +1,3 @@
-defmodule Schedule.LayoutView do
-    use Schedule.Web, :view
+defmodule ScheduleApp.LayoutView do
+    use ScheduleApp.Web, :view
 end

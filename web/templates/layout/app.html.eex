@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
-  	<head>
-	    <meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="author" content="Toth Limitada">
-        <meta name="description" content="Toth schedule module">
-    	<title>Toth Schedule Module</title>
-    	<link rel="stylesheet" href="<%= static_path(@conn, "/css/schedule.css") %>">
-  	</head>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-  	<body class="app">
+        <title>Toth Schedule App</title>
+        <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    </head>
+
+    <body>
         <%= render @view_module, @view_template, assigns %>
-    	<script src="<%= static_path(@conn, "/js/schedule.js") %>"></script>
-  	</body>
+
+        <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    </body>
 </html>

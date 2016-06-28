@@ -1,0 +1,7 @@
+<script type="text/javascript">
+    window.module = '<%= @module %>';
+    window.token = '<%= @token %>';
+    window.username = '<%= @username %>';
+</script>
+
+<div id="app"></div>

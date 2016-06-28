@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const AppCachePlugin = require('appcache-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
@@ -12,9 +11,9 @@ const precss = require('precss');
 const csswring = require('csswring');
 
 const MODE_ENV = process.env.MODE_ENV;
-const __DEPLOYMENT__ = MODE_ENV === 'deploy';
-const __PRODUCTION__ = MODE_ENV === 'prod';
-const __DEVELOPMENT__ = MODE_ENV === 'dev';
+const __PRODUCTION__ = MODE_ENV === 'production';
+const __DEVFULLSTACK__ = MODE_ENV === 'devfullstack';
+const __DEVFRONTEND__ = MODE_ENV === 'devfrontend';
 const __TESTING__ = MODE_ENV === 'testing';
 
 const PATHS = {
@@ -90,7 +89,7 @@ const postcss = function() {
     return [autoprefixer, precss, csswring]
 };
 
-const devtool = (__DEVELOPMENT__ || __TESTING__) ? 'source-map' : 'source-map';
+const devtool = (__DEVFRONTEND__ || __TESTING__) ? 'source-map' : 'source-map';
 
 const plugins = [
     new webpack.ProvidePlugin({
@@ -105,9 +104,15 @@ const preLoaders = [{
     include: PATHS.source
 }];
 
-if (__DEPLOYMENT__ || __PRODUCTION__) {
+const devServer = undefined;
+
+const watchOptions = {
+    poll: true
+};
+
+if (__PRODUCTION__ || __DEVFULLSTACK__) {
     output.path = PATHS.production;
-    output.filename = 'js/schedule.js';
+    output.filename = 'js/app.js';
     loaders.push({
         test: /\.(scss|sass)$/,
         loader: ExtractTextPlugin.extract('style', 'css!sass'),
@@ -123,14 +128,14 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
             warnings: false
         }
     }));
-    plugins.push(new ExtractTextPlugin('css/schedule.css'));
+    plugins.push(new ExtractTextPlugin('css/app.css'));
     plugins.push(new CopyWebpackPlugin([{from: PATHS.assets}]));
     plugins.push(new webpack.DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify('production'),
-            __DEPLOYMENT__: __DEPLOYMENT__,
             __PRODUCTION__: __PRODUCTION__,
-            __DEVELOPMENT__: __DEVELOPMENT__,
+            __DEVFULLSTACK__: __DEVFULLSTACK__,
+            __DEVFRONTEND__: __DEVFRONTEND__,
             __TESTING__: __TESTING__
         }
     }));
@@ -146,7 +151,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
     }));*/
 } else {
     output.path = PATHS.development;
-    output.filename = 'schedule.js';
+    output.filename = 'app.js';
     loaders.push({
         test: /\.(scss|sass)$/,
         loader: 'style!css!sass',
@@ -158,13 +163,10 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
     modules.loaders = loaders;
     modules.preLoaders = __DEVELOPMENT__ ? preLoaders : [];
     plugins.push(new webpack.HotModuleReplacementPlugin());
-    /*plugins.push(new NpmInstallPlugin({
-        save: true
-    }));*/
     plugins.push(new HtmlWebpackPlugin({
-        title: 'Toth Schedule Module',
+        title: 'Toth Schedule App',
         template: PATHS.template,
-        appMountId: 'schedule',
+        appMountId: 'schedule_app',
         inject: false,
         mobile: true
     }));
@@ -172,26 +174,26 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
     plugins.push(new webpack.DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify('dev'),
-            __DEPLOYMENT__: __DEPLOYMENT__,
             __PRODUCTION__: __PRODUCTION__,
-            __DEVELOPMENT__: __DEVELOPMENT__,
+            __DEVFULLSTACK__: __DEVFULLSTACK__,
+            __DEVFRONTEND__: __DEVFRONTEND__,
             __TESTING__: __TESTING__
         }
     }));
-}
 
-const devServer = {
-    contentBase: PATHS.development,
-    outputPath: PATHS.development,
-    stats: 'errors-only',
-    progress: true,
-    colors: true,
-    host: '0.0.0.0',
-    port: 3000,
-    hot: true,
-    inline: true,
-    historyApiFallback: true
-};
+    devServer = {
+        contentBase: PATHS.development,
+        outputPath: PATHS.development,
+        stats: 'errors-only',
+        progress: true,
+        colors: true,
+        host: '0.0.0.0',
+        port: 3000,
+        hot: true,
+        inline: true,
+        historyApiFallback: true
+    };
+}
 
 module.exports = {
     node: node,
@@ -201,9 +203,7 @@ module.exports = {
     module: modules,
     postcss: postcss,
     devtool: devtool,
-    watchOptions: {
-      poll: true
-    },
-    devServer: (__DEVELOPMENT__ || __TESTING__) ? devServer : undefined,
+    watchOptions: watchOptions,
+    devServer: devServer,
     plugins: plugins
 };

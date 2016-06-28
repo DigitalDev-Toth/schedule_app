@@ -1,44 +1,38 @@
-/*import { API } from '../api';*/
-
 /**
- * Redux Action
+ * Update instance.
  *
- * Get schedule options for draw it
+ * @param      {Object}  payload  The payload
+ * @return     {Object}  The instance.
  */
-export let getScheduleOptions = (payload) => {
+export let updateInstance = (payload) => {
     return {
-        type: 'SCHEDULE_DEFAULT_OPTIONS',
+        type: 'UPDATE_INSTANCE',
         payload
     };
 };
 
 /**
- * Redux Action
+ * Notification.
  *
- * Get the user entered by channel event
+ * @param      {String}  payload  The payload
+ * @return     {Object}  The message.
  */
-export let getScheduleUserEntered = (user) => {
-    let message = `Bienvenido ${user}`;
-
-    if (user !== 'toth') {
-        message = `El usuario ${user} se ha conectado`;
-    }
-
+export let notification = (payload) => {
     return {
-        type: 'SCHEDULE_USER_ENTERED',
-        user,
-        message
+        type: 'NOTIFICATION',
+        payload
     };
 };
 
 /**
- * Redux Action
+ * Load default data.
  *
- * Show the list of users connected by channels
+ * @param      {Object}  payload  The payload
+ * @return     {Object}  The default data.
  */
-export let showScheduleOnlookerUserRemote = (usersRemote) => {
+export let loadDefaultData = (payload) => {
     return {
-        type: 'SCHEDULE_USER_REMOTE',
-        usersRemote
+        type: 'LOAD_DEFAULT_DATA',
+        payload
     };
 };

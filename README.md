@@ -20,6 +20,8 @@ $ selenium-standalone install
 HOW TO USE IT
 ---
 ### DEVELOPMENT
+
+#### DEVFRONTEND
 Run the Selenium-Standalone server
 ```
 $ selenium-standalone start
@@ -34,13 +36,13 @@ $ npm run test:units
 $ npm run test:features
 ```
 
-### PRODUCTION
+#### DEVFULLSTACK
 Build assets and start the production server
 ```
-$ MODE_ENV=prod mix phoenix.server
+$ MODE_ENV=devfullstack mix phoenix.server
 ```
 
-### DEPLOYMENT
+### PRODUCTION
 Initial setup
 ```
 $ mix deps.get --only prod
@@ -48,7 +50,7 @@ $ MIX_ENV=prod mix compile
 ```
 Compile assets
 ```
-$ npm run deploy
+$ npm run production
 $ MIX_ENV=prod mix phoenix.digest
 ```
 Finally run the server

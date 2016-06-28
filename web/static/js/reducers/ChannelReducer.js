@@ -1,27 +1,26 @@
-const InitialState = {
-    user: '',
-    usersRemote: []
-};
+import { ChannelInitialState } from '../helpers/InitialState';
 
 /**
- * Redux Reducer
+ * Channel reducer
  *
- * Set the Schedule Channel actions to Redux Store
+ * @param      {Object}  state   The state
+ * @param      {Object}  action  The action
+ * @return     {Object}  The next state
  */
-export let getScheduleChannelReducer = (state = InitialState, action) => {
+let channelReducer = (state = ChannelInitialState(), action) => {
     switch (action.type) {
-        case 'SCHEDULE_USER_ENTERED': {
+        case 'UPDATE_INSTANCE': {
             return Object.assign(...state, {
                 type: action.type,
-                user: action.user,
-                message: action.message
+                instance: action.payload
             });
         }
 
-        case 'SCHEDULE_USER_REMOTE': {
+        case 'NOTIFICATION': {
             return Object.assign(...state, {
                 type: action.type,
-                usersRemote: action.usersRemote
+                instance: state.instance,
+                message: action.payload
             });
         }
 
@@ -30,3 +29,5 @@ export let getScheduleChannelReducer = (state = InitialState, action) => {
         }
     }
 };
+
+export default channelReducer;

@@ -10,9 +10,9 @@ const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
 
 /**
- * Onlooker container
+ * Looker container
  */
-class Onlooker extends Component {
+class Looker extends Component {
     /**
      * Basic React component constructor
      *
@@ -92,7 +92,7 @@ class Onlooker extends Component {
 /**
  * React properties types definitions
  */
-Onlooker.propTypes = {
+Looker.propTypes = {
     channel: PropTypes.any,
     usersRemote: PropTypes.any
 };
@@ -100,7 +100,7 @@ Onlooker.propTypes = {
 /**
  * Material-UI context types
  */
-Onlooker.childContextTypes = {
+Looker.childContextTypes = {
     muiTheme: React.PropTypes.object.isRequired
 };
 
@@ -136,4 +136,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Onlooker);
+)(Looker);

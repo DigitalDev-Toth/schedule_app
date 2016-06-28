@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 export default function() {
-    this.Given(/^I am on the Toth Schedule Module page$/, function(next) {
+    this.Given(/^I am on the Toth Schedule App page$/, function(next) {
         this.driver
             .url('http://localhost:3000')
             .call(next);

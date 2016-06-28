@@ -1,11 +1,83 @@
+import Model from '../models/Model';
+import { postRequest, deleteRequest } from '../helpers/requests';
+import { login, getToken, getUserId, getUserFullName } from '../helpers/Auth';
+
+/**
+ * Authenticate
+ *
+ * @param      {Object}    nextState  The next state
+ * @param      {Function}  replace    The replace
+ * @param      {Function}  next       The next
+ * @param      {String}    token      The token
+ * @param      {String}    username   The username
+ */
+export let authenticate = (nextState, replace, next, token, username) => {
+    const scheme = new Model('user');
+    const doc = username;
+
+    scheme.getDocument(doc)
+    .then(user => {
+        const data = {
+            session: {
+                token: token,
+                user: user
+            }
+        };
+
+        postRequest('/api/v1/auth/sessions', data)
+        .then(result => {
+            login(nextState, replace, next, result);
+        })
+        .catch(error => {
+            console.log('AUTH ERROR', error);
+            const result = {
+                error: 'invalid auth'
+            };
+
+            login(nextState, replace, next, result);
+        });
+    })
+    .catch(error => {
+        console.log('USER ERROR', error);
+        const result = {
+            error: 'invalid user'
+        };
+
+        login(nextState, replace, next, result);
+    });
+};
+
+/**
+ * Welcome
+ */
+export let welcome = () => {
+    const data = {
+        token: getToken(),
+        id: getUserId(),
+        name: getUserFullName()
+    };
+    let promises = [
+        postRequest('/api/v1/message/welcome', data),
+        postRequest('/api/v1/message/entered', data)
+    ];
+
+    Promise.all(promises)
+    .then(() => {
+        /*console.log('WELCOME RESPONSE', response);*/
+    })
+    .catch(error => {
+        console.log('WELCOME ERROR', error);
+    });
+};
+
 /**
  * Get the default documents.
  *
- * @param      {Array}     schemes             The schemes
- * @param      {Array}     docs                The docs
- * @param      {Function}  getScheduleOptions  The get schedule options
+ * @param      {Function}  loadDefaultData  The load default data
  */
-export let getDefaultDocuments = (schemes, docs, getScheduleOptions) => {
+export let getDefaultDocuments = (loadDefaultData) => {
+    const schemes = [new Model('room'), new Model('options')];
+    const docs = ['1234', 'default'];
     let promises = [];
 
     for (let i = 0; i < schemes.length; i++) {
@@ -13,8 +85,8 @@ export let getDefaultDocuments = (schemes, docs, getScheduleOptions) => {
     }
 
     Promise.all(promises)
-    .then(getScheduleOptions)
+    .then(loadDefaultData)
     .catch(error => {
-        console.log('ERROR!!', error);
+        console.log('DEFAULT ERROR', error);
     });
 };

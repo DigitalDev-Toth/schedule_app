@@ -1,7 +1,7 @@
-defmodule Schedule.ErrorView do
-    use Schedule.Web, :view
+defmodule ScheduleApp.ErrorView do
+    use ScheduleApp.Web, :view
 
-    def render(:not_found, _assigns) do
+    def render("404.html", _assigns) do
         "Page not found"
     end
 
@@ -9,8 +9,6 @@ defmodule Schedule.ErrorView do
         "Server internal error"
     end
 
-    # In case no render clause matches or no
-    # template is found, let's render it as 500
     def template_not_found(_template, assigns) do
         render "500.html", assigns
     end

@@ -7,51 +7,39 @@ import { Provider } from 'react-redux';
 import MakeStore from './store/MakeStore';
 import App from './containers/App';
 import Schedule from './containers/Schedule';
-import Onlooker from './containers/Onlooker';
-import Api from './containers/Api';
+import Looker from './containers/Looker';
+/*import Api from './containers/Api';*/
 import DevTools from './containers/DevTools';
 import NotFound from './components/error/NotFound';
 import Forbidden from './components/error/Forbidden';
-import userAuth from './utilities/Auth';
+import { authorization } from './helpers/Auth';
 import '../images/ren_y_stimpy.jpg';
 
-const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
-const __PRODUCTION__ = process.env.__PRODUCTION__;
+const __PRODUCTION__ = process.env.__DEPLOYMENT__;
+const __DEVFULLSTACK__ = process.env.__DEVFULLSTACK__;
 const __TESTING__ = process.env.__TESTING__;
 const store = MakeStore();
 const history = syncHistoryWithStore(browserHistory, store);
-const auth = userAuth();
-const ScheduleAccess = auth ? Schedule : Forbidden;
-const OnlookerAccess = auth ? Onlooker : Forbidden;
-const ApiAccess = auth ? Api : Forbidden;
 
 /**
  * Routing
  */
-if (__DEPLOYMENT__ || __PRODUCTION__) {
+if (__PRODUCTION__ || __DEVFULLSTACK__) {
     render(
         <div>
             <Provider store={store}>
                 <Router history={history}>
-                    <Redirect from='/schedule' to='/' />
                     <Route path='/' component={App}>
-                        <IndexRoute component={Forbidden} />
-                        <Route path='schedule'>
-                            <Route path=':token' component={ScheduleAccess} />
-                        </Route>
-                        <Route path='onlooker' component={Forbidden} />
-                        <Route path='onlooker'>
-                            <Route path=':token' component={OnlookerAccess} />
-                        </Route>
-                        <Route path='api'>
-                            <Route path='v1' component={ApiAccess} />
-                        </Route>
+                        <IndexRoute component={Schedule} onEnter={authorization} />
+                        <Route path='schedule/:token' component={Schedule} onEnter={authorization} />
+                        <Route path='looker/:token' component={Looker} onEnter={authorization} />
+                        <Route path='error' component={Forbidden} />
                         <Route path='*' component={NotFound} />
                     </Route>
                 </Router>
             </Provider>
             { (() => {
-                if (!__DEPLOYMENT__ && !__TESTING__) {
+                if (!__PRODUCTION__ && !__TESTING__) {
                     return (
                         <Provider store={store}>
                             <DevTools />
@@ -60,7 +48,7 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
                 }
             })() }
         </div>,
-        document.getElementById('schedule')
+        document.getElementById('app')
     );
 } else {
     render(
@@ -70,16 +58,13 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
                     <Redirect from='/schedule' to='/' />
                     <Route path='/' component={App}>
                         <IndexRoute component={Schedule} />
-                        <Route path='onlooker' component={Onlooker} />
-                        <Route path='api'>
-                            <Route path='v1' component={Api} />
-                        </Route>
+                        <Route path='looker' component={Looker} />
                         <Route path='*' component={NotFound} />
                     </Route>
                 </Router>
             </Provider>
             { (() => {
-                if (!__DEPLOYMENT__ && !__TESTING__) {
+                if (!__PRODUCTION__ && !__TESTING__) {
                     return (
                         <Provider store={store}>
                             <DevTools />
@@ -88,6 +73,6 @@ if (__DEPLOYMENT__ || __PRODUCTION__) {
                 }
             })() }
         </div>,
-        document.getElementById('schedule')
+        document.getElementById('app')
     );
 }

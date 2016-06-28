@@ -5,11 +5,12 @@ import * as scheduleActions from '../actions';
 import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
 import ScheduleToth from '../components/schedule/ScheduleToth';
-import Model from '../models/Model';
 import API from '../api';
+import { getUserId } from '../helpers/Auth';
+import { checkInstance } from '../helpers/Tools';
 
-const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
+const __DEVFULLSTACK__ = process.env.__DEVFULLSTACK__;
 
 /**
  * Schedule container
@@ -26,22 +27,36 @@ class Schedule extends Component {
     }
 
     /**
-     * React component did mount
+     * React component did mount callback
      */
     componentDidMount() {
-        if (__DEPLOYMENT__ || __PRODUCTION__) {
-            this.props.channel.on('schedule:user_entered', () => {
-                this.props.channel.push('schedule:onlooker', {onlooker: true});
+        const actions = this.props.actions;
+
+        if (__PRODUCTION__ || __DEVFULLSTACK__) {
+            const pathname = this.props.location.pathname;
+            const userId = getUserId();
+            const {instance, result} = checkInstance(pathname, this.props.instance);
+
+            if (result) {
+                actions.updateInstance(instance);
+            }
+
+            API.Auth.welcome();
+
+            instance.on(`welcome__${userId}`, (payload) => {
+                if (userId === payload.id) {
+                    actions.notification(payload.message);
+                }
+            });
+
+            instance.on('entered', (payload) => {
+                if (userId !== payload.id) {
+                    actions.notification(payload.message);
+                }
             });
         }
 
-        const room = new Model('room');
-        const options = new Model('options');
-
-        API.Docs.getDefaultDocuments(
-            [room, options],
-            ['1234', 'default'],
-            this.props.actions.getScheduleOptions);
+        API.Docs.getDefaultDocuments(actions.loadDefaultData);
     }
 
     /**
@@ -51,17 +66,17 @@ class Schedule extends Component {
      */
     render() {
         //console.log('default',this.props.optionsDefault,this.props.roomsDefault);
-        if (typeof this.props.optionsDefault == 'object' && !Object.keys(this.props.optionsDefault).length) {
+        if (typeof this.props.options == 'object' && !Object.keys(this.props.options).length) {
             return (
                 <div>
-                    <Notifier />
+                    WOOOOOOOOOOOOLA
                 </div>
             );
         } else {
             return (
                 <div>
-                    <ScheduleToth optionsDefault={this.props.optionsDefault} roomsDefault={this.props.roomsDefault} />
                     <Notifier />
+                    <ScheduleToth optionsDefault={this.props.options} roomsDefault={this.props.rooms} />
                 </div>
             );
         }
@@ -72,10 +87,9 @@ class Schedule extends Component {
  * React properties types definitions
  */
 Schedule.propTypes = {
-    channel: PropTypes.any,
-    userEntered: PropTypes.any,
-    optionsDefault: PropTypes.any,
-    roomsDefault: PropTypes.any
+    instance: PropTypes.any,
+    options: PropTypes.any,
+    rooms: PropTypes.any
 };
 
 /**
@@ -86,10 +100,9 @@ Schedule.propTypes = {
  */
 const mapStateToProps = (state) => {
     return {
-        channel: state.ScheduleOptions.channel,
-        userEntered: state.ScheduleChannel.user,
-        optionsDefault: state.ScheduleOptions.optionsDefault,
-        roomsDefault: state.ScheduleOptions.roomsDefault,
+        instance: state.Channel.instance,
+        options: state.Default.options,
+        rooms: state.Default.rooms,
         state
     };
 };
