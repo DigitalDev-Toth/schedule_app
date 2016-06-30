@@ -1,6 +1,13 @@
 import Model from '../models/Model';
 import { postRequest } from '../helpers/requests';
-import { login, getToken, getUserId, getUserFullName } from '../helpers/Auth';
+import {
+    login,
+    getToken,
+    getAdminToken,
+    getUserId,
+    getUserName,
+    getUserFullName
+} from '../helpers/Auth';
 
 /**
  * Authenticate
@@ -62,11 +69,48 @@ export let welcome = () => {
     ];
 
     Promise.all(promises)
-    .then(() => {
-        /*console.log('WELCOME RESPONSE', response);*/
-    })
+    .then(() => {})
     .catch(error => {
         console.log('WELCOME ERROR', error);
+    });
+};
+
+/**
+ * Gets the remote users.
+ *
+ * @param      {Function}  loadRemoteUsers  The load remote users
+ */
+export let getRemoteUsers = (loadRemoteUsers) => {
+    const data = {
+        toke: getToken(),
+        admin: getAdminToken()
+    };
+
+    postRequest('/api/v1/remote/get_users', data)
+    .then(result => {
+        console.log('api', result);
+        loadRemoteUsers(result.users);
+    })
+    .catch(error => {
+        console.log('GET REMOTE USERS ERROR', error);
+    });
+};
+
+/**
+ * Sets the remote user.
+ */
+export let setRemoteUser = () => {
+    const data = {
+        token: getToken(),
+        id: getUserId(),
+        username: getUserName(),
+        name: getUserFullName()
+    };
+
+    postRequest('/api/v1/remote/set_user', data)
+    .then(() => {})
+    .catch(error => {
+        console.log('SET REMOTE USER ERROR', error);
     });
 };
 

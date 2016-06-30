@@ -16,9 +16,17 @@ defmodule ScheduleApp.SessionController do
             {:ok, user} ->
                 {:ok, token, _full_claims} = Guardian.encode_and_sign(user["_id"], :token)
 
-                conn
-                |> put_status(:created)
-                |> render("show.json", token: token, user: user)
+                if user["role"] == 0 do
+                    {:ok, admin, _full_claims} = Guardian.encode_and_sign(token, :token)
+
+                    conn
+                    |> put_status(:created)
+                    |> render("admin.json", token: token, admin: admin, user: user)
+                else
+                    conn
+                    |> put_status(:created)
+                    |> render("show.json", token: token, user: user)
+                end
             :error ->
                 conn
                 |> put_status(:unprocessable_entity)

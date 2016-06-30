@@ -6,7 +6,7 @@ defmodule ScheduleApp.Session do
     ## @param      token  The token
     ## @param      user   The user
     ##
-    ## @return     The authentication result
+    ## @return     The authenticate result
     ##
     def authenticate(%{"token" => token, "user" => user}) do
         {:ok, %{username: username, password: password}} =

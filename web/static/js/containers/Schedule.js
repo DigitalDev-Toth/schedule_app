@@ -2,12 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
-import Notifier from './Notifier';
-/*import Main from '../components/Main';*/
-import ScheduleToth from '../components/schedule/ScheduleToth';
 import API from '../api';
 import { getUserId } from '../helpers/Auth';
 import { checkInstance } from '../helpers/Tools';
+import Notifier from './Notifier';
+/*import Main from '../components/Main';*/
+import ScheduleToth from '../components/schedule/ScheduleToth';
+import CircularProgress from 'material-ui/CircularProgress';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const __PRODUCTION__ = process.env.__PRODUCTION__;
 const __DEVFULLSTACK__ = process.env.__DEVFULLSTACK__;
@@ -42,14 +45,15 @@ class Schedule extends Component {
             }
 
             API.Auth.welcome();
+            API.Remote.setRemoteUser();
 
-            instance.on(`welcome__${userId}`, (payload) => {
+            instance.on(`welcome__${userId}`, payload => {
                 if (userId === payload.id) {
                     actions.notification(payload.message);
                 }
             });
 
-            instance.on('entered', (payload) => {
+            instance.on('entered', payload => {
                 if (userId !== payload.id) {
                     actions.notification(payload.message);
                 }
@@ -57,6 +61,10 @@ class Schedule extends Component {
         }
 
         API.Docs.getDefaultDocuments(actions.loadDefaultData);
+    }
+
+    getChildContext() {
+        return {muiTheme: getMuiTheme(baseTheme)};
     }
 
     /**
@@ -68,8 +76,10 @@ class Schedule extends Component {
         //console.log('default',this.props.optionsDefault,this.props.roomsDefault);
         if (typeof this.props.options == 'object' && !Object.keys(this.props.options).length) {
             return (
-                <div>
-                    WOOOOOOOOOOOOLA
+                <div className='loading text-center'>
+                    <div className='cell'>
+                        <CircularProgress size={2} />
+                    </div>
                 </div>
             );
         } else {
@@ -90,6 +100,13 @@ Schedule.propTypes = {
     instance: PropTypes.any,
     options: PropTypes.any,
     rooms: PropTypes.any
+};
+
+/**
+ * Material UI context types definitions
+ */
+Schedule.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
 };
 
 /**

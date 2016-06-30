@@ -5,7 +5,9 @@ defmodule ScheduleApp do
         import Supervisor.Spec, warn: false
 
         children = [
-            supervisor(ScheduleApp.Endpoint, [])
+            supervisor(ScheduleApp.Endpoint, []),
+
+            worker(ScheduleApp.RemoteUsers, [[name: :remote_users]]),
         ]
 
         opts = [strategy: :one_for_one, name: ScheduleApp.Supervisor]

@@ -34,6 +34,8 @@ defmodule ScheduleApp.Router do
             delete  "/auth/sessions", SessionController, :delete
             post    "/message/welcome", MessageController, :welcome
             post    "/message/entered", MessageController, :entered
+            post    "/remote/get_users", RemoteController, :get_users
+            post    "/remote/set_user", RemoteController, :set_user
         end
     end
 end

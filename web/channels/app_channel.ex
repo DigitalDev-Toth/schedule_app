@@ -4,13 +4,13 @@ defmodule ScheduleApp.AppChannel do
     ##
     ## @brief      Join to topic/module schedule
     ##
-    ## @param      _payload  The payload
+    ## @param      payload  The payload
     ## @param      socket    The socket
     ##
     ## @return     The status
     ##
-    def join("module:schedule", _payload, socket) do
-        # send(self, {:after_join, payload})
+    def join("module:schedule", payload, socket) do
+        socket = assign(socket, :key, payload["key"])
 
         {:ok, socket}
     end
@@ -51,5 +51,36 @@ defmodule ScheduleApp.AppChannel do
             "module:schedule",
             "entered",
             %{id: id, message: message})
+    end
+
+    ##
+    ## @brief      Remote users
+    ##
+    ## @param      users  The users
+    ##
+    def remote_users(users) do
+        ScheduleApp.Endpoint.broadcast!(
+            "module:looker",
+            "remote_users",
+            %{users: users})
+    end
+
+    ##
+    ## @brief      Terminate
+    ##
+    ## @param      _reason  The reason
+    ## @param      socket   The socket
+    ##
+    def terminate(_reason, socket) do
+        topic = socket.topic
+
+
+        if topic == "module:schedule" do
+            key = socket.assigns.key
+
+            ScheduleApp.Looker.delete_user(key)
+        end
+
+        :ok
     end
 end

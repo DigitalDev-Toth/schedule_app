@@ -10,6 +10,16 @@ defmodule ScheduleApp.SessionView do
         }
     end
 
+    def render("admin.json", %{token: token, admin: admin, user: user}) do
+        %{
+            token: token,
+            admin: admin,
+            user: Enum.at(String.split(user["_id"], "/"), 1),
+            username: Enum.at(String.split(user["_id"], "/"), 1),
+            name: user["name"]
+        }
+    end
+
     def render("error.json", _) do
         %{error: "invalid token"}
     end

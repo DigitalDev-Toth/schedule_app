@@ -2,12 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
+import API from '../api';
+import { getUserId } from '../helpers/Auth';
+import { checkInstance } from '../helpers/Tools';
 import { Grid, Row, Col } from '../components/box/Container';
 import { Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody } from 'material-ui';
+import CircularProgress from 'material-ui/CircularProgress';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-const __DEPLOYMENT__ = process.env.__DEPLOYMENT__;
 const __PRODUCTION__ = process.env.__PRODUCTION__;
+const __DEVFULLSTACK__ = process.env.__DEVFULLSTACK__;
 
 /**
  * Looker container
@@ -24,12 +29,25 @@ class Looker extends Component {
     }
 
     /**
-     * React component did mount
+     * React component did mount callback
      */
     componentDidMount() {
-        if (__DEPLOYMENT__ || __PRODUCTION__) {
-            this.props.channel.on('schedule:onlooker', params => {
-                this.props.actions.showScheduleOnlookerUserRemote(params.usersRemote);
+        const actions = this.props.actions;
+
+        if (__PRODUCTION__ || __DEVFULLSTACK__) {
+            const pathname = this.props.location.pathname;
+            const userId = getUserId();
+            const {instance, result} = checkInstance(pathname, this.props.instance);
+
+            if (result) {
+                actions.updateInstance(instance);
+            }
+
+            API.Remote.getRemoteUsers(actions.loadRemoteUsers);
+
+            instance.on('remote_users', payload => {
+                console.log('channel', payload);
+                actions.loadRemoteUsers(payload.users);
             });
         }
     }
@@ -49,43 +67,52 @@ class Looker extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        let usersRemote = this.props.usersRemote === undefined ? [] : this.props.usersRemote;
+        let users = this.props.users;
+        console.log(users);
 
-        let users = usersRemote.map((userRemote) => {
+        if (users === undefined || users.length === 0) {
             return (
-                <TableRow>
-                    <TableRowColumn style={{width: '150px'}}>username</TableRowColumn>
-                    <TableRowColumn style={{width: '150px'}}>{userRemote.ip}</TableRowColumn>
-                    <TableRowColumn style={{width: '100px'}}>{userRemote.method}</TableRowColumn>
-                    <TableRowColumn>{userRemote.agent}</TableRowColumn>
-                </TableRow>
+                <div className='loading text-center'>
+                    <div className='cell'>
+                        <CircularProgress size={2} />
+                    </div>
+                </div>
             );
-        });
-
-        return (
-            <div>
-                <Grid>
-                    <Row center='xs' center='md' around='xs' around='md'>
-                        <Col type='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center' >
-                            <h1>Lista de usuarios conectados</h1>
-                            <Table selectable={false} >
-                                <TableHeader displaySelectAll={false} adjustForCheckbox={false} displayRowCheckbox={false}>
-                                    <TableRow>
-                                        <TableHeaderColumn style={{width: '150px'}}>Usuario</TableHeaderColumn>
-                                        <TableHeaderColumn style={{width: '150px'}}>IP</TableHeaderColumn>
-                                        <TableHeaderColumn style={{width: '100px'}}>Método</TableHeaderColumn>
-                                        <TableHeaderColumn>Agente</TableHeaderColumn>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody displaySelectAll={false} adjustForCheckbox={false} displayRowCheckbox={false}>
-                                    {users}
-                                </TableBody>
-                            </Table>
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
-        );
+        } else {
+            return (
+                <div>
+                    <Grid>
+                        <Row center='xs' center='md' around='xs' around='md'>
+                            <Col type='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center' >
+                                <h1>Lista de usuarios conectados</h1>
+                                <Table selectable={false} >
+                                    <TableHeader displaySelectAll={false} adjustForCheckbox={false} displayRowCheckbox={false}>
+                                        <TableRow>
+                                            <TableHeaderColumn style={{width: '120px'}}>Usuario</TableHeaderColumn>
+                                            <TableHeaderColumn style={{width: '210px'}}>Nombre</TableHeaderColumn>
+                                            <TableHeaderColumn style={{width: '150px'}}>IP</TableHeaderColumn>
+                                            <TableHeaderColumn>Agente</TableHeaderColumn>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody displaySelectAll={false} adjustForCheckbox={false} displayRowCheckbox={false}>
+                                        {users.map((user) => {
+                                            return (
+                                                <TableRow>
+                                                    <TableRowColumn style={{width: '120px'}}>{user.username}</TableRowColumn>
+                                                    <TableRowColumn style={{width: '210px'}}>{user.name}</TableRowColumn>
+                                                    <TableRowColumn style={{width: '150px'}}>{user.ip}</TableRowColumn>
+                                                    <TableRowColumn>{user.agent}</TableRowColumn>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </Col>
+                        </Row>
+                    </Grid>
+                </div>
+            );
+        }
     }
 }
 
@@ -93,12 +120,12 @@ class Looker extends Component {
  * React properties types definitions
  */
 Looker.propTypes = {
-    channel: PropTypes.any,
-    usersRemote: PropTypes.any
+    instance: PropTypes.any,
+    users: PropTypes.any
 };
 
 /**
- * Material-UI context types
+ * Material UI context types definitions
  */
 Looker.childContextTypes = {
     muiTheme: React.PropTypes.object.isRequired
@@ -112,8 +139,8 @@ Looker.childContextTypes = {
  */
 const mapStateToProps = (state) => {
     return {
-        channel: state.ScheduleOptions.channel,
-        usersRemote: state.ScheduleChannel.usersRemote,
+        instance: state.Channel.instance,
+        users: state.Looker.users,
         state
     };
 };

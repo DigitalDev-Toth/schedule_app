@@ -4,18 +4,19 @@ const __PRODUCTION__ = process.env.__PRODUCTION__;
 const __DEVFULLSTACK__ = process.env.__DEVFULLSTACK__;
 
 /**
- * Connect to channel.
+ * Connects to channel.
  *
- * @param      {string}                      module    The module
+ * @param      {String}                      module  The module
+ * @param      {String}                      userId  The user identifier
  * @return     {(Function|Socket|string[])}  The channel instance.
  */
-let connectToChannel = (module = 'schedule') => {
+let connectToChannel = (module = 'schedule', userId) => {
     if (__PRODUCTION__ || __DEVFULLSTACK__) {
         const socket = new Socket('/socket', {});
 
         socket.connect();
 
-        const channel = socket.channel(`module:${module}`, {});
+        const channel = socket.channel(`module:${module}`, {key: userId});
 
         channel.join()
             .receive('ignore', () => {})

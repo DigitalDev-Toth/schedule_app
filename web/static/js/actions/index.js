@@ -25,6 +25,19 @@ export let notification = (payload) => {
 };
 
 /**
+ * Loads a remote users.
+ *
+ * @param      {Object}  payload  The payload
+ * @return     {Object}  The remote users.
+ */
+export let loadRemoteUsers = (payload) => {
+    return {
+        type: 'LOAD_REMOTE_USERS',
+        payload
+    };
+};
+
+/**
  * Load default data.
  *
  * @param      {Object}  payload  The payload
