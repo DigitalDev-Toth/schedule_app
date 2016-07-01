@@ -48,8 +48,7 @@
     "test:features": "./node_modules/.bin/cucumber-js --compiler js:babel-register ./test/static/features"
   },
   "dependencies": {
-    "pouchdb": "^5.3.2",
-    "react-edit-inline": "^1.0.7"
+    "pouchdb": "^5.3.2"
   },
   "devDependencies": {
     "appcache-webpack-plugin": "^1.2.1",
@@ -100,6 +99,7 @@
     "rc-tree-select": "^1.5.7-beta.2",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
+    "react-edit-inline": "^1.0.7",
     "react-grid-layout": "^0.12.3",
     "react-notification-system": "^0.2.7",
     "react-redux": "^4.4.5",

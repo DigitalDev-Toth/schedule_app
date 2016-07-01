@@ -106,7 +106,7 @@ Schedule.propTypes = {
  * Material UI context types definitions
  */
 Schedule.childContextTypes = {
-    muiTheme: PropTypes.object.isRequired,
+    muiTheme: PropTypes.object.isRequired
 };
 
 /**

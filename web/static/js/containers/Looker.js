@@ -3,12 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 import API from '../api';
-import { getUserId } from '../helpers/Auth';
 import { checkInstance } from '../helpers/Tools';
 import { Grid, Row, Col } from '../components/box/Container';
 import { Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody } from 'material-ui';
 import CircularProgress from 'material-ui/CircularProgress';
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+/*import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';*/
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const __PRODUCTION__ = process.env.__PRODUCTION__;
@@ -36,7 +35,6 @@ class Looker extends Component {
 
         if (__PRODUCTION__ || __DEVFULLSTACK__) {
             const pathname = this.props.location.pathname;
-            const userId = getUserId();
             const {instance, result} = checkInstance(pathname, this.props.instance);
 
             if (result) {
@@ -128,7 +126,7 @@ Looker.propTypes = {
  * Material UI context types definitions
  */
 Looker.childContextTypes = {
-    muiTheme: React.PropTypes.object.isRequired
+    muiTheme: PropTypes.object.isRequired
 };
 
 /**

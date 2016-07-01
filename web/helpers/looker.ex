@@ -49,9 +49,8 @@ defmodule ScheduleApp.Looker do
         users = ScheduleApp.RemoteUsers.get_users()
         |> parse_users
 
-        ScheduleApp.AppChannel.remote_users(users)
 
-        :ok
+        {:ok, users}
     end
 
     ##

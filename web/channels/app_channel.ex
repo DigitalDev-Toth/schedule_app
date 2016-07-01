@@ -74,11 +74,12 @@ defmodule ScheduleApp.AppChannel do
     def terminate(_reason, socket) do
         topic = socket.topic
 
-
         if topic == "module:schedule" do
             key = socket.assigns.key
 
-            ScheduleApp.Looker.delete_user(key)
+            {:ok, users} = ScheduleApp.Looker.delete_user(key)
+
+            ScheduleApp.AppChannel.remote_users(users)
         end
 
         :ok
