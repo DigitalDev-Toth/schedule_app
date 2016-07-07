@@ -6,9 +6,9 @@ import {
 } from '../../../helpers/Tools';
 
 /**
- * Grid component
+ * Layout component
  */
-class Grid extends Component {
+class Layout extends Component {
     /**
      * Basic React component constructor
      *
@@ -32,7 +32,7 @@ class Grid extends Component {
         const cellWidth = getCellWidth(days.length);
 
         return (
-            <div className='calendar-grid'>
+            <div className='calendar-layout'>
                 <table>
                     {(() => {
                         let rows = [];
@@ -60,9 +60,9 @@ class Grid extends Component {
 /**
  * React properties types definitions
  */
-Grid.propTypes = {
+Layout.propTypes = {
     config: PropTypes.any,
     rooms: PropTypes.any
 };
 
-export default Grid;
+export default Layout;

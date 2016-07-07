@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Grid from './grid';
+import Layout from './layout';
 
 /**
  * Calendar component
@@ -27,7 +28,8 @@ class Calendar extends Component {
 
         return (
             <div className='calendar'>
-                <Grid config={config} />
+                <Grid config={config} rooms={rooms} />
+                <Layout config={config} rooms={rooms} />
             </div>
         );
     }

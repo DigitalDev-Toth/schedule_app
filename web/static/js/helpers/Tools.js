@@ -1,3 +1,4 @@
+import moment from 'moment';
 import ConnectToChannel from './Socket';
 import { getUserId } from './Auth';
 
@@ -54,3 +55,38 @@ export let getModuleName = () => {
 
     return module;
 };
+
+/**
+ * Gets the day period in seconds.
+ *
+ * @param      {String}  initTime  The initialize time
+ * @param      {String}  endTime   The end time
+ * @return     {Number}  The day period in seconds.
+ */
+export let getDayPeriodInSeconds = (initTime, endTime) => {
+    const currentDate = moment().format('YYYY-MM-DD');
+    const initDaySeconds = moment(`${currentDate} ${initTime}`).unix();
+    const endDaySeconds = moment(`${currentDate} ${endTime}`).unix();
+
+    return endDaySeconds - initDaySeconds;
+};
+
+/**
+ * Gets the frequency in seconds.
+ *
+ * @param      {Number}  frequency  The frequency
+ * @return     {Number}  The frequency in seconds.
+ */
+export let getFrequencyInSeconds = (frequency) => {
+    return frequency * 60;
+}
+
+/**
+ * Gets the cell width.
+ *
+ * @param      {Number}  days    The days
+ * @return     {Number}  The cell width.
+ */
+export let getCellWidth = (days) => {
+    return 100 / days;
+}
