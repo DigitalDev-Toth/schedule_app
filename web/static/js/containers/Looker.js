@@ -65,8 +65,7 @@ class Looker extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        let users = this.props.users;
-        console.log(users);
+        const users = this.props.users;
 
         if (users === undefined || users.length === 0) {
             return (

@@ -7,7 +7,9 @@ import { getUserId } from '../helpers/Auth';
 import { checkInstance } from '../helpers/Tools';
 import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
-import ScheduleToth from '../components/schedule/ScheduleToth';
+/*import ScheduleToth from '../components/schedule/ScheduleToth';*/
+import Header from '../components/header';
+import Calendar from '../components/calendar';
 import CircularProgress from 'material-ui/CircularProgress';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -73,8 +75,7 @@ class Schedule extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        //console.log('default',this.props.optionsDefault,this.props.roomsDefault);
-        if (typeof this.props.options == 'object' && !Object.keys(this.props.options).length) {
+        /*if (typeof this.props.options == 'object' && !Object.keys(this.props.options).length) {
             return (
                 <div className='loading text-center'>
                     <div className='cell'>
@@ -87,6 +88,26 @@ class Schedule extends Component {
                 <div>
                     <Notifier />
                     <ScheduleToth optionsDefault={this.props.options} roomsDefault={this.props.rooms} />
+                </div>
+            );
+        }*/
+        const options = this.props.options;
+        const rooms = this.props.rooms;
+
+        if (typeof options == 'object' && !Object.keys(options).length) {
+            return (
+                <div className='loading text-center'>
+                    <div className='cell'>
+                        <CircularProgress size={2} />
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <Notifier />
+                    <Header name='Toth Limitada' options={options} />
+                    <Calendar options={options} rooms={rooms} />
                 </div>
             );
         }

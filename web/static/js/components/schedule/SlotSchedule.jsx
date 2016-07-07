@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-//import Schedule from '../../containers/Schedule.js';
 
 /**
  * SlotSchedule component
  */
-
 class SlotSchedule extends Component {
     /**
      * Basic React component constructor
@@ -21,14 +20,18 @@ class SlotSchedule extends Component {
         };
     }
 
+    renderTopCell(options, data) {
+        console.log(options, data);
+        return (
+            <div key={options} _grid={{x: data, y: 0, w: 1, h: 1, maxW: 2}} className='slot'>{options}</div>
+        );
+    }
+
     /**
      * React DOM rendering
      *
      * @return     {Object}  React DOM object
      */
-    componentDidMount() {
-
-    }
     render() {
         let optionsDefault = this.state.optionsDefault;
         //let roomsDefault = this.state.roomsDefault;
@@ -39,11 +42,6 @@ class SlotSchedule extends Component {
                         cols={{lg: columsLength, md: columsLength, sm: columsLength, xs: columsLength, xxs: columsLength}}>
                         {optionsDefault.options.days_of_week.map(this.renderTopCell, this)}
                 </ResponsiveReactGridLayout>
-        );
-    }
-    renderTopCell(options,data) {
-        return (
-            <div key={options} _grid={{x: data, y: 0, w: 1, h: 1, maxW: 2}} className='slot'>{options}</div>
         );
     }
 }
