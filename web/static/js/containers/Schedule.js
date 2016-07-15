@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 import API from '../api';
-import { getUserId } from '../helpers/Auth';
-import { checkInstance } from '../helpers/Tools';
+import { getUserId } from '../helpers/AuthHelper';
+import { checkInstance } from '../helpers/ToolsHelper';
 import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
 /*import ScheduleToth from '../components/schedule/ScheduleToth';*/

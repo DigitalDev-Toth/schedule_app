@@ -1,4 +1,4 @@
-import { LookerInitialState } from '../helpers/InitialState';
+import { LookerInitialState } from '../helpers/InitialStateHelper';
 
 /**
  * Looker reducer

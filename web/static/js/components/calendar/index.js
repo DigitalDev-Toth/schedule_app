@@ -16,6 +16,13 @@ class Calendar extends Component {
     }
 
     /**
+     * On layout change handler
+     */
+    onLayoutChange() {
+        console.log('onLayoutChange');
+    }
+
+    /**
      * React DOM rendering
      *
      * @return     {Object}  React DOM object
@@ -29,7 +36,7 @@ class Calendar extends Component {
         return (
             <div className='calendar'>
                 <Grid config={config} rooms={rooms} />
-                <Layout config={config} rooms={rooms} />
+                <Layout config={config} rooms={rooms} onLayoutChange={this.onLayoutChange.bind(this)} />
             </div>
         );
     }

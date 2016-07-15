@@ -3,7 +3,7 @@ import {
     getDayPeriodInSeconds,
     getFrequencyInSeconds,
     getCellWidth
-} from '../../../helpers/Tools';
+} from '../../../helpers/ToolsHelper';
 
 /**
  * Grid component

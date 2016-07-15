@@ -12,7 +12,7 @@ import Looker from './containers/Looker';
 import DevTools from './containers/DevTools';
 import NotFound from './components/error/NotFound';
 import Forbidden from './components/error/Forbidden';
-import { authorization } from './helpers/Auth';
+import { authorization } from './helpers/AuthHelper';
 import '../images/ren_y_stimpy.jpg';
 
 const __PRODUCTION__ = process.env.__DEPLOYMENT__;

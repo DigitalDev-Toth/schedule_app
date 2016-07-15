@@ -1,4 +1,4 @@
-import { DefaultInitialState } from '../helpers/InitialState';
+import { DefaultInitialState } from '../helpers/InitialStateHelper';
 
 /**
  * Default reducer

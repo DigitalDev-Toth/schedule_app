@@ -1,4 +1,4 @@
-import { ChannelInitialState } from '../helpers/InitialState';
+import { ChannelInitialState } from '../helpers/InitialStateHelper';
 
 /**
  * Channel reducer

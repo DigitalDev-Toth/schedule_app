@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { getToken } from '../Auth';
+import { getToken } from '../AuthHelper';
 
 /**
  * Default headers.

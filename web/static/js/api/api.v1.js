@@ -7,7 +7,7 @@ import {
     getUserId,
     getUserName,
     getUserFullName
-} from '../helpers/Auth';
+} from '../helpers/AuthHelper';
 
 /**
  * Authenticate

@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import moment from 'moment';
-import ConnectToChannel from './Socket';
-import { getUserId } from './Auth';
+import ConnectToChannel from './SocketHelper';
+import { getUserId } from './AuthHelper';
 
 /**
  * Check instance
@@ -90,3 +91,23 @@ export let getFrequencyInSeconds = (frequency) => {
 export let getCellWidth = (days) => {
     return 100 / days;
 }
+
+/**
+ * Generate layout.
+ *
+ * @return     {Object}  The layout.
+ */
+export let generateLayout = () => {
+    return _.map(_.range(0, 25), function (item, i) {
+        const y = Math.ceil(Math.random() * 4) + 1;
+
+        return {
+            x: _.random(0, 5) * 2 % 12,
+            y: Math.floor(i / 6) * y,
+            w: 1,
+            h: y,
+            i: i.toString(),
+            static: Math.random() < 0.05
+        };
+    });
+};

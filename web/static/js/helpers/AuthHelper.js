@@ -1,5 +1,5 @@
 import API from '../api';
-import { getModulePathName } from './Tools';
+import { getModulePathName } from './ToolsHelper';
 
 const _TOKEN_ = 'token';
 const _ADMIN_TOKEN_ = 'admintoken';

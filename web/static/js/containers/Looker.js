@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as scheduleActions from '../actions';
 import API from '../api';
-import { checkInstance } from '../helpers/Tools';
+import { checkInstance } from '../helpers/ToolsHelper';
 import { Grid, Row, Col } from '../components/box/Container';
 import { Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody } from 'material-ui';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -44,7 +44,6 @@ class Looker extends Component {
             API.Remote.getRemoteUsers(actions.loadRemoteUsers);
 
             instance.on('remote_users', payload => {
-                console.log('channel', payload);
                 actions.loadRemoteUsers(payload.users);
             });
         }
