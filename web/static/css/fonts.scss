@@ -1,5 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,300');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,300,700,100');
+
+$lato: 'Lato';
+$roboto: 'Roboto';
+$officina-book: 'OfficinaSansStd-Book';
+$officina-bold: 'OfficinaSansStd-Bold';
+$officina-book-italic: 'OfficinaSansStd-BookItalic';
+$officina-bold-italic: 'OfficinaSansStd-BoldItalic';
+$toth: 'toth';
+
 @font-face {
-    font-family: 'toth';
+    font-family: $officina-book;
+    src:    url('../fonts/OfficinaSansStd-Book.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $officina-book-italic;
+    src:    url('../fonts/OfficinaSansStd-BookItalic.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $officina-bold;
+    src:    url('../fonts/OfficinaSansStd-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $officina-bold-italic;
+    src:    url('../fonts/OfficinaSansStd-BoldItalic.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $toth;
     src:    url('../fonts/toth.eot');
     src:    url('../fonts/toth.eot') format('embedded-opentype'),
             url('../fonts/toth.ttf') format('truetype'),
@@ -10,7 +49,7 @@
 }
 
 [class^="icon-"], [class*=" icon-"] {
-    font-family: 'toth' !important;
+    font-family: $toth !important;
     speak: none;
     font-style: normal;
     font-weight: normal;

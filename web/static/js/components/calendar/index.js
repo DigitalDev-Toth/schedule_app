@@ -28,10 +28,8 @@ class Calendar extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        let config = this.props.options;
-        let rooms = this.props.rooms;
-
-        console.log('calendar', config, rooms);
+        const config = this.props.options;
+        const rooms = this.props.rooms;
 
         return (
             <div className='calendar'>

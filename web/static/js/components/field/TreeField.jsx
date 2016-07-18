@@ -24,7 +24,7 @@ class TreeField extends Component {
      * @param      {String|Integer|Boolean}  value   The value
      */
     onChange = (value) => {
-        this.setState({ value });
+        this.setState({value});
     };
 
     /**
@@ -33,7 +33,7 @@ class TreeField extends Component {
      * @param      {String|Integer|Boolean}  value   The value
      */
     onMultipleChange = (value) => {
-        this.setState({ multipleValue: value });
+        this.setState({multipleValue: value});
     };
 
     /**

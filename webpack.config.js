@@ -81,6 +81,9 @@ const loaders = [{
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
     loader: 'file?name=/fonts/[name].[ext]'
 }, {
+    test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+    loader: 'file?name=/fonts/[name].[ext]'
+}, {
     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
     loader: 'url?limit=10000&mimetype=image/svg+xml&name=/fonts/[name].[ext]'
 }];

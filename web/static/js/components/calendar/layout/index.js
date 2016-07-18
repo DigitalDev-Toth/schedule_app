@@ -2,13 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import {Responsive, WidthProvider} from 'react-grid-layout';
 import {
-    getDayPeriodInSeconds,
+    /*getDayPeriodInSeconds,
     getFrequencyInSeconds,
-    getCellWidth,
+    getCellWidth,*/
     generateLayout
 } from '../../../helpers/ToolsHelper';
-
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
+import Event from './Event';
 
 /**
  * Layout component
@@ -25,7 +24,7 @@ class Layout extends Component {
         this.state = {
             currentBreakpoint: 'lg',
             mounted: false,
-            layouts: {lg: this.props.initialLayout},
+            layouts: {lg: this.props.initialLayout}
         };
     }
 
@@ -42,12 +41,10 @@ class Layout extends Component {
      * @return     {Object}  The items DOM
      */
     generateDOM() {
-        return _.map(this.state.layouts.lg, function (l, i) {
+        return _.map(this.state.layouts.lg, function(l, i) {
             return (
                 <div key={i}>
-                    <div className='item'>
-                        John Doe
-                    </div>
+                    <Event />
                 </div>
             );
         });
@@ -89,12 +86,12 @@ class Layout extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        const config = this.props.config;
+        /*const config = this.props.config;
         const rooms = this.props.rooms;
         const days = config.options.days_of_week;
         const frequency = getFrequencyInSeconds(rooms.frequency);
         const period = getDayPeriodInSeconds(rooms.init_time, rooms.end_time);
-        const cellWidth = getCellWidth(days.length);
+        const cellWidth = getCellWidth(days.length);*/
 
         return (
             <div className='calendar-layout'>
@@ -103,10 +100,7 @@ class Layout extends Component {
                     layouts={this.state.layouts}
                     onBreakpointChange={this.onBreakpointChange.bind(this)}
                     onLayoutChange={this.onLayoutChange.bind(this)}
-                    // WidthProvider option
                     measureBeforeMount={false}
-                    // I like to have it animate on mount. If you don't, delete `useCSSTransforms` (it's default `true`)
-                    // and set `measureBeforeMount={true}`.
                     useCSSTransforms={this.state.mounted}>
                         {this.generateDOM()}
                 </ResponsiveReactGridLayout>
@@ -114,6 +108,8 @@ class Layout extends Component {
         );
     }
 }
+
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 /**
  * React properties types definitions

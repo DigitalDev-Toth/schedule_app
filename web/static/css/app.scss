@@ -106,6 +106,7 @@ body {
                 width: 50px;
                 height: 100%;
                 vertical-align: top;
+                font-family: $roboto;
 
                 div {
                     display: table-cell;
@@ -155,6 +156,7 @@ body {
                     vertical-align: middle;
                     text-align: center;
                     color: $white;
+                    font-family: $roboto;
                 }
             }
         }
@@ -183,8 +185,8 @@ body {
                 height: 80px;
                 border-left: 4px solid $white;
                 border-right: 4px solid $white;
-                border-top: 2px solid $gallery;
-                border-bottom: 2px solid $gallery;
+                border-top: 2px solid $white;
+                border-bottom: 2px solid $white;
                 background-color: $quill-gray;
                 vertical-align: middle;
                 text-align: center;
@@ -198,13 +200,38 @@ body {
         .react-grid-item {
             background-color: $white;
 
-            .item {
+            .event {
                 width: 100%;
                 height: 100%;
                 margin-left: 1px;
                 border: 2px solid $quill-gray;
                 border-left: 8px solid $teal;
+                font-family: $roboto;
+                cursor: pointer;
+
+                .info {
+                    width: 100%;
+                    padding: 6px;
+
+                    .name,
+                    .dni {
+                        width: 100%;
+                    }
+
+                    .name {
+                        font-size: 14px;
+                    }
+
+                    .dni {
+                        font-size: 11px;
+                    }
+                }
             }
+        }
+
+        .react-grid-placeholder {
+            background: $gray;
+            opacity: 0.4;
         }
     }
 }

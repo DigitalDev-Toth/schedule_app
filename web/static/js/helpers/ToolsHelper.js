@@ -80,7 +80,7 @@ export let getDayPeriodInSeconds = (initTime, endTime) => {
  */
 export let getFrequencyInSeconds = (frequency) => {
     return frequency * 60;
-}
+};
 
 /**
  * Gets the cell width.
@@ -90,7 +90,7 @@ export let getFrequencyInSeconds = (frequency) => {
  */
 export let getCellWidth = (days) => {
     return 100 / days;
-}
+};
 
 /**
  * Generate layout.
@@ -98,7 +98,7 @@ export let getCellWidth = (days) => {
  * @return     {Object}  The layout.
  */
 export let generateLayout = () => {
-    return _.map(_.range(0, 25), function (item, i) {
+    return _.map(_.range(0, 25), function(item, i) {
         const y = Math.ceil(Math.random() * 4) + 1;
 
         return {
