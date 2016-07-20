@@ -20,8 +20,8 @@ class Styles extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        const { children, color } = this.props;
-        const colorTheme = color ||'teal500';
+        const {children, color} = this.props;
+        const colorTheme = color || 'teal500';
         const muiTheme = getMuiTheme({
             palette: {
                 accent1Color: colors[colorTheme]

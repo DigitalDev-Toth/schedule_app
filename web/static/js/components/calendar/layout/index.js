@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { Dialog, FlatButton, indigo500 } from 'material-ui';
 import _ from 'lodash';
-import {Responsive, WidthProvider} from 'react-grid-layout';
-import {
-    /*getDayPeriodInSeconds,
-    getFrequencyInSeconds,
-    getCellWidth,*/
-    generateLayout
-} from '../../../helpers/ToolsHelper';
+import { Responsive, WidthProvider } from 'react-grid-layout';
+import { /*compact,*/ cloneLayout, moveElement } from 'react-grid-layout/build/utils';
+import {generateLayout, getLayoutWidth } from '../../../helpers/ToolsHelper';
 import Event from './Event';
+import ProcedureForm from '../../form/ProcedureForm';
+import Styles from '../../styles/Style';
 
 /**
  * Layout component
@@ -24,8 +23,11 @@ class Layout extends Component {
         this.state = {
             currentBreakpoint: 'lg',
             mounted: false,
-            layouts: {lg: this.props.initialLayout}
+            verticalCompact: false,
+            layouts: {lg: this.props.initialLayout},
+            openModal: false
         };
+        this.layouts = undefined;
     }
 
     /**
@@ -36,15 +38,33 @@ class Layout extends Component {
     }
 
     /**
+     * Request close handler
+     */
+    handleRequestClose() {
+        this.setState({
+            openModal: false
+        });
+    }
+
+    /**
+     * Touch tap handler
+     */
+    handleTouchTap() {
+        this.setState({
+            openModal: true
+        });
+    }
+
+    /**
      * Generate DOM handler
      *
      * @return     {Object}  The items DOM
      */
     generateDOM() {
-        return _.map(this.state.layouts.lg, function(l, i) {
+        return _.map(this.state.layouts.lg, (l, i) => {
             return (
                 <div key={i}>
-                    <Event />
+                    <Event id={i} handleTouchTap={this.handleTouchTap.bind(this)} />
                 </div>
             );
         });
@@ -72,12 +92,48 @@ class Layout extends Component {
     }
 
     /**
-     * On new layout
+     * On drag start handler
+     *
+     * @param      {Array}  layouts  The layouts
      */
-    onNewLayout() {
-        this.setState({
-            layouts: {lg: generateLayout()}
-        });
+    onDragStart(layouts) {
+        this.layouts = cloneLayout(layouts);
+    }
+
+    /**
+     * On drag handler
+     *
+     * @param      {Array}   layouts   The layouts
+     * @param      {Object}  oldEvent  The old event
+     * @param      {Object}  newEvent  The new event
+     */
+    onDrag(layouts, oldEvent, newEvent) {
+        for (let i = 0; i < layouts.length; i++) {
+            if (layouts[i].i === this.layouts[i].i) {
+                if (layouts[i].y !== this.layouts[i].y && newEvent.x !== layouts[i].x) {
+                    moveElement(layouts, layouts[i], this.layouts[i].x, this.layouts[i].y, true);
+                }
+            }
+        }
+    }
+
+    /**
+     * On drag stop handler
+     *
+     * @param      {Array}   layouts   The layouts
+     * @param      {Object}  oldEvent  The old event
+     * @param      {Object}  newEvent  The new event
+     */
+    onDragStop(layouts, oldEvent, newEvent) {
+        for (let i = 0; i < layouts.length; i++) {
+            if (layouts[i].i === this.layouts[i].i && newEvent.i !== layouts[i].i) {
+                if (layouts[i].y !== this.layouts[i].y && newEvent.x === layouts[i].x) {
+                    moveElement(layouts, layouts[i], this.layouts[i].x, this.layouts[i].y, true);
+                }
+            }
+        }
+
+        this.layouts = undefined;
     }
 
     /**
@@ -86,37 +142,73 @@ class Layout extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        /*const config = this.props.config;
-        const rooms = this.props.rooms;
-        const days = config.options.days_of_week;
-        const frequency = getFrequencyInSeconds(rooms.frequency);
-        const period = getDayPeriodInSeconds(rooms.init_time, rooms.end_time);
-        const cellWidth = getCellWidth(days.length);*/
+        const layoutWidth = getLayoutWidth();
+        const layouts = this.state.layouts;
+        const mounted = this.state.mounted;
+        const verticalCompact = this.state.verticalCompact;
+        const openModal = this.state.openModal;
+        const standardActions = (
+            <FlatButton
+                label='Cancelar'
+                secondary={true}
+                onTouchTap={this.handleRequestClose.bind(this)}
+                keyboardFocused={true} />
+        );
 
         return (
             <div className='calendar-layout'>
-                <ResponsiveReactGridLayout
-                    {...this.props}
-                    layouts={this.state.layouts}
-                    onBreakpointChange={this.onBreakpointChange.bind(this)}
-                    onLayoutChange={this.onLayoutChange.bind(this)}
-                    measureBeforeMount={false}
-                    useCSSTransforms={this.state.mounted}>
-                        {this.generateDOM()}
-                </ResponsiveReactGridLayout>
+                <div className='cell-space'></div>
+                <div className='cell-layout' style={{width: `${layoutWidth}px`}}>
+                    <ResponsiveReactGridLayout
+                        {...this.props}
+                        layouts={layouts}
+                        onBreakpointChange={this.onBreakpointChange.bind(this)}
+                        onLayoutChange={this.onLayoutChange.bind(this)}
+                        onDragStart={this.onDragStart.bind(this)}
+                        onDrag={this.onDrag.bind(this)}
+                        onDragStop={this.onDragStop.bind(this)}
+                        measureBeforeMount={false}
+                        verticalCompact={verticalCompact}
+                        useCSSTransforms={mounted}>
+                            {this.generateDOM()}
+                    </ResponsiveReactGridLayout>
+                </div>
+                <Styles color='indigo500'>
+                    <Dialog
+                        autoScrollBodyContent={true}
+                        open={openModal}
+                        contentStyle = {styles.DialogTitle}
+                        contentStyle = {styles.Dialog}
+                        title='Ingreso de Procedimientos'
+                        actions={standardActions}
+                        modal={true}
+                        onRequestClose={this.handleRequestClose.bind(this)}>
+                        <ProcedureForm />
+                    </Dialog>
+                </Styles>
             </div>
         );
     }
 }
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const styles = {
+    DialogTitle: {
+        backgroundColor: indigo500,
+        color: 'white'
+    },
+    Dialog: {
+        width: '70%',
+        maxWidth: 'none'
+    }
+};
 
 /**
  * React properties types definitions
  */
 Layout.propTypes = {
-    config: PropTypes.any,
-    rooms: PropTypes.any,
+    config: PropTypes.object.isRequired,
+    rooms: PropTypes.object.isRequired,
     onLayoutChange: PropTypes.func.isRequired
 };
 
@@ -124,13 +216,12 @@ Layout.propTypes = {
  * React default properties
  */
 Layout.defaultProps = {
-    width: window.innerWidth,
+    width: getLayoutWidth(),
     className: 'layout',
     rowHeight: 78,
-    cols: {lg: 7, md: 10, sm: 6, xs: 4, xxs: 2},
+    cols: {lg: 7, md: 7, sm: 7, xs: 7, xxs: 7},
     isResizable: false,
     margin: [4, 2],
-    verticalCompact: false,
     initialLayout: generateLayout()
 };
 

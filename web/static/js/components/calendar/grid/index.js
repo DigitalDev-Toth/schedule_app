@@ -18,6 +18,47 @@ class Grid extends Component {
         super(props);
     }
 
+    getTimesSpaces(period, frequency) {
+        let rows = [];
+
+        for (let i = 0; i < period; i += frequency) {
+            rows.push(
+                <tr>
+                    <td></td>
+                </tr>
+            );
+        }
+
+        return rows;
+    }
+
+    /**
+     * Gets the events spaces.
+     *
+     * @param      {Number}  period     The period
+     * @param      {Number}  frequency  The frequency
+     * @param      {Array}   days       The days
+     * @param      {Number}  cellWidth  The cell width
+     * @return     {Array}   The events spaces.
+     */
+    getEventsSpaces(period, frequency, days, cellWidth) {
+        let rows = [];
+
+        for (let i = 0; i < period; i += frequency) {
+            rows.push(
+                <tr>
+                    {days.map(() => {
+                        return (
+                            <td style={{width: `${cellWidth}%`}}></td>
+                        );
+                    })}
+                </tr>
+            );
+        }
+
+        return rows;
+    }
+
     /**
      * React DOM rendering
      *
@@ -33,25 +74,16 @@ class Grid extends Component {
 
         return (
             <div className='calendar-grid'>
-                <table>
-                    {(() => {
-                        let rows = [];
-
-                        for (let i = 0; i < period; i += frequency) {
-                            rows.push(
-                                <tr>
-                                    {days.map(() => {
-                                        return (
-                                            <td style={{width: `${cellWidth}%`}}></td>
-                                        );
-                                    })}
-                                </tr>
-                            );
-                        }
-
-                        return rows;
-                    })()}
-                </table>
+                <div className='times'>
+                    <table>
+                        {this.getTimesSpaces(period, frequency)}
+                    </table>
+                </div>
+                <div className='events'>
+                    <table>
+                        {this.getEventsSpaces(period, frequency, days, cellWidth)}
+                    </table>
+                </div>
             </div>
         );
     }

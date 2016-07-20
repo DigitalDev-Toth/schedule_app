@@ -1,7 +1,7 @@
-import 'rc-tree-select/assets/index.css';
 import React, { Component } from 'react';
 import TreeSelect from 'rc-tree-select';
 import { gData } from './TreeData';
+import 'rc-tree-select/assets/index.css';
 
 class TreeField extends Component {
     /**
@@ -23,24 +23,25 @@ class TreeField extends Component {
      *
      * @param      {String|Integer|Boolean}  value   The value
      */
-    onChange = (value) => {
+    onChange(value) {
         this.setState({value});
-    };
+    }
 
     /**
      * Multi change handler
      *
      * @param      {String|Integer|Boolean}  value   The value
      */
-    onMultipleChange = (value) => {
+    onMultipleChange(value) {
         this.setState({multipleValue: value});
-    };
+    }
 
     /**
      * React DOM rendering
      */
-    render = () => {
-        const { style } = this.props;
+    render() {
+        const {style} = this.props;
+
         return (
             <div style={{margin: 20}}>
                 <TreeSelect
@@ -61,7 +62,7 @@ class TreeField extends Component {
                     onChange={this.onChange} />
             </div>
         );
-    };
+    }
 }
 
 export default TreeField;

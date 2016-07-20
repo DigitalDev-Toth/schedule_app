@@ -19,7 +19,7 @@ class Calendar extends Component {
      * On layout change handler
      */
     onLayoutChange() {
-        console.log('onLayoutChange');
+        /*console.log('onLayoutChange');*/
     }
 
     /**

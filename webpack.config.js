@@ -169,7 +169,7 @@ if (__PRODUCTION__ || __DEVFULLSTACK__) {
     plugins.push(new HtmlWebpackPlugin({
         title: 'Toth Schedule App',
         template: PATHS.template,
-        appMountId: 'schedule_app',
+        appMountId: 'app',
         inject: false,
         mobile: true
     }));
