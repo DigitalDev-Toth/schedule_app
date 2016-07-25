@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 /**
- * Header component
+ * Navbar component
  */
-class Header extends Component {
+class Navbar extends Component {
     /**
      * Basic React component constructor
      *
@@ -26,9 +26,9 @@ class Header extends Component {
         const cellWidth = 100 / days.length;
 
         return (
-            <div className='header'>
-                <div className='header-space'>&nbsp;</div>
-                <div className='header-content text-left'>
+            <div className='navbar'>
+                <div className='navbar-space'>&nbsp;</div>
+                <div className='navbar-content text-left'>
                     <div className='typography'>
                         <div className='name'>
                             <span>{name}</span>
@@ -58,16 +58,19 @@ class Header extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='days'>
-                        <table>
-                            <tr>
-                                {days.map((day) => {
-                                    return (
-                                        <th style={{width: `${cellWidth}%`}}>{day}</th>
-                                    );
-                                })}
-                            </tr>
-                        </table>
+                    <div className='schedule-header'>
+                        <div className='times'></div>
+                        <div className='days'>
+                            <table>
+                                <tr>
+                                    {days.map((day) => {
+                                        return (
+                                            <th style={{width: `${cellWidth}%`}}>{day}</th>
+                                        );
+                                    })}
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,9 +81,9 @@ class Header extends Component {
 /**
  * React properties types definitions
  */
-Header.propTypes = {
+Navbar.propTypes = {
     name: PropTypes.any,
     options: PropTypes.any
 };
 
-export default Header;
+export default Navbar;

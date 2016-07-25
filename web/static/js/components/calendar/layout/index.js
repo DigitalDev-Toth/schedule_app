@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Dialog, FlatButton, indigo500 } from 'material-ui';
 import _ from 'lodash';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import { /*compact,*/ cloneLayout, moveElement } from 'react-grid-layout/build/utils';
-import {generateLayout, getLayoutWidth } from '../../../helpers/ToolsHelper';
+import { cloneLayout, moveElement } from 'react-grid-layout/build/utils';
+import { generateLayout, getLayoutWidth } from '../../../helpers/ToolsHelper';
 import Event from './Event';
 import ProcedureForm from '../../form/ProcedureForm';
 import Styles from '../../styles/Style';
@@ -21,6 +21,7 @@ class Layout extends Component {
         super(props);
 
         this.state = {
+            width: getLayoutWidth(),
             currentBreakpoint: 'lg',
             mounted: false,
             verticalCompact: false,
@@ -64,7 +65,7 @@ class Layout extends Component {
         return _.map(this.state.layouts.lg, (l, i) => {
             return (
                 <div key={i}>
-                    <Event id={i} handleTouchTap={this.handleTouchTap.bind(this)} />
+                    <Event handleTouchTap={this.handleTouchTap.bind(this)} />
                 </div>
             );
         });
@@ -156,22 +157,24 @@ class Layout extends Component {
         );
 
         return (
-            <div className='calendar-layout'>
-                <div className='cell-space'></div>
-                <div className='cell-layout' style={{width: `${layoutWidth}px`}}>
-                    <ResponsiveReactGridLayout
-                        {...this.props}
-                        layouts={layouts}
-                        onBreakpointChange={this.onBreakpointChange.bind(this)}
-                        onLayoutChange={this.onLayoutChange.bind(this)}
-                        onDragStart={this.onDragStart.bind(this)}
-                        onDrag={this.onDrag.bind(this)}
-                        onDragStop={this.onDragStop.bind(this)}
-                        measureBeforeMount={false}
-                        verticalCompact={verticalCompact}
-                        useCSSTransforms={mounted}>
-                            {this.generateDOM()}
-                    </ResponsiveReactGridLayout>
+            <div>
+                <div className='calendar-layout'>
+                    <div className='cell-space'></div>
+                    <div className='cell-layout'>
+                        <ResponsiveReactGridLayout
+                            {...this.props}
+                            layouts={layouts}
+                            onBreakpointChange={this.onBreakpointChange.bind(this)}
+                            onLayoutChange={this.onLayoutChange.bind(this)}
+                            onDragStart={this.onDragStart.bind(this)}
+                            onDrag={this.onDrag.bind(this)}
+                            onDragStop={this.onDragStop.bind(this)}
+                            measureBeforeMount={false}
+                            verticalCompact={verticalCompact}
+                            useCSSTransforms={mounted}>
+                                {this.generateDOM()}
+                        </ResponsiveReactGridLayout>
+                    </div>
                 </div>
                 <Styles color='indigo500'>
                     <Dialog
@@ -216,9 +219,8 @@ Layout.propTypes = {
  * React default properties
  */
 Layout.defaultProps = {
-    width: getLayoutWidth(),
     className: 'layout',
-    rowHeight: 78,
+    rowHeight: 28,
     cols: {lg: 7, md: 7, sm: 7, xs: 7, xxs: 7},
     isResizable: false,
     margin: [4, 2],

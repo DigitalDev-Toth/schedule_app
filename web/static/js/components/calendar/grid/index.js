@@ -18,6 +18,13 @@ class Grid extends Component {
         super(props);
     }
 
+    /**
+     * Gets the times spaces.
+     *
+     * @param      {Number}  period     The period
+     * @param      {Number}  frequency  The frequency
+     * @return     {Array}   The times spaces.
+     */
     getTimesSpaces(period, frequency) {
         let rows = [];
 
