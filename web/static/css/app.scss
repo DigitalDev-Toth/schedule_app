@@ -62,20 +62,21 @@ body {
     }
 }
 
-.header {
+.navbar {
     max-height: 6%;
     width: 100%;
     height: 100%;
+    margin-bottom: 0;
 
-    .header-space,
-    .header-content {
+    .navbar-space,
+    .navbar-content {
         width: 100%;
         height: 100%;
         border-bottom: 2px solid $teal;
         background: transparent;
     }
 
-    .header-content {
+    .navbar-content {
         position: fixed;
         left: 0;
         top: 0;
@@ -143,20 +144,31 @@ body {
             }
         }
 
-        .days {
+        .schedule-header {
+            display: table;
             width: 100%;
             height: 35%;
             background-color: $blue-chill;
 
-            table {
-                width: 100%;
+            .times {
+                display:table-cell;
+                width: 100px;
+            }
+
+            .days {
+                display: table-cell;
                 height: 100%;
 
-                th {
-                    vertical-align: middle;
-                    text-align: center;
-                    color: $white;
-                    font-family: $roboto;
+                table {
+                    width: 100%;
+                    height: 100%;
+
+                    th {
+                        vertical-align: middle;
+                        text-align: center;
+                        color: $white;
+                        font-family: $roboto;
+                    }
                 }
             }
         }
@@ -192,7 +204,8 @@ body {
                 width: 100%;
 
                 td {
-                    height: 80px;
+                    width: 100%;
+                    height: 30px;
                     border-left: 4px solid $white;
                     border-right: 0;
                     border-top: 2px solid $white;
@@ -209,7 +222,7 @@ body {
                 width: 100%;
 
                 td {
-                    height: 80px;
+                    height: 30px;
                     border-left: 4px solid $white;
                     border-right: 4px solid $white;
                     border-top: 2px solid $white;

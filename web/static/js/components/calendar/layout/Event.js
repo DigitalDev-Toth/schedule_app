@@ -20,14 +20,12 @@ class Event extends Component {
      */
     render() {
         const handleTouchTap = this.props.handleTouchTap;
-        const id = this.props.id;
 
         return (
             <div onDoubleClick={handleTouchTap} className='event'>
                 <div className='info'>
                     <div className='name'>John Doe</div>
                     <div className='dni'>15.523.321-8</div>
-                    <h1>{id}</h1>
                 </div>
             </div>
         );
@@ -38,8 +36,7 @@ class Event extends Component {
  * React properties types definitions
  */
 Event.propTypes = {
-    handleTouchTap: PropTypes.any,
-    id: PropTypes.any
+    handleTouchTap: PropTypes.any
 };
 
 export default Event;

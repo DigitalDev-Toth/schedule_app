@@ -8,7 +8,7 @@ import { checkInstance } from '../helpers/ToolsHelper';
 import Notifier from './Notifier';
 /*import Main from '../components/Main';*/
 /*import ScheduleToth from '../components/schedule/ScheduleToth';*/
-import Header from '../components/header';
+import Navbar from '../components/navbar';
 import Calendar from '../components/calendar';
 import CircularProgress from 'material-ui/CircularProgress';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -75,22 +75,6 @@ class Schedule extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        /*if (typeof this.props.options == 'object' && !Object.keys(this.props.options).length) {
-            return (
-                <div className='loading text-center'>
-                    <div className='cell'>
-                        <CircularProgress size={2} />
-                    </div>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <Notifier />
-                    <ScheduleToth optionsDefault={this.props.options} roomsDefault={this.props.rooms} />
-                </div>
-            );
-        }*/
         const options = this.props.options;
         const rooms = this.props.rooms;
         const users = this.props.user;
@@ -107,8 +91,8 @@ class Schedule extends Component {
             return (
                 <div>
                     <Notifier />
-                    <Header name='Toth Limitada' options={options} />
-                    <Calendar options={options} rooms={rooms} users={users} />
+                    <Navbar name='Toth Limitada' options={options} />
+                    <Calendar options={options} rooms={rooms} />
                 </div>
             );
         }
