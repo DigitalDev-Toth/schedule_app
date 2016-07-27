@@ -6,7 +6,8 @@
 export let DefaultInitialState = () => {
     return {
         options: {},
-        rooms: {}
+        rooms: {},
+        user: {}
     };
 };
 

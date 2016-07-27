@@ -120,8 +120,8 @@ export let setRemoteUser = () => {
  * @param      {Function}  loadDefaultData  The load default data
  */
 export let getDefaultDocuments = (loadDefaultData) => {
-    const schemes = [new Model('room'), new Model('options')];
-    const docs = ['1234', 'default'];
+    const schemes = [new Model('room'), new Model('options'), new Model('user')];
+    const docs = ['1234', 'default', 'username1'];
     let promises = [];
 
     for (let i = 0; i < schemes.length; i++) {

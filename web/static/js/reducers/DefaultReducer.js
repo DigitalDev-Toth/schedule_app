@@ -13,7 +13,8 @@ let defaultReducer = (state = DefaultInitialState(), action) => {
             return Object.assign(...state, {
                 type: action.type,
                 options: action.payload[1],
-                rooms: action.payload[0]
+                rooms: action.payload[0],
+                user: action.payload[2]
             });
         }
 

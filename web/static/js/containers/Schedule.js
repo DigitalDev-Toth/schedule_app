@@ -40,7 +40,7 @@ class Schedule extends Component {
         if (__PRODUCTION__ || __DEVFULLSTACK__) {
             const pathname = this.props.location.pathname;
             const userId = getUserId();
-            const {instance, result} = checkInstance(pathname, this.props.instance);
+            const { instance, result } = checkInstance(pathname, this.props.instance);
 
             if (result) {
                 actions.updateInstance(instance);
@@ -66,7 +66,7 @@ class Schedule extends Component {
     }
 
     getChildContext() {
-        return {muiTheme: getMuiTheme(baseTheme)};
+        return { muiTheme: getMuiTheme(baseTheme) };
     }
 
     /**
@@ -93,6 +93,7 @@ class Schedule extends Component {
         }*/
         const options = this.props.options;
         const rooms = this.props.rooms;
+        const users = this.props.user;
 
         if (typeof options == 'object' && !Object.keys(options).length) {
             return (
@@ -107,7 +108,7 @@ class Schedule extends Component {
                 <div>
                     <Notifier />
                     <Header name='Toth Limitada' options={options} />
-                    <Calendar options={options} rooms={rooms} />
+                    <Calendar options={options} rooms={rooms} users={users} />
                 </div>
             );
         }
@@ -120,7 +121,8 @@ class Schedule extends Component {
 Schedule.propTypes = {
     instance: PropTypes.any,
     options: PropTypes.any,
-    rooms: PropTypes.any
+    rooms: PropTypes.any,
+    user: PropTypes.any
 };
 
 /**
@@ -141,6 +143,7 @@ const mapStateToProps = (state) => {
         instance: state.Channel.instance,
         options: state.Default.options,
         rooms: state.Default.rooms,
+        user: state.Default.user,
         state
     };
 };
