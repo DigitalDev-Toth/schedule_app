@@ -4,7 +4,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import { cloneLayout, moveElement } from 'react-grid-layout/build/utils';
 import { generateLayout, getLayoutWidth } from '../../../helpers/ToolsHelper';
 import CalendarForm from '../form/';
-import Event from './Event';
+import Event from '../Card/Event';
 
 /**
  * Layout component
