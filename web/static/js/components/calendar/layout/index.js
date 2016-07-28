@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { Dialog, FlatButton, indigo500 } from 'material-ui';
 import _ from 'lodash';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { cloneLayout, moveElement } from 'react-grid-layout/build/utils';
 import { generateLayout, getLayoutWidth } from '../../../helpers/ToolsHelper';
+import CalendarForm from '../form/';
 import Event from './Event';
-import ProcedureForm from '../../form/ProcedureForm';
-import Styles from '../../styles/Style';
 
 /**
  * Layout component
@@ -19,7 +17,7 @@ class Layout extends Component {
      */
     constructor(props) {
         super(props);
-
+        this.changeStateModal = this.changeStateModal.bind(this);
         this.state = {
             width: getLayoutWidth(),
             currentBreakpoint: 'lg',
@@ -37,7 +35,6 @@ class Layout extends Component {
     componentDidMount() {
         this.setState({mounted: true});
     }
-
     /**
      * Request close handler
      */
@@ -46,7 +43,6 @@ class Layout extends Component {
             openModal: false
         });
     }
-
     /**
      * Touch tap handler
      */
@@ -55,7 +51,16 @@ class Layout extends Component {
             openModal: true
         });
     }
-
+    /**
+     * ChangeState From Modal Child
+     *
+     * @param      {Boolean}  Modal open state
+     */
+    changeStateModal(isOpen) {
+        this.setState({
+            openModal: isOpen
+        });
+    }
     /**
      * Generate DOM handler
      *
@@ -143,19 +148,10 @@ class Layout extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        const layoutWidth = getLayoutWidth();
         const layouts = this.state.layouts;
         const mounted = this.state.mounted;
-        const verticalCompact = this.state.verticalCompact;
         const openModal = this.state.openModal;
-        const standardActions = (
-            <FlatButton
-                label='Cancelar'
-                secondary={true}
-                onTouchTap={this.handleRequestClose.bind(this)}
-                keyboardFocused={true} />
-        );
-
+        const verticalCompact = this.state.verticalCompact;
         return (
             <div>
                 <div className='calendar-layout'>
@@ -176,36 +172,13 @@ class Layout extends Component {
                         </ResponsiveReactGridLayout>
                     </div>
                 </div>
-                <Styles color='indigo500'>
-                    <Dialog
-                        autoScrollBodyContent={true}
-                        open={openModal}
-                        contentStyle = {styles.DialogTitle}
-                        contentStyle = {styles.Dialog}
-                        title='Ingreso de Procedimientos'
-                        actions={standardActions}
-                        modal={true}
-                        onRequestClose={this.handleRequestClose.bind(this)}>
-                        <ProcedureForm />
-                    </Dialog>
-                </Styles>
+                <CalendarForm isOpen={openModal} onClose={this.changeStateModal} />
             </div>
         );
     }
 }
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-const styles = {
-    DialogTitle: {
-        backgroundColor: indigo500,
-        color: 'white'
-    },
-    Dialog: {
-        width: '70%',
-        maxWidth: 'none'
-    }
-};
-
 /**
  * React properties types definitions
  */

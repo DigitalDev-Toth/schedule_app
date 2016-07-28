@@ -92,7 +92,7 @@ class Schedule extends Component {
                 <div>
                     <Notifier />
                     <Navbar name='Toth Limitada' options={options} />
-                    <Calendar options={options} rooms={rooms} />
+                    <Calendar options={options} rooms={rooms} users={users} />
                 </div>
             );
         }
