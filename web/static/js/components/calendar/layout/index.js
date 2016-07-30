@@ -4,7 +4,8 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import { cloneLayout, moveElement } from 'react-grid-layout/build/utils';
 import { generateLayout, getLayoutWidth } from '../../../helpers/ToolsHelper';
 import CalendarForm from '../form/';
-import Event from '../Card/Event';
+import Event from '../card/Event';
+import style from '../../../../css/app.scss';
 
 /**
  * Layout component
@@ -193,7 +194,7 @@ Layout.propTypes = {
  */
 Layout.defaultProps = {
     className: 'layout',
-    rowHeight: 28,
+    rowHeight: parseInt(style.eventHeight),
     cols: {lg: 7, md: 7, sm: 7, xs: 7, xxs: 7},
     isResizable: false,
     margin: [4, 2],
