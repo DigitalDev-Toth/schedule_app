@@ -27,9 +27,11 @@ class App extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
+        const children = this.props.children;
+
         return (
             <div>
-                {this.props.children}
+                {children}
             </div>
         );
     }
@@ -39,7 +41,7 @@ class App extends Component {
  * React properties types definitions
  */
 App.propTypes = {
-    children: PropTypes.any
+    children: PropTypes.element.isRequired
 };
 
 export default App;

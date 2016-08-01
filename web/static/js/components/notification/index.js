@@ -73,8 +73,8 @@ class Notification extends Component {
  * React properties types definitions
  */
 Notification.propTypes = {
-    show: PropTypes.any,
-    message: PropTypes.any
+    show: PropTypes.bool.isRequired,
+    message: PropTypes.string.isRequired
 };
 
 export default Notification;

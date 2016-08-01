@@ -43,7 +43,7 @@ class Notifier extends Component {
  * React properties types definitions
  */
 Notifier.propTypes = {
-    message: PropTypes.any
+    message: PropTypes.string.isRequired
 };
 
 /**

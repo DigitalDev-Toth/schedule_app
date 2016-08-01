@@ -100,8 +100,8 @@ class Grid extends Component {
  * React properties types definitions
  */
 Grid.propTypes = {
-    config: PropTypes.any,
-    rooms: PropTypes.any
+    config: PropTypes.object.isRequired,
+    rooms: PropTypes.object.isRequired
 };
 
 export default Grid;

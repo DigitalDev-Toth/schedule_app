@@ -12,13 +12,13 @@ import style from '../../../../css/app.scss';
  */
 class Layout extends Component {
     /**
-     * Basic React component constructor
+     * Basic react component constructor
      *
      * @param      {Object}  props    React properties
      */
     constructor(props) {
         super(props);
-        this.changeStateModal = this.changeStateModal.bind(this);
+
         this.state = {
             width: getLayoutWidth(),
             currentBreakpoint: 'lg',
@@ -28,6 +28,7 @@ class Layout extends Component {
             openModal: false
         };
         this.layouts = undefined;
+        this.changeStateModal = this.changeStateModal.bind(this);
     }
 
     /**
@@ -153,6 +154,7 @@ class Layout extends Component {
         const mounted = this.state.mounted;
         const openModal = this.state.openModal;
         const verticalCompact = this.state.verticalCompact;
+
         return (
             <div>
                 <div className='calendar-layout'>
@@ -180,6 +182,7 @@ class Layout extends Component {
 }
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+
 /**
  * React properties types definitions
  */

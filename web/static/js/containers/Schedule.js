@@ -6,8 +6,6 @@ import API from '../api';
 import { getUserId } from '../helpers/AuthHelper';
 import { checkInstance } from '../helpers/ToolsHelper';
 import Notifier from './Notifier';
-/*import Main from '../components/Main';*/
-/*import ScheduleToth from '../components/schedule/ScheduleToth';*/
 import Navbar from '../components/navbar';
 import Calendar from '../components/calendar';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -65,8 +63,13 @@ class Schedule extends Component {
         API.Docs.getDefaultDocuments(actions.loadDefaultData);
     }
 
+    /**
+     * Gets the child context.
+     *
+     * @return     {Object}  The child context.
+     */
     getChildContext() {
-        return { muiTheme: getMuiTheme(baseTheme) };
+        return {muiTheme: getMuiTheme(baseTheme)};
     }
 
     /**
@@ -103,10 +106,10 @@ class Schedule extends Component {
  * React properties types definitions
  */
 Schedule.propTypes = {
-    instance: PropTypes.any,
-    options: PropTypes.any,
-    rooms: PropTypes.any,
-    user: PropTypes.any
+    instance: PropTypes.object.isRequired,
+    options: PropTypes.object.isRequired,
+    rooms: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 /**

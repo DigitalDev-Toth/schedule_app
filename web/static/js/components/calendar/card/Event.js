@@ -36,7 +36,7 @@ class Event extends Component {
  * React properties types definitions
  */
 Event.propTypes = {
-    handleTouchTap: PropTypes.any
+    handleTouchTap: PropTypes.func.isRequired
 };
 
 export default Event;

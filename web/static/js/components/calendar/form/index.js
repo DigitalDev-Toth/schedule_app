@@ -3,7 +3,15 @@ import { FlatButton, Dialog, indigo500 } from 'material-ui';
 import ProcedureForm from '../../form/ProcedureForm';
 import Styles from '../../styles/Style';
 
-export default class CalendarForm extends React.Component {
+/**
+ * Calendar form component
+ */
+class CalendarForm extends React.Component {
+    /**
+     * Basic react component constructor
+     *
+     * @param      {Object}  props    React properties
+     */
     constructor(props) {
         super(props);
         const { isOpen } = this.props;
@@ -12,9 +20,14 @@ export default class CalendarForm extends React.Component {
             isOpen
         };
     }
+
+    /**
+     * React component did mount callback
+     */
     componentDidMount() {
         this.setState({ open: this.props.isOpen });
     }
+
     /**
      * Request close handler
      */
@@ -26,6 +39,12 @@ export default class CalendarForm extends React.Component {
             this.props.onClose(this.state.isOpen);
         }
     }
+
+    /**
+     * React DOM rendering
+     *
+     * @return     {Object}  React DOM object
+     */
     render() {
         const isOpen = this.props.isOpen;
         const standardActions = (
@@ -35,6 +54,7 @@ export default class CalendarForm extends React.Component {
                 onTouchTap={this.handleRequestClose}
                 keyboardFocused={true} />
         );
+
         return (
             <div>
                 <Styles color='indigo500'>
@@ -54,6 +74,7 @@ export default class CalendarForm extends React.Component {
         );
     }
 }
+
 const styles = {
     DialogTitle: {
         backgroundColor: indigo500,
@@ -64,6 +85,12 @@ const styles = {
         maxWidth: 'none'
     }
 };
+
+/**
+ * React properties types definitions
+ */
 CalendarForm.propTypes = {
     open: React.PropTypes.any
 };
+
+export default CalendarForm;

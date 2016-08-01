@@ -46,8 +46,8 @@ class Calendar extends Component {
  * React properties types definitions
  */
 Calendar.propTypes = {
-    options: PropTypes.any,
-    rooms: PropTypes.any
+    options: PropTypes.object.isRequired,
+    rooms: PropTypes.object.isRequired
 };
 
 export default Calendar;

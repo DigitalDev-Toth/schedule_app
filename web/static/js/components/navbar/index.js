@@ -83,7 +83,7 @@ class Navbar extends Component {
  */
 Navbar.propTypes = {
     name: PropTypes.any,
-    options: PropTypes.any
+    options: PropTypes.object.isRequired
 };
 
 export default Navbar;

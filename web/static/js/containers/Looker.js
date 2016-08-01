@@ -116,8 +116,8 @@ class Looker extends Component {
  * React properties types definitions
  */
 Looker.propTypes = {
-    instance: PropTypes.any,
-    users: PropTypes.any
+    instance: PropTypes.object,
+    users: PropTypes.array
 };
 
 /**
