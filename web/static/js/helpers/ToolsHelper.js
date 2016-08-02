@@ -98,7 +98,6 @@ export let getCellWidth = (days) => {
  * @return     {Object}  The layout.
  */
 export let generateLayout = (config) => {
-    console.log(config);
     return _.map(_.range(0, 25), (item, i) => {
         const y = Math.ceil(Math.random() * 4);
 
