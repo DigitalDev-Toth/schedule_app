@@ -24,7 +24,7 @@ class Layout extends Component {
             currentBreakpoint: 'lg',
             mounted: false,
             verticalCompact: false,
-            layouts: {lg: generateLayout(this.props.config)},
+            layouts: {lg: this.props.initialLayout},
             openModal: false
         };
         console.log(this.props);
