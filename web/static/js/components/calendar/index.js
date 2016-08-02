@@ -30,13 +30,12 @@ class Calendar extends Component {
     render() {
         const config = this.props.options;
         const rooms = this.props.rooms;
-        const schedule = this.props.users.schedule[0];
-        console.log(schedule);
+        const users = this.props.users;
 
         return (
             <div className='calendar'>
                 <Grid config={config} rooms={rooms} />
-                <Layout config={config} rooms={rooms} onLayoutChange={this.onLayoutChange.bind(this)} />
+                <Layout config={config} rooms={rooms} users={users} onLayoutChange={this.onLayoutChange.bind(this)} />
             </div>
         );
     }
@@ -47,7 +46,8 @@ class Calendar extends Component {
  */
 Calendar.propTypes = {
     options: PropTypes.object.isRequired,
-    rooms: PropTypes.object.isRequired
+    rooms: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired
 };
 
 export default Calendar;
