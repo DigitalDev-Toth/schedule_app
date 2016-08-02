@@ -99,7 +99,7 @@ export let getCellWidth = (days) => {
  */
 export let generateLayout = () => {
     return _.map(_.range(0, 25), (item, i) => {
-        const y = Math.ceil(Math.random() * 4) + 1;
+        const y = Math.ceil(Math.random() * 4);
 
         return {
             x: _.random(0, 5) * 2 % 12,
