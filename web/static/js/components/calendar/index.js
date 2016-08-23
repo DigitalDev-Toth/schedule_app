@@ -31,7 +31,6 @@ class Calendar extends Component {
         const config = this.props.options;
         const rooms = this.props.rooms;
         const schedule = this.props.users.schedule[0];
-        console.log(schedule);
 
         return (
             <div className='calendar'>

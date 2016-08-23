@@ -22,14 +22,14 @@ class Notification extends Component {
     }
 
     /**
-     * React component will mount
+     * React component will mount callback
      */
     componentWillMount() {
         this.setState({viewHeight: window.innerHeight});
     }
 
     /**
-     * React component did mount
+     * React component did mount callback
      */
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
@@ -53,11 +53,11 @@ class Notification extends Component {
      * @return     {Object}  React DOM object
      */
     render() {
-        let message = this.props.message;
-        let show = this.props.show;
-        let notificationSystem = this.notificationSystem;
+        const message = this.props.message;
+        const show = this.props.show;
+        const notificationSystem = this.notificationSystem;
 
-        if (show && notificationSystem != null) {
+        if (show && notificationSystem) {
             this.addNotification(message);
         }
 

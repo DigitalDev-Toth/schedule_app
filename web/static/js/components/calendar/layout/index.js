@@ -70,6 +70,7 @@ class Layout extends Component {
      */
     generateDOM() {
         return _.map(this.state.layouts.lg, (l, i) => {
+            console.log(l);
             return (
                 <div key={i}>
                     <Event handleTouchTap={this.handleTouchTap.bind(this)} />
