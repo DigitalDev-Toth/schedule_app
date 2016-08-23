@@ -25,7 +25,7 @@ class Event extends Component {
             <div onDoubleClick={handleTouchTap} className='event'>
                 <div className='info'>
                     <div className='name'>John Doe</div>
-                    <div className='dni'>15.523.321-8</div>
+                    <div className='dni'></div>
                 </div>
             </div>
         );
