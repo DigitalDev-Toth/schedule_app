@@ -7,7 +7,7 @@ INSTALL
 - Get it:
 ```
 $ git clone git@github.com:DigitalDev-Toth/schedule_app.git
-$ cd schedule
+$ cd schedule_app
 ```
 - Dependencies:
 ```
