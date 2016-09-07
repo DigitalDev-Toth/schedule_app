@@ -34,8 +34,8 @@ class Calendar extends Component {
 
         return (
             <div className='calendar'>
-                <Grid config={config} rooms={rooms} />
-                <Layout config={config} rooms={rooms} users={users} onLayoutChange={this.onLayoutChange.bind(this)} />
+                <Grid config={config} rooms={rooms} users={users} />
+                <Layout config={config} rooms={rooms} onLayoutChange={this.onLayoutChange.bind(this)} />
             </div>
         );
     }

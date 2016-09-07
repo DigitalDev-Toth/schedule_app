@@ -50,7 +50,6 @@ class Grid extends Component {
      */
     getEventsSpaces(period, frequency, days, cellWidth) {
         let rows = [];
-
         for (let i = 0; i < period; i += frequency) {
             rows.push(
                 <tr>
@@ -65,7 +64,13 @@ class Grid extends Component {
 
         return rows;
     }
-
+    setColorEventSpaces(rooms, users, frequency) {
+        const schedule = users.schedule[0];
+        const initSchedule = getDayPeriodInSeconds(rooms.init_time, schedule.itime);
+        const periodSchedule = getDayPeriodInSeconds(schedule.itime, schedule.ftime);
+        const endSchedule = initSchedule + periodSchedule;
+        console.log(initSchedule,  frequency, endSchedule, );
+    }
     /**
      * React DOM rendering
      *
@@ -74,6 +79,7 @@ class Grid extends Component {
     render() {
         const config = this.props.config;
         const rooms = this.props.rooms;
+        const users = this.props.users;
         const days = config.options.days_of_week;
         const frequency = getFrequencyInSeconds(rooms.frequency);
         const period = getDayPeriodInSeconds(rooms.init_time, rooms.end_time);
@@ -89,6 +95,7 @@ class Grid extends Component {
                 <div className='events'>
                     <table>
                         {this.getEventsSpaces(period, frequency, days, cellWidth)}
+                        {this.setColorEventSpaces(rooms, users, frequency)}
                     </table>
                 </div>
             </div>
@@ -101,7 +108,8 @@ class Grid extends Component {
  */
 Grid.propTypes = {
     config: PropTypes.object.isRequired,
-    rooms: PropTypes.object.isRequired
+    rooms: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired
 };
 
 export default Grid;

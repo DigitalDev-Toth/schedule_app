@@ -27,7 +27,6 @@ class Layout extends Component {
             layouts: {lg: this.props.initialLayout},
             openModal: false
         };
-
         this.layouts = undefined;
     }
 
@@ -188,7 +187,6 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 Layout.propTypes = {
     config: PropTypes.object.isRequired,
     rooms: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
     onLayoutChange: PropTypes.func.isRequired
 };
 
